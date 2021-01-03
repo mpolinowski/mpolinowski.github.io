@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[15],{Esot:function(t,e,n){"use strict";n.r(e);var o=n("q1tI"),u=n.n(o),a=n("TJpk"),i=n.n(a);e.default=function(){return u.a.createElement(i.a,null,u.a.createElement("meta",{"http-equiv":"refresh",content:"0;url=https://mpolinowski.github.io/setting-up-an-okd-cluster"}))}}}]);
-//# sourceMappingURL=component---src-pages-first-openshift-3-cluster-jsx-8d1290b7183bbd0cc4f0.js.map

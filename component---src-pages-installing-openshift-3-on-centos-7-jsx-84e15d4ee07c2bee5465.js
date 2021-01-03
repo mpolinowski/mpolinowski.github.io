@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{J65U:function(t,e,n){"use strict";n.r(e);var a=n("q1tI"),o=n.n(a),r=n("TJpk"),i=n.n(r);e.default=function(){return o.a.createElement(i.a,null,o.a.createElement("meta",{"http-equiv":"refresh",content:"0;url=https://mpolinowski.github.io/red-hat-open-shift-3-container-platform"}))}}}]);
-//# sourceMappingURL=component---src-pages-installing-openshift-3-on-centos-7-jsx-84e15d4ee07c2bee5465.js.map

@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{P3co:function(e,t,n){"use strict";n.r(t);var o=n("q1tI"),a=n.n(o),i=n("TJpk"),r=n.n(i);t.default=function(){return a.a.createElement(r.a,null,a.a.createElement("meta",{"http-equiv":"refresh",content:"0;url=https://mpolinowski.github.io/node-express-static"}))}}}]);
-//# sourceMappingURL=component---src-pages-node-express-static-wiki-jsx-bb6c6761a2d628ac1d6c.js.map

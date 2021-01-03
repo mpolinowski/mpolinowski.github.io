@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[26],{G3mv:function(e,n,t){"use strict";t.r(n);var i=t("q1tI"),o=t.n(i),r=t("TJpk"),u=t.n(r);n.default=function(){return o.a.createElement(u.a,null,o.a.createElement("meta",{"http-equiv":"refresh",content:"0;url=https://mpolinowski.github.io/nginx-node-js-security"}))}}}]);
-//# sourceMappingURL=component---src-pages-nginx-node-security-jsx-7655303d7bcce1906b02.js.map
