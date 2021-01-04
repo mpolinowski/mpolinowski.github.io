@@ -1,0 +1,12 @@
+/**
+ *
+ *
+ * @author Jerry Bendy <jerry@icewingcc.com>
+ * @licence MIT
+ *
+ */
+
+/**
+ * @preserve XDate v@VERSION
+ * Docs & Licensing: http://arshaw.com/xdate/
+ */
