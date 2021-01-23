@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{pssB:function(t,e,n){"use strict";n.r(e);var r=n("9Hrx"),o=n("q1tI"),p=n.n(o),s=function(t){function e(){return t.apply(this,arguments)||this}return Object(r.a)(e,t),e.prototype.render=function(){return p.a.createElement("meta",{"http-equiv":"refresh",content:"0; URL='/devnotes'"})},e}(p.a.Component);e.default=s}}]);
-//# sourceMappingURL=component---src-pages-404-jsx-f614411dafdc9890ec6a.js.map
