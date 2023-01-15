@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmikes_dev_notebook=self.webpackChunkmikes_dev_notebook||[]).push([[9299],{84342:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/markdown","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
