@@ -303,6 +303,7 @@
     .gslide-description.description-top {
   margin: 0 auto;
   width: 100%;
+  background-color: #111;
 }
 
 .gslide-description p {
@@ -506,13 +507,14 @@ iframe.wait-autoplay {
 
 .glightbox-clean .gdesc-inner {
   padding: 22px 20px;
+  background-color: #111;
 }
 
 .glightbox-clean .gslide-title {
   font-size: 1em;
   font-weight: normal;
   font-family: arial;
-  color: #000;
+  color: #fff;
   margin-bottom: 19px;
   line-height: 1.4em;
 }
