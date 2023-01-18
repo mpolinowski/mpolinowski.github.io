@@ -1188,8 +1188,9 @@ section .container {
 }
 
 .credits a {
-  color: #18d26e;
+  color: #fff;
   transition: 0.3s;
+  opacity: 0.5;
 }
 
 .credits a:hover {
