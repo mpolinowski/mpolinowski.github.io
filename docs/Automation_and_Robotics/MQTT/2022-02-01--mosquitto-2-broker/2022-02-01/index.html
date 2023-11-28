@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">Mosquitto v2 MQTT Broker on Debian Bullseye | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/2022-02-01"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Mosquitto v2 MQTT Broker on Debian Bullseye | Mike Polinowski"><meta data-rh="true" name="description" content="TST, Hong Kong"><meta data-rh="true" property="og:description" content="TST, Hong Kong"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/2022-02-01"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/2022-02-01" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/2022-02-01" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.dcca9435.css">
+<script src="/assets/js/runtime~main.9a0cc3b5.js" defer="defer"></script>
+<script src="/assets/js/main.6d14a3ae.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_gu5v" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--light_dGsa"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--dark_pzCA"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_kWbt colorModeToggle_GwZs"><button class="clean-btn toggleButton_fOL9 toggleButtonDisabled_STpu" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_DCeJ"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_DFgp"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_IP3a"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_IbdI"><div class="docsWrapper_JGIH"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_SdI4" type="button"></button><div class="docRoot_eRbX"><aside class="theme-doc-sidebar-container docSidebarContainer_Ta75"><div class="sidebarViewport_fgog"><div class="sidebar_oDHW"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_vPEQ"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/development">Development</a><button aria-label="Expand sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Collapse sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/home-automation">Home Automation</a><button aria-label="Expand sidebar category &#x27;Home Automation&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/mqtt">MQTT</a><button aria-label="Collapse sidebar category &#x27;MQTT&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2023-07-25-emqx-mqtt-broker-docker/2023-07-25">EMQX MQTT Broker with Docker</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-07-24-mosquitto-broker-cross-compilation/2022-07-24">Mosquitto Broker Docker Cross-Compile</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-07-23-mosquitto-broker-compilation/2022-07-23">Mosquitto Broker from Source</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-07-22-go-hello-world/2022-07-22">Go - MQTT Hello World</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-07-21-rust-hello-world/2022-07-21">Rust - MQTT Hello World</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-06-23-instar-mqtt-python-part-I/2022-06-23">INSTAR MQTTv5 with Python - Client Connection</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-03-30--mqtt-with-rabbit-mq/2022-03-30">INSTAR MQTT with RabbitMQ</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-03-28--mqtt-message-server/2022-03-28">MQTT Message Server and Angular Frontend</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-03-27--build-mosquitto-from-source/2022-03-27">Building Eclipse Mosquitto v2 from Source</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-03-26--mqtt-clients/2022-03-26">MQTT Clients</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/2022-02-01">Mosquitto v2 MQTT Broker on Debian Bullseye</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2021-09-12--golang-paho-mqtt/2021-09-12">Go Paho MQTT Client</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-11--mqtt-home-assistant/2019-08-11">MQTT Networks with Home Assistant</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-10--mqtt-athom-homey/2019-08-10">MQTT Networks with Athom Homey</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-09--mqtt-homee/2019-08-09">MQTT Networks with homee</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-08--mqtt-homematic/2019-08-08">MQTT Networks with Homematic</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-07--mqtt-iobroker/2019-08-07">MQTT Networks with ioBroker</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-06--mqtt-node-red/2019-08-06">MQTT Networks with Node-RED</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-05--mqtt-openhab2/2019-08-05">MQTT Networks with OpenHAB 2</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-04--mqtt-android-dashboards/2019-08-04">MQTT Android Dashboards</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/MQTT/2019-08-03--mqtt-debugging/2019-08-03">Debugging MQTT Sensor Networks</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/robotics--simulation">Robotics &amp; Simulation</a><button aria-label="Expand sidebar category &#x27;Robotics &amp; Simulation&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_lg0V"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_nDJs"><div class="docItemContainer_OGiL"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_k3Z9" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_JACu"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/automation-deep-vision-and-robotics"><span itemprop="name">Automation, Deep Vision and Robotics</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/mqtt"><span itemprop="name">MQTT</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Mosquitto v2 MQTT Broker on Debian Bullseye</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_QCOD theme-doc-toc-mobile tocMobile_N0YI"><button type="button" class="clean-btn tocCollapsibleButton_pHwF">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Mosquitto v2 MQTT Broker on Debian Bullseye</h1></header><p><img alt="TST, Hong Kong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-027d6cb82627f4093030484d7bfca6fd.jpg" width="2385" height="978"></p>
+<ul>
+<li><a href="#install-mosquitto-on-debian-bullseye">Install Mosquitto on Debian Bullseye</a></li>
+<li><a href="#configure-mosquitto">Configure Mosquitto</a></li>
+<li><a href="#verify-that-the-broker-is-working">Verify that the Broker is working</a>
+<ul>
+<li><a href="#mosquitto-cli-tools">Mosquitto CLI Tools</a></li>
+<li><a href="#connecting-clients">Connecting Clients</a></li>
+</ul>
+</li>
+<li><a href="#websockets">Websockets</a>
+<ul>
+<li><a href="#mqtt-explorer">MQTT Explorer</a></li>
+<li><a href="#mqttjs-web-client">MQTT.js Web Client</a></li>
+</ul>
+</li>
+<li><a href="#mosquitto-webserver">Mosquitto Webserver</a></li>
+<li><a href="#adding-encryption">Adding Encryption</a>
+<ul>
+<li><a href="#creating-self-signed-certificates">Creating Self-Signed Certificates</a>
+<ul>
+<li><a href="#ca-certificates">CA Certificates</a></li>
+<li><a href="#server-certificates">Server Certificates</a></li>
+<li><a href="#mosquitto-server-configuration">Mosquitto Server Configuration</a></li>
+<li><a href="#testing-the-connection">Testing the Connection</a></li>
+<li><a href="#client-certificates">Client Certificates</a></li>
+<li><a href="#creating-a-client-certificate">Creating a client certificate</a></li>
+<li><a href="#update-the-mosquitto-server-configuration">Update the Mosquitto Server Configuration</a></li>
+<li><a href="#testing-the-connection-1">Testing the Connection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#connect-your-instar-ip-camera">Connect your INSTAR IP Camera</a></li>
+</ul>
+<p>Mosquitto is a message broker that implements the MQTT protocol. Mosquitto is an open-source project developed by Eclipse. MQTT protocol uses a publish/subscribe model. Client can publish message to a broker and other clients can subscribe to the topic of that message. A broker is a central component that receives all messages from the clients and then publishes the messages to all subscribed clients.</p>
+<h2 id="install-mosquitto-on-debian-bullseye">Install Mosquitto on Debian Bullseye</h2>
+<blockquote>
+<p>Check <a href="/docs/IoT-and-Machine-Learning/MQTT/2022-03-27--build-mosquitto-from-source/2022-03-27">Building Eclipse Mosquitto v2 from Source</a> for building the broker from it&#x27;s source code under Arch Linux.</p>
+</blockquote>
+<p>Add the Mosquitto repository:</p>
+<pre><code class="language-bash">wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key
+sudo apt-key add mosquitto-repo.gpg.key
+cd /etc/apt/sources.list.d/
+wget http://repo.mosquitto.org/debian/mosquitto-bullseye.list
+</code></pre>
+<p>Install Mosquitto broker:</p>
+<pre><code class="language-bash">apt update
+apt install mosquitto
+</code></pre>
+<p>Check Mosquitto version:</p>
+<pre><code class="language-bash">mosquitto -h | grep version
+mosquitto version 2.0.14
+</code></pre>
+<p>Check if Mosquitto service is running:</p>
+<pre><code class="language-bash">service mosquitto status                                                                                              
+● mosquitto.service - Mosquitto MQTT Broker
+     Loaded: loaded (/lib/systemd/system/mosquitto.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2022-02-05 14:06:50 HKT; 25min ago
+       Docs: man:mosquitto.conf(5)
+             man:mosquitto(8)
+    Process: 574 ExecStartPre=/bin/mkdir -m 740 -p /var/log/mosquitto (code=exited, status=0/SUCCESS)
+    Process: 586 ExecStartPre=/bin/chown mosquitto /var/log/mosquitto (code=exited, status=0/SUCCESS)
+    Process: 593 ExecStartPre=/bin/mkdir -m 740 -p /run/mosquitto (code=exited, status=0/SUCCESS)
+    Process: 598 ExecStartPre=/bin/chown mosquitto /run/mosquitto (code=exited, status=0/SUCCESS)
+   Main PID: 599 (mosquitto)
+      Tasks: 1 (limit: 9357)
+     Memory: 3.6M
+        CPU: 1.184s
+     CGroup: /system.slice/mosquitto.service
+             └─599 /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+
+Feb 05 14:06:49 nomad-minion systemd[1]: Starting Mosquitto MQTT Broker...
+Feb 05 14:06:50 nomad-minion mosquitto[599]: 1644041210: Loading config file /etc/mosquitto/conf.d/custom.conf
+Feb 05 14:06:50 nomad-minion systemd[1]: Started Mosquitto MQTT Broker.
+</code></pre>
+<p>Here I can see that the Mosquitto binary was installed in <code>/usr/sbin</code> and it is being started with a default configuration file in <code>/etc/mosquitto/mosquitto.conf</code>.</p>
+<h2 id="configure-mosquitto">Configure Mosquitto</h2>
+<p>Mosquitto installs 5 further tools that we can use with our broker:</p>
+<pre><code class="language-bash">ls -la /usr/bin | grep mosquitto
+-rwxr-xr-x  1 root root        60448 Jun  9  2021 mosquitto_ctrl
+-rwxr-xr-x  1 root root        31456 Jun  9  2021 mosquitto_passwd
+-rwxr-xr-x  1 root root        60296 Jun  9  2021 mosquitto_pub
+-rwxr-xr-x  1 root root        64608 Jun  9  2021 mosquitto_rr
+-rwxr-xr-x  1 root root        64608 Jun  9  2021 mosquitto_sub
+</code></pre>
+<p>Password file can be created using <code>mosquitto_passwd</code> tool:</p>
+<pre><code class="language-bash">mosquitto_passwd -c /etc/mosquitto/password_file admin
+Password: instar
+Reenter password: instar
+</code></pre>
+<p>First argument is path to a file, second argument is username. The <code>-c</code> option means that new password file will be created. Run the following command and enter a password for the user.</p>
+<p>Next, open Mosquitto configuration file:</p>
+<pre><code class="language-bash">cat /etc/mosquitto/mosquitto.conf
+# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+
+pid_file /run/mosquitto/mosquitto.pid
+
+persistence true
+persistence_location /var/lib/mosquitto/
+
+log_dest file /var/log/mosquitto/mosquitto.log
+
+include_dir /etc/mosquitto/conf.d
+</code></pre>
+<p>Here I can see that the &quot;actual&quot; configuration file, the one that I need to edit, must be located in <code>/etc/mosquitto/conf.d</code>. So let&#x27;s take a look:</p>
+<p><strong>/etc/mosquitto/conf.d/custom.conf</strong></p>
+<pre><code class="language-conf"># =================================================================
+# General configuration
+# =================================================================
+# per_listener_settings false
+# allow_zero_length_clientid true
+auto_id_prefix zeroid-
+# check_retain_source true
+#max_inflight_bytes 0
+#max_inflight_messages 20
+#max_keepalive 65535
+#max_packet_size 0
+#max_queued_bytes 0
+#max_qos 2
+#max_queued_messages 1000
+#memory_limit 0
+#message_size_limit 0
+persistent_client_expiration 7d
+# pid_file /var/run/mosquitto/mosquitto.pid
+queue_qos0_messages true
+#retain_available true
+#set_tcp_nodelay false
+#sys_interval 10
+#upgrade_outgoing_qos false
+#user mosquitto
+# =================================================================
+# Listeners
+# =================================================================
+listener 1883
+protocol mqtt
+listener 1885
+protocol websockets
+#socket_domain
+#bind_interface
+#http_dir
+#max_connections -1
+#mount_point
+#use_username_as_clientid
+#websockets_headers_size
+# -----------------------------------------------------------------
+# Certificate based SSL/TLS support
+# -----------------------------------------------------------------
+#certfile
+#keyfile
+#ciphers
+#ciphers_tls1.3
+#crlfile
+#dhparamfile
+#require_certificate false
+#cafile
+#capath
+#use_identity_as_username false
+# -----------------------------------------------------------------
+# Pre-shared-key based SSL/TLS support
+# -----------------------------------------------------------------
+#psk_hint
+#ciphers
+#use_identity_as_username false
+# =================================================================
+# Persistence
+# =================================================================
+#autosave_interval 1800
+#autosave_on_changes false
+#persistence false
+#persistence_file mosquitto.db
+#persistence_location
+# =================================================================
+# Logging
+# =================================================================
+#log_dest stderr
+log_type error
+log_type warning
+log_type notice
+log_type information
+connection_messages true
+#log_facility
+log_timestamp true
+log_timestamp_format %Y-%m-%dT%H:%M:%S
+#websockets_log_level 0
+# =================================================================
+# Security
+# =================================================================
+#clientid_prefixes
+allow_anonymous false
+# -----------------------------------------------------------------
+# Default authentication and topic access control
+# -----------------------------------------------------------------
+password_file /etc/mosquitto/passwordfile
+acl_file /etc/mosquitto/acl.file
+# -----------------------------------------------------------------
+# External authentication and topic access plugin options
+# -----------------------------------------------------------------
+# auth_plugin
+# auth_opt_db_host
+# auth_opt_db_port
+# auth_opt_db_username
+# auth_opt_db_password
+# =================================================================
+# Bridges
+# =================================================================
+#connection &lt;name&gt;
+#address &lt;host&gt;[:&lt;port&gt;] [&lt;host&gt;[:&lt;port&gt;]]
+#topic &lt;topic&gt; [[[out | in | both] qos-level] local-prefix remote-prefix]
+#bridge_bind_address
+#bridge_attempt_unsubscribe true
+#bridge_protocol_version mqttv311
+#idle_timeout 60
+#keepalive_interval 60
+#local_clientid
+#notifications true
+#notification_topic
+#remote_clientid
+#remote_password
+#remote_username
+# restart_timeout 20
+# restart_timeout 10 30
+#restart_timeout 5 30
+#round_robin false
+#start_type automatic
+#threshold 10
+#try_private true
+#bridge_outgoing_retain true
+#bridge_max_packet_size 0
+# -----------------------------------------------------------------
+# Certificate based SSL/TLS support
+# -----------------------------------------------------------------
+#bridge_cafile
+#bridge_capath
+#bridge_alpn
+#bridge_insecure false
+#bridge_certfile
+#bridge_keyfile
+# -----------------------------------------------------------------
+# PSK based SSL/TLS support
+# -----------------------------------------------------------------
+#bridge_identity
+#bridge_psk
+# =================================================================
+# External config files
+# =================================================================
+#include_dir
+</code></pre>
+<p>Make changes as needed and restart the Mosquitto service with:</p>
+<pre><code class="language-bash">service mosquitto restart &amp;&amp; service mosquitto status
+</code></pre>
+<h2 id="verify-that-the-broker-is-working">Verify that the Broker is working</h2>
+<h3 id="mosquitto-cli-tools">Mosquitto CLI Tools</h3>
+<p>Verify that the broker is working using the Mosquitto subscription and publication tools:</p>
+<pre><code class="language-bash">mosquitto_sub  -h localhost -p 1883 -u admin -P instar -v -t &#x27;$SYS/broker/uptime&#x27;
+$SYS/broker/uptime 1089 seconds
+$SYS/broker/uptime 1100 seconds
+$SYS/broker/uptime 1111 seconds
+</code></pre>
+<p>Subscribing to <code>$SYS/broker/uptime</code> will give you the broker uptime in an 10s interval (interval can be adjusted in the mosquitto config).</p>
+<h3 id="connecting-clients">Connecting Clients</h3>
+<p>And to something more exciting - I will connect an INSTAR IP camera:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_01-5ae8f61bf9ebcd9af6fad332db059338.png" width="1133" height="714"></p>
+<p>And send an update to switch the <em>privacy area 1</em> on and off again using the command topic:</p>
+<pre><code class="language-bash">mosquitto_pub -h 192.168.2.111 -p 1883 -u admin -P instar -t &#x27;cameras/117/multimedia/privacy/region1/enable&#x27; -m &#x27;{&quot;val&quot;:&quot;1&quot;}&#x27; -d
+Client (null) sending CONNECT
+Client (null) received CONNACK (0)
+Client (null) sending PUBLISH (d0, q0, r0, m1, &#x27;cameras/117/multimedia/privacy/region1/enable&#x27;, ... (11 bytes))
+Client (null) sending DISCONNECT
+
+mosquitto_pub -h 192.168.2.111 -p 1883 -u admin -P instar -t &#x27;cameras/117/multimedia/privacy/region1/enable&#x27; -m &#x27;{&quot;val&quot;:&quot;0&quot;}&#x27; -d
+Client (null) sending CONNECT
+Client (null) received CONNACK (0)
+Client (null) sending PUBLISH (d0, q0, r0, m1, &#x27;cameras/117/multimedia/privacy/region1/enable&#x27;, ... (11 bytes))
+Client (null) sending DISCONNECT
+</code></pre>
+<p>Subscribing to the status topic I can see that the command was executed as expected:</p>
+<pre><code class="language-bash">mosquitto_sub -h localhost -p 1883 -u admin -P instar -v -t &#x27;cameras/117/status/multimedia/privacy/region1/enable&#x27;    
+cameras/117/status/multimedia/privacy/region1/enable {&quot;val&quot;:&quot;1&quot;}
+cameras/117/status/multimedia/privacy/region1/enable {&quot;val&quot;:&quot;0&quot;}
+</code></pre>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_02-09a6355ecc5ebebc65ee7216a34b483c.png" width="1020" height="736"></p>
+<h2 id="websockets">Websockets</h2>
+<h3 id="mqtt-explorer">MQTT Explorer</h3>
+<p>So far I have been using the configured default listener on port <code>1885</code> using the <strong>MQTT</strong> protocol. But I added an additional listener on port <code>8885</code> that requires a websocket connection:</p>
+<pre><code class="language-conf"># =================================================================
+# Listeners
+# =================================================================
+listener 1883
+protocol mqtt
+listener 1885
+protocol websockets
+</code></pre>
+<p>In the <a href="https://mqtt-explorer.com/">MQTT Explorer</a> you can switch the used protocol to <code>ws</code> to test the service:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_03-80d58d8c03492fe75d935556dd1ff3fb.png" width="1016" height="734"></p>
+<h3 id="mqttjs-web-client">MQTT.js Web Client</h3>
+<p>Using a <a href="/docs/Development/Javascript/2021-06-04--mqtt-dashboard-react/2021-06-04">MQTT.js React Dashboard</a> to connect to the WS service:</p>
+<pre><code class="language-js">import React, { useState, Fragment } from &#x27;react&#x27;;
+import &#x27;./App.css&#x27;;
+
+var mqtt = require(&#x27;mqtt&#x27;);
+var options = {
+    protocol: &#x27;ws&#x27;,
+    username: &#x27;admin&#x27;,
+    password: &#x27;instar&#x27;,
+    // clientId uniquely identifies client
+    // choose any string you wish
+    clientId: &#x27;mqttjs_&#x27; + Math.random().toString(16).substr(2, 8),
+};
+var client  = mqtt.connect(&#x27;ws://192.168.2.111:1885&#x27;, options);
+
+// Get Broker Uptime MQTT topic
+client.subscribe(&#x27;$SYS/broker/uptime&#x27;);
+
+function App() {
+  var note;
+  client.on(&#x27;message&#x27;, function (topic, message) {
+    note = message.toString();
+    // Updates React state with message 
+    setMsg(note);
+    console.log(note);
+    client.end();
+    });
+
+  // Sets default React state 
+  const [msg, setMsg] = useState(&lt;Fragment&gt;&lt;em&gt;connecting...&lt;/em&gt;&lt;/Fragment&gt;);
+
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;header className=&quot;App-header&quot;&gt;
+        &lt;h1&gt;Mosquitto Broker&lt;/h1&gt;
+        &lt;p&gt;Uptime: {msg}&lt;/p&gt;
+      &lt;/header&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_04-c2a81f5b204350f8144843088eedfe96.png" width="1184" height="883"></p>
+<h2 id="mosquitto-webserver">Mosquitto Webserver</h2>
+<p>When a listener is using the websockets protocol, it is possible to serve http data as well. Set <code>http_dir</code> to a directory which contains the files you wish to serve. If this option is not specified, then no normal http connections will be possible. Let&#x27;s add this third listener to the configuration file:</p>
+<pre><code class="language-conf"># =================================================================
+# Listeners
+# =================================================================
+listener 1883
+protocol mqtt
+listener 1885
+protocol websockets
+listener 8080
+protocol websockets
+http_dir /opt/mqtt-tree
+</code></pre>
+<p>I am going to use this <a href="https://github.com/mpolinowski/d3-MQTT-Topic-Tree">D3 Tree</a> from <code>@hardillb</code> and download to <code>/opt/mqtt-tree</code>. All I need to add the the <code>./index.html</code> file is the Mosquitto WS URL, Port and the broker login to display a tree view of all registered topics:</p>
+<pre><code class="language-js">var options = {
+  // host: location.hostname,
+  // port: parseInt(location.port),
+  host: &#x27;192.168.2.111&#x27;,
+  port: 1885,
+  clientID: &quot;web&quot; + new Date().getTime(),
+  connectOpts: {
+    userName: &#x27;admin&#x27;,
+    password: &#x27;instar&#x27;,
+    // useSSL: true,
+    keepAliveInterval: 30,
+    timeout: 10,
+    cleanSession: false,
+    onSuccess: onConnect,
+    onFailure: onFailure
+  }
+}
+</code></pre>
+<p>Restart the Mosquitto service and visit the broker IP on port <code>8080</code> with your web browser:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_05-0fb5a1b5a2b1e93e1b1400b0d83a9bf4.png" width="929" height="713"></p>
+<h2 id="adding-encryption">Adding Encryption</h2>
+<h3 id="creating-self-signed-certificates">Creating Self-Signed Certificates</h3>
+<p><strong>Client Requirements</strong></p>
+<ul>
+<li>A CA (certificate authority) certificate of the CA that has signed the server certificate on the Mosquitto Broker.</li>
+</ul>
+<p><strong>Broker Requirements</strong></p>
+<ul>
+<li>CA certificate of the CA that has signed the server certificate on the Mosquitto Broker.</li>
+<li>CA certificated server certificate.</li>
+<li>Server Private key for decryption.</li>
+</ul>
+<pre><code class="language-bash">openssl version
+OpenSSL 1.1.1l  24 Aug 2021
+</code></pre>
+<p>Mosquitto already creates a directory for self-signed certificates - if it does not exists create it with:</p>
+<pre><code class="language-bash">mkdir -p /etc/mosquitto/certs
+chown mosquitto:mosquitto /etc/mosquitto/certs
+</code></pre>
+<h4 id="ca-certificates">CA Certificates</h4>
+<p>m</p>
+<pre><code class="language-bash">cd /etc/mosquitto/certs
+openssl genrsa -out ca.key 4096
+</code></pre>
+<p><strong>Important</strong>: The FQDN must not be the same as the <strong>server FQDN</strong>, otherwise you might end up with SSL errors. On a local network using a AVM Fritzbox router every device receives both a hostname - for example my Mosquitto server identifies as <code>debian11</code> - and a domain name hostname + <code>.fritz.box</code>. So, for example, I am able to access the Mosquitto webserver via <code>http://debian11.fritz.box:8080/</code>:</p>
+<pre><code class="language-bash">openssl req -new -x509 -days 1825 -key ca.key -out ca.crt
+
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#x27;.&#x27;, the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:INSTAR
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:debian11.fritz.box
+Email Address []:
+</code></pre>
+<pre><code class="language-bash">chown mosquitto:mosquitto ca.{crt,key}
+</code></pre>
+<h4 id="server-certificates">Server Certificates</h4>
+<pre><code class="language-bash">openssl genrsa -out server.key 4096
+</code></pre>
+<p><strong>Important</strong>: Here the FQDN must be the <strong>hostname</strong>, otherwise you might end up with SSL errors. As mentioned above my server can be reached via the hostname <code>debian11</code> - I can test this by visiting the mosquitto webserver <code>http://debian11:8080/</code>:</p>
+<pre><code class="language-bash">openssl req -new -out server.csr -key server.key
+
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#x27;.&#x27;, the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:INSTAR
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:debian11
+Email Address []:
+
+Please enter the following &#x27;extra&#x27; attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+</code></pre>
+<pre><code class="language-bash">openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 1825
+
+Signature ok
+subject=C = AU, ST = Some-State, O = INSTAR, CN = debian11
+Getting CA Private Key
+</code></pre>
+<pre><code class="language-bash">chown mosquitto:mosquitto server.{csr,key,crt}
+</code></pre>
+<p>The <code>certs</code> directory should now contain the following files:</p>
+<pre><code class="language-bash">-rw-r--r-- 1 mosquitto mosquitto 1956 Feb 16 20:31 ca.crt
+-rw------- 1 mosquitto mosquitto 3243 Feb 16 20:30 ca.key
+-rw-r--r-- 1 root      root        41 Feb 16 20:37 ca.srl
+-rw-r--r-- 1 mosquitto mosquitto 1834 Feb 16 20:37 server.crt
+-rw-r--r-- 1 mosquitto mosquitto 1659 Feb 16 20:37 server.csr
+-rw------- 1 mosquitto mosquitto 3243 Feb 16 20:34 server.key
+</code></pre>
+<h4 id="mosquitto-server-configuration">Mosquitto Server Configuration</h4>
+<p>Add the following configuration to <code>/etc/mosquitto/conf.d/custom.conf</code>:</p>
+<pre><code class="language-yml"># -----------------------------------------------------------------
+# Certificate based SSL/TLS support
+# -----------------------------------------------------------------
+listener 8883
+tls_version tlsv1.2
+cafile /etc/mosquitto/certs/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+</code></pre>
+<p>Then restart the service:</p>
+<pre><code class="language-bash">service mosquitto restart &amp;&amp; service mosquitto status
+</code></pre>
+<h4 id="testing-the-connection">Testing the Connection</h4>
+<p>All you need to establish a server connection is the <code>ca.crt</code> file on your client machine. Then you can try to subscribe to the last-will topic of your camera and should receive it&#x27;s online status:</p>
+<pre><code class="language-bash">mosquitto_sub -h debian11 -t &#x27;cameras/117/status/connection&#x27; -p 8883 --insecure --cafile ca.crt --tls-version tlsv1.2 -u admin -P instar -v
+
+cameras/117/status/connection {&quot;val&quot;:&quot;online&quot;}
+cameras/117/status/connection {&quot;val&quot;:&quot;offline&quot;}
+cameras/117/status/connection {&quot;val&quot;:&quot;online&quot;}
+</code></pre>
+<p>Or with the <strong>MQTT Explorer</strong>:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_06-d9a6501da366813cfae1dbec80dbb4ba.png" width="1014" height="640"></p>
+<p>Add the <code>ca.crt</code> file here:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_07-48662b02209b8dd16d92d48521f56778.png" width="1007" height="460"></p>
+<h4 id="client-certificates">Client Certificates</h4>
+<p>For more security, you can add client certificates, which need to be signed by the server.</p>
+<h4 id="creating-a-client-certificate">Creating a client certificate</h4>
+<p>Generate client certificates for the MQTT clients. <strong>Important</strong>: Don’t use the server name as FQDN:</p>
+<pre><code class="language-bash">openssl genrsa -out client.key 4096
+</code></pre>
+<pre><code class="language-bash">openssl req -out client.csr -key client.key -new
+
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &#x27;.&#x27;, the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:INSTAR
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:mqtt.client
+Email Address []:
+
+Please enter the following &#x27;extra&#x27; attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+</code></pre>
+<pre><code class="language-bash">openssl x509 -req -in client.csr -CA ca.crt --CAkey ca.key --CAcreateserial -out client.crt -days 1825
+
+Signature ok
+subject=C = AU, ST = Some-State, O = INSTAR, CN = mqtt.client
+Getting CA Private Key
+</code></pre>
+<pre><code class="language-bash">chown mosquitto:mosquitto client.{csr,crt,key}
+</code></pre>
+<p>Restart the Mosquitto server:</p>
+<pre><code class="language-bash">service mosquitto restart &amp;&amp; service mosquitto status
+</code></pre>
+<h4 id="update-the-mosquitto-server-configuration">Update the Mosquitto Server Configuration</h4>
+<p>To enforce the usage of client certificates, you will need to add <code>require_certificate true</code> to your listener configuration:</p>
+<pre><code class="language-yml"># -----------------------------------------------------------------
+# Certificate based SSL/TLS support
+# -----------------------------------------------------------------
+listener 8883
+tls_version tlsv1.2
+cafile /etc/mosquitto/certs/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+require_certificate true
+</code></pre>
+<h4 id="testing-the-connection-1">Testing the Connection</h4>
+<pre><code class="language-bash">mosquitto_sub -h debian11 -t &#x27;cameras/117/status/connection&#x27; -p 8883 --insecure --cafile ca.crt --cert client.crt --key client.key --tls-version tlsv1.2 -u admin -P instar -v
+
+cameras/117/status/connection {&quot;val&quot;:&quot;online&quot;}
+</code></pre>
+<p>For the MQTT Explorer upload the Client Key and Cert:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_08-0dad0d164bdec7d1fcec4b1112dadab6.png" width="1019" height="571"></p>
+<h2 id="connect-your-instar-ip-camera">Connect your INSTAR IP Camera</h2>
+<p>To connect your INSTAR camera you first have to do 2 things:</p>
+<ol>
+<li>Combine the <code>client.key</code> and <code>client.crt</code> into a single file called <code>client.pem</code>:</li>
+</ol>
+<pre><code class="language-bash">-----BEGIN RSA PRIVATE KEY-----
+MIIJKAIBAAKCAgEAorc0ouM2Uh0pBlZ5IbCSonwOACUCPQ+FqWjhRl5FbAAke2iK
+
+...
+
+l6hxaLG33DoTvYoEbjBEmLtsBAz4sdnTGi2z6HOYfMsqGjMehPJmr2XH/kA=
+-----END RSA PRIVATE KEY-----
+-----BEGIN CERTIFICATE-----
+MIIFIDCCAwgCFHLf6A9ycbmW6ExF+DBGE3T3qhFAMA0GCSqGSIb3DQEBCwUAMFAx
+
+...
+
+CVSpxYNxMG6gIpeIFrTogygOfdc=
+-----END CERTIFICATE-----
+</code></pre>
+<ol start="2">
+<li>Take the <code>ca.crt</code> and save it as <code>ca.pem</code>.</li>
+</ol>
+<p>Now open your camera&#x27;s SSL Cert menu, add the <code>client.pem</code> as your custom certificate and enable it:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_09-e913aafe3d5b36029890eba777843163.png" width="948" height="854"></p>
+<p>And secondly add the <code>ca.pem</code> to the Custom CA Store of your camera:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_10-af28ed2051bcea94db91923e43b70d4e.png" width="1063" height="525"></p>
+<p>Configure the client to use your MQTT brokers <strong>Hostname</strong> instead of it&#x27;s local IP to be able to activate the <strong>Verify Certificate</strong> option:</p>
+<p><img alt="Mosquitto2 MQTT Broker" src="/assets/images/Mosquitto2_Broker_11-5100e12de27ee21cc284f18cee3e24e7.png" width="947" height="767"></p>
+<p>Start your MQTT client and check the <code>http://debian11/tmpfs/mqtt-log</code> - you should see it connect on port <code>8883</code> using <strong>TLS</strong>:</p>
+<pre><code class="language-bash">2022-2-18 4:11:11: [Info] Config: Version 2
+2022-2-18 4:11:11: [Info] Config: Units loaded: 283
+2022-2-18 4:11:11: [Info] Config: Memory required: 40749
+2022-2-18 4:11:11: [Info] Authenticate with Mqtt-Broker
+2022-2-18 4:11:11: [Info] Activate TLS
+2022-2-18 4:11:11: [Info] Connect to Mqtt-Broker debian11 on port 8883...
+2022-2-18 4:11:11: [Info] Synchronize Cgi-Server with Mqtt-Broker
+2022-2-18 4:11:11: [Info] Mqtt listen thread has been started.
+2022-2-18 4:11:11: [Info] Synchronize Cgi-Server with Mqtt-Broker
+2022-2-18 4:11:12: [Info] Adapter connected!
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_aHIs padding--none margin-left--sm"><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/linux">LINUX</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/smarthome">Smarthome</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/mqtt">MQTT</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Automation_and_Robotics/MQTT/2022-02-01--mosquitto-2-broker/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_NulP" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated__GQF"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Automation_and_Robotics/MQTT/2022-03-26--mqtt-clients/2022-03-26"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">MQTT Clients</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Automation_and_Robotics/MQTT/2021-09-12--golang-paho-mqtt/2021-09-12"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Go Paho MQTT Client</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_IS5x thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#install-mosquitto-on-debian-bullseye" class="table-of-contents__link toc-highlight">Install Mosquitto on Debian Bullseye</a></li><li><a href="#configure-mosquitto" class="table-of-contents__link toc-highlight">Configure Mosquitto</a></li><li><a href="#verify-that-the-broker-is-working" class="table-of-contents__link toc-highlight">Verify that the Broker is working</a><ul><li><a href="#mosquitto-cli-tools" class="table-of-contents__link toc-highlight">Mosquitto CLI Tools</a></li><li><a href="#connecting-clients" class="table-of-contents__link toc-highlight">Connecting Clients</a></li></ul></li><li><a href="#websockets" class="table-of-contents__link toc-highlight">Websockets</a><ul><li><a href="#mqtt-explorer" class="table-of-contents__link toc-highlight">MQTT Explorer</a></li><li><a href="#mqttjs-web-client" class="table-of-contents__link toc-highlight">MQTT.js Web Client</a></li></ul></li><li><a href="#mosquitto-webserver" class="table-of-contents__link toc-highlight">Mosquitto Webserver</a></li><li><a href="#adding-encryption" class="table-of-contents__link toc-highlight">Adding Encryption</a><ul><li><a href="#creating-self-signed-certificates" class="table-of-contents__link toc-highlight">Creating Self-Signed Certificates</a></li></ul></li><li><a href="#connect-your-instar-ip-camera" class="table-of-contents__link toc-highlight">Connect your INSTAR IP Camera</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2023 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>

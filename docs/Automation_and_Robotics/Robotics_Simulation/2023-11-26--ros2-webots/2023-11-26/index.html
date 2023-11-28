@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">ROS2 Webots Robot Simulation | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ROS2 Webots Robot Simulation | Mike Polinowski"><meta data-rh="true" name="description" content="Configure the Webots simulator with ROS2"><meta data-rh="true" property="og:description" content="Configure the Webots simulator with ROS2"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.dcca9435.css">
+<script src="/assets/js/runtime~main.9a0cc3b5.js" defer="defer"></script>
+<script src="/assets/js/main.6d14a3ae.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_gu5v" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--light_dGsa"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--dark_pzCA"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_kWbt colorModeToggle_GwZs"><button class="clean-btn toggleButton_fOL9 toggleButtonDisabled_STpu" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_DCeJ"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_DFgp"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_IP3a"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_IbdI"><div class="docsWrapper_JGIH"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_SdI4" type="button"></button><div class="docRoot_eRbX"><aside class="theme-doc-sidebar-container docSidebarContainer_Ta75"><div class="sidebarViewport_fgog"><div class="sidebar_oDHW"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_vPEQ"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/development">Development</a><button aria-label="Expand sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Collapse sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/home-automation">Home Automation</a><button aria-label="Expand sidebar category &#x27;Home Automation&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/mqtt">MQTT</a><button aria-label="Expand sidebar category &#x27;MQTT&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/robotics--simulation">Robotics &amp; Simulation</a><button aria-label="Collapse sidebar category &#x27;Robotics &amp; Simulation&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26">ROS2 Webots Robot Simulation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-gazebo-simulation/2023-11-26">ROS2 Gazebo Robot Simulation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24">ROS2 Graph Concepts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-19--ros2-gazebo-installation/2023-11-19">Gazebo &amp; ROS2 Basic Installation</a></li></ul></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_lg0V"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_nDJs"><div class="docItemContainer_OGiL"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_k3Z9" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_JACu"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/automation-deep-vision-and-robotics"><span itemprop="name">Automation, Deep Vision and Robotics</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/robotics--simulation"><span itemprop="name">Robotics &amp; Simulation</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">ROS2 Webots Robot Simulation</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_QCOD theme-doc-toc-mobile tocMobile_N0YI"><button type="button" class="clean-btn tocCollapsibleButton_pHwF">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>ROS2 Webots Robot Simulation</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-252551beac0b36b4ba53ccd380897f8e.jpg" width="1500" height="620"></p>
+<blockquote>
+<p>Excerpt from <a href="https://docs.ros.org/en/iron/index.html">ROS 2 Documentation (IRON)</a>: The Robot Operating System (ROS) is a set of software libraries and tools for building robot applications. From drivers and state-of-the-art algorithms to powerful developer tools, ROS has the open source tools you need for your next robotics project.</p>
+</blockquote>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#robot-simulation-and-control">Robot Simulation and Control</a>
+<ul>
+<li><a href="#create-the-package-structure">Create the Package Structure</a></li>
+<li><a href="#edit-the-driver-plugin">Edit the Driver Plugin</a></li>
+<li><a href="#declare-the-plugin">Declare the Plugin</a></li>
+<li><a href="#create-the-launch-file">Create the Launch File</a></li>
+<li><a href="#add-added-files-to-plugin-setup">Add added Files to Plugin Setup</a></li>
+<li><a href="#test-run">Test Run</a></li>
+</ul>
+</li>
+<li><a href="#integrating-sensors">Integrating Sensors</a>
+<ul>
+<li><a href="#updating-the-plugin-declaration">Updating the Plugin Declaration</a></li>
+<li><a href="#creating-a-ros-sensor-node">Creating a ROS Sensor Node</a></li>
+<li><a href="#add-the-new-node-to-plugin-setup">Add the new Node to Plugin Setup</a></li>
+<li><a href="#test-run-1">Test Run</a></li>
+</ul>
+</li>
+<li><a href="#adding-reset-handler">Adding Reset Handler</a></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Install the <code>webots</code>, <code>webots_ros2</code> package and run simulation examples on Ubuntu.</p>
+<p>Start by importing the `Cyberbotics.asc`` signature file using these commands:</p>
+<pre><code class="language-bash">sudo mkdir -p /etc/apt/keyrings
+cd /etc/apt/keyrings
+sudo wget -q https://cyberbotics.com/Cyberbotics.asc
+</code></pre>
+<p>Adding the Cyberbotics repository:</p>
+<pre><code class="language-bash">echo &quot;deb [arch=amd64 signed-by=/etc/apt/keyrings/Cyberbotics.asc] https://cyberbotics.com/debian binary-amd64/&quot; | sudo tee /etc/apt/sources.list.d/Cyberbotics.list
+sudo apt update
+</code></pre>
+<p>Then proceed to the installation of Webots using:</p>
+<pre><code class="language-bash">sudo apt install webots
+</code></pre>
+<p>Add the installed version:</p>
+<pre><code class="language-bash">echo &quot;export WEBOTS_HOME=/usr/local/webots&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<p>Install <code>webots_ros2</code>:</p>
+<pre><code class="language-bash">sudo apt install ros-iron-webots-ros2
+</code></pre>
+<p>Use the ROS2 launch command to start demo packages (e.g. <code>webots_ros2_universal_robot</code>):</p>
+<pre><code class="language-bash">ros2 launch webots_ros2_universal_robot multirobot_launch.py
+</code></pre>
+<p><img alt="ROS2 Webots Robot Simulation" src="/assets/images/ROS2_Webots_01-f73ff01f788c47cf0979b3848ff6cfa7.webp" width="1840" height="984"></p>
+<h2 id="robot-simulation-and-control">Robot Simulation and Control</h2>
+<p>This tutorial is compatible with version <code>2023.1.0</code> of <code>webots_ros2</code> and <code>Webots</code> <code>R2023b</code>, as well as upcoming versions.</p>
+<h3 id="create-the-package-structure">Create the Package Structure</h3>
+<p>Create a new package named <code>hello_webots</code> from the <code>src</code> folder of your ROS2 workspace. Change the current directory of your terminal to <code>ros2_ws/src</code> and run:</p>
+<pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python --license Apache-2.0 --node-name my_webot_driver hello_webots --dependencies rclpy geometry_msgs webots_ros2_driver
+</code></pre>
+<p>The <code>--dependencies rclpy geometry_msgs webots_ros2_driver</code> option specifies the packages needed by the <code>my_webot_driver.py</code> plugin in the <code>package.xml</code> file.</p>
+<p>Let’s add a <code>launch</code> and a <code>worlds</code> folder inside the <code>hello_webots</code> folder and add a &quot;world&quot;:</p>
+<pre><code class="language-bash">mkdir hello_webots/{launch,worlds}
+wget https://docs.ros.org/en/iron/_downloads/5ad123fc6a8f1ea79553d5039728084a/my_world.wbt -P hello_webots/worlds
+</code></pre>
+<pre><code class="language-bash">hello_webots/
+├── hello_webots
+│   ├── __init__.py
+│   └── my_webot_driver.py
+├── launch
+├── LICENSE
+├── package.xml
+├── resource
+│   └── hello_webots
+├── setup.cfg
+├── setup.py
+├── test
+│   ├── test_copyright.py
+│   ├── test_flake8.py
+│   └── test_pep257.py
+└── worlds
+│   └── my_world.wbt
+</code></pre>
+<h3 id="edit-the-driver-plugin">Edit the Driver Plugin</h3>
+<p>The <code>webots_ros2_driver</code> sub-package automatically creates a ROS2 interface for most sensors. We can create custom plugin as a ROS node to access the Webots robot API and create custom topics and services to control your robot.</p>
+<blockquote>
+<p>The purpose of this tutorial is to show a basic example with a minimum number of dependencies. However, you could avoid the use of this plugin by using another webots_ros2 sub-package named webots_ros2_control, introducing a new dependency. This other sub-package creates an interface with the ros2_control package that facilitates the control of a differential wheeled robot.</p>
+</blockquote>
+<p>Open <code>hello_webots/hello_webots/my_webot_driver.py</code> and replace its contents with the following:</p>
+<pre><code class="language-py">import rclpy
+from geometry_msgs.msg import Twist
+
+HALF_DISTANCE_BETWEEN_WHEELS = 0.045
+WHEEL_RADIUS = 0.025
+
+class MyRobotDriver:
+    def init(self, webots_node, properties):
+        self.__robot = webots_node.robot
+
+        self.__left_motor = self.__robot.getDevice(&#x27;left wheel motor&#x27;)
+        self.__right_motor = self.__robot.getDevice(&#x27;right wheel motor&#x27;)
+
+        self.__left_motor.setPosition(float(&#x27;inf&#x27;))
+        self.__left_motor.setVelocity(0)
+
+        self.__right_motor.setPosition(float(&#x27;inf&#x27;))
+        self.__right_motor.setVelocity(0)
+
+        self.__target_twist = Twist()
+
+        rclpy.init(args=None)
+        self.__node = rclpy.create_node(&#x27;my_webot_driver&#x27;)
+        self.__node.create_subscription(Twist, &#x27;cmd_vel&#x27;, self.__cmd_vel_callback, 1)
+
+    def __cmd_vel_callback(self, twist):
+        self.__target_twist = twist
+
+    def step(self):
+        rclpy.spin_once(self.__node, timeout_sec=0)
+
+        forward_speed = self.__target_twist.linear.x
+        angular_speed = self.__target_twist.angular.z
+
+        command_motor_left = (forward_speed - angular_speed * HALF_DISTANCE_BETWEEN_WHEELS) / WHEEL_RADIUS
+        command_motor_right = (forward_speed + angular_speed * HALF_DISTANCE_BETWEEN_WHEELS) / WHEEL_RADIUS
+
+        self.__left_motor.setVelocity(command_motor_left)
+        self.__right_motor.setVelocity(command_motor_right)
+</code></pre>
+<p>As you can see, the MyRobotDriver class implements three methods.</p>
+<ol>
+<li>The first method, named <code>init(self, ...)</code>, is actually the ROS node counterpart of the Python <code>__init__(self, ...)</code> constructor.</li>
+</ol>
+<ul>
+<li>The init method always takes two arguments:<!-- -->
+<ul>
+<li>The webots_node argument contains a reference on the Webots instance.</li>
+<li>The properties argument is a dictionary created from the XML tags given in the URDF files (<code>my_robot.urdf</code> file see below) and allows you to pass parameters to the controller.</li>
+</ul>
+</li>
+<li>The robot instance from the simulation <code>self.__robot</code> can be used to access the Webots robot API. Then, it gets the two motor instances and initializes them with a target position and a target velocity. Finally a ROS node is created and a callback method is registered for a ROS topic named <code>/cmd_vel</code> that will handle Twist messages.</li>
+</ul>
+<ol start="2">
+<li>The second is an implementation of the <code>__cmd_vel_callback(self, twist)</code> callback private method that will be called for each Twist message received on the <code>/cmd_vel</code> topic and will save it in the <code>self.__target_twist</code> member variable.</li>
+<li>Finally, the <code>step(self)</code> method is called at every time step of the simulation. The call to <code>rclpy.spin_once()</code> is needed to keep the ROS node running smoothly. At each time step, the method will retrieve the desired <code>forward_speed</code> and <code>angular_speed</code> from <code>self.__target_twist</code>. As the motors are controlled with angular velocities, the method will then convert the forward_speed and angular_speed into individual commands for each wheel. This conversion depends on the structure of the robot, more specifically on the radius of the wheel and the distance between them.</li>
+</ol>
+<h3 id="declare-the-plugin">Declare the Plugin</h3>
+<p>You now have to create a <strong>URDF</strong> file to declare the <code>MyRobotDriver</code> plugin. This will allow the <code>webots_ros2_driver</code> ROS node to launch the plugin and connect it to the target robot.</p>
+<p>In the <code>hello_webots/resource</code> folder create a text file named <code>my_robot.urdf</code> with this content:</p>
+<pre><code class="language-bash">nano hello_webots/resource/my_robot.urdf
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;robot name=&quot;My robot&quot;&gt;
+    &lt;webots&gt;
+        &lt;plugin type=&quot;hello_webots.my_webot_driver.MyRobotDriver&quot; /&gt;
+    &lt;/webots&gt;
+&lt;/robot&gt;
+</code></pre>
+<p>The type attribute specifies the path to the class given by the hierarchical structure of files. <code>webots_ros2_driver</code> is responsible for loading the class based on the specified package and modules.</p>
+<h3 id="create-the-launch-file">Create the Launch File</h3>
+<p>Let’s create the launch file to easily launch the simulation and the ROS controller with a single command:</p>
+<pre><code class="language-bash">nano hello_webots/launch/robot_launch.py
+</code></pre>
+<pre><code class="language-py">import os
+import launch
+from launch import LaunchDescription
+from ament_index_python.packages import get_package_share_directory
+from webots_ros2_driver.webots_launcher import WebotsLauncher
+from webots_ros2_driver.webots_controller import WebotsController
+
+
+def generate_launch_description():
+    package_dir = get_package_share_directory(&#x27;hello_webots&#x27;)
+    robot_description_path = os.path.join(package_dir, &#x27;resource&#x27;, &#x27;my_robot.urdf&#x27;)
+
+    webots = WebotsLauncher(
+        world=os.path.join(package_dir, &#x27;worlds&#x27;, &#x27;my_world.wbt&#x27;)
+    )
+
+    my_webot_driver = WebotsController(
+        robot_name=&#x27;my_robot&#x27;,
+        parameters=[
+            {&#x27;robot_description&#x27;: robot_description_path},
+        ]
+    )
+
+    return LaunchDescription([
+        webots,
+        my_webot_driver,
+        launch.actions.RegisterEventHandler(
+            # shutdown when webots terminates
+            event_handler=launch.event_handlers.OnProcessExit(
+                target_action=webots,
+                on_exit=[launch.actions.EmitEvent(event=launch.events.Shutdown())],
+            )
+        )
+    ])
+</code></pre>
+<p>The <code>WebotsLauncher</code> object is a custom action that allows you to start a Webots simulation instance. You have to specify in the constructor which world file the simulator will open.</p>
+<p>The robot_name parameter is used to define the name of the robot the driver should connect to. The <code>robot_description</code> parameter holds the path to the <strong>URDF</strong> file which refers to the <code>MyRobotDriver</code> plugin. You can see the <code>WebotsController</code> node as the interface that connects your controller plugin to the target robot.</p>
+<h3 id="add-added-files-to-plugin-setup">Add added Files to Plugin Setup</h3>
+<p>Before you can start the launch file, you have to modify the setup.py file to include the extra files you added:</p>
+<pre><code class="language-bash">nano hello_webots/setup.py
+</code></pre>
+<pre><code class="language-bash">from setuptools import find_packages, setup
+
+package_name = &#x27;hello_webots&#x27;
+data_files = []
+data_files.append((&#x27;share/ament_index/resource_index/packages&#x27;, [&#x27;resource/&#x27; + package_name]))
+data_files.append((&#x27;share/&#x27; + package_name + &#x27;/launch&#x27;, [&#x27;launch/robot_launch.py&#x27;]))
+data_files.append((&#x27;share/&#x27; + package_name + &#x27;/worlds&#x27;, [&#x27;worlds/my_world.wbt&#x27;]))
+data_files.append((&#x27;share/&#x27; + package_name + &#x27;/resource&#x27;, [&#x27;resource/my_robot.urdf&#x27;]))
+data_files.append((&#x27;share/&#x27; + package_name, [&#x27;package.xml&#x27;]))
+
+setup(
+    name=package_name,
+    version=&#x27;0.0.0&#x27;,
+    packages=find_packages(exclude=[&#x27;test&#x27;]),
+    data_files=data_files,
+    install_requires=[&#x27;setuptools&#x27;],
+    zip_safe=True,
+    maintainer=&#x27;user&#x27;,
+    maintainer_email=&#x27;user.name@mail.com&#x27;,
+    description=&#x27;TODO: Package description&#x27;,
+    license=&#x27;TODO: License declaration&#x27;,
+    tests_require=[&#x27;pytest&#x27;],
+    entry_points={
+        &#x27;console_scripts&#x27;: [
+            &#x27;my_robot_driver = hello_webots.my_robot_driver:main&#x27;,
+        ],
+    },
+)
+</code></pre>
+<p>This sets-up the package and adds in the data_files variable the newly added files: <code>my_world.wbt</code>, <code>my_robot.urdf</code> and <code>robot_launch.py</code>.</p>
+<h3 id="test-run">Test Run</h3>
+<p>From a terminal in your ROS2 workspace run:</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+colcon build
+source install/local_setup.bash
+ros2 launch hello_webots robot_launch.py
+</code></pre>
+<p>This will launch the simulation:</p>
+<p><img alt="ROS2 Webots Robot Simulation" src="/assets/images/ROS2_Webots_02-b4739c707364368438aa36ef8db9de87.webp" width="1569" height="854"></p>
+<p>Open a second terminal and send a command with:</p>
+<pre><code class="language-bash">ros2 topic pub /cmd_vel geometry_msgs/Twist  &quot;linear: { x: 0.1 }&quot;
+</code></pre>
+<p>At this point, the robot is able to blindly follow your motor commands. But it will eventually bump into the wall as you order it to move forwards.</p>
+<h2 id="integrating-sensors">Integrating Sensors</h2>
+<p>Implementing a ROS 2 node that avoids obstacles using the robot’s distance sensors with the <code>webots_ros2_driver</code> interface.</p>
+<h3 id="updating-the-plugin-declaration">Updating the Plugin Declaration</h3>
+<p><code>webots_ros2_driver</code> contains plugins to interface most of Webots devices with ROS2 directly. These plugins can be loaded using the <code>&lt;device&gt;</code> tag in the URDF file of the robot. The list of all existing interfaces and the corresponding parameters can be found on the <a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices">devices reference page</a> - e.g. currently available sensors devices:</p>
+<ul>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#camera-device">Camera</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#compass-device">Compass</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#distance-sensor-device">DistanceSensor</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#gps-device">GPS</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#lidar-device">Lidar</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#light-sensor-device">LightSensor</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#range-finder-device">RangeFinder</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#receiver-device">Receiver</a></li>
+<li><a href="https://github.com/cyberbotics/webots_ros2/wiki/References-Devices#imu-device">IMU</a></li>
+</ul>
+<p>In <code>my_robot.urdf</code> replace the whole contents with:</p>
+<pre><code class="language-bash">nano hello_webots/resources/my_robot.urdf
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;robot name=&quot;My robot&quot;&gt;
+    &lt;webots&gt;
+        &lt;device reference=&quot;ds0&quot; type=&quot;DistanceSensor&quot;&gt;
+            &lt;ros&gt;
+                &lt;topicName&gt;/left_sensor&lt;/topicName&gt;
+                &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+            &lt;/ros&gt;
+        &lt;/device&gt;
+        &lt;device reference=&quot;ds1&quot; type=&quot;DistanceSensor&quot;&gt;
+            &lt;ros&gt;
+                &lt;topicName&gt;/right_sensor&lt;/topicName&gt;
+                &lt;alwaysOn&gt;true&lt;/alwaysOn&gt;
+            &lt;/ros&gt;
+        &lt;/device&gt;
+        &lt;plugin type=&quot;hello_webots.my_webot_driver.MyRobotDriver&quot; /&gt;
+    &lt;/webots&gt;
+&lt;/robot&gt;
+</code></pre>
+<p>In addition to your custom plugin, the webots_ros2_driver will parse the <code>&lt;device&gt;</code> tags referring to the DistanceSensor nodes and use the standard parameters in the <code>&lt;ros&gt;</code> tags to enable the sensors and name their topics.</p>
+<h3 id="creating-a-ros-sensor-node">Creating a ROS Sensor Node</h3>
+<p>The robot will use a standard ROS node to detect the wall and send motor commands to avoid it. In the <code>hello_webots/hello_webots/</code> folder, create a file named `obstacle_avoider.py`` with this code:</p>
+<pre><code class="language-bash">nano hello_webots/hello_webots/obstacle_avoider.py
+</code></pre>
+<pre><code class="language-py">import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Range
+from geometry_msgs.msg import Twist
+
+
+MAX_RANGE = 0.15
+
+
+class ObstacleAvoider(Node):
+    def __init__(self):
+        super().__init__(&#x27;obstacle_avoider&#x27;)
+
+        self.__publisher = self.create_publisher(Twist, &#x27;cmd_vel&#x27;, 1)
+
+        self.create_subscription(Range, &#x27;left_sensor&#x27;, self.__left_sensor_callback, 1)
+        self.create_subscription(Range, &#x27;right_sensor&#x27;, self.__right_sensor_callback, 1)
+
+    def __left_sensor_callback(self, message):
+        self.__left_sensor_value = message.range
+
+    def __right_sensor_callback(self, message):
+        self.__right_sensor_value = message.range
+
+        command_message = Twist()
+
+        command_message.linear.x = 0.1
+
+        if self.__left_sensor_value &lt; 0.9 * MAX_RANGE or self.__right_sensor_value &lt; 0.9 * MAX_RANGE:
+            command_message.angular.z = -2.0
+
+        self.__publisher.publish(command_message)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    avoider = ObstacleAvoider()
+    rclpy.spin(avoider)
+    # Destroy the node explicitly
+    # (optional - otherwise it will be done automatically
+    # when the garbage collector destroys the node object)
+    avoider.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == &#x27;__main__&#x27;:
+    main()
+</code></pre>
+<p>This node will create a publisher for the command and subscribe to the sensors topics here:</p>
+<pre><code class="language-bash">self.__publisher = self.create_publisher(Twist, &#x27;cmd_vel&#x27;, 1)
+
+self.create_subscription(Range, &#x27;left_sensor&#x27;, self.__left_sensor_callback, 1)
+self.create_subscription(Range, &#x27;right_sensor&#x27;, self.__right_sensor_callback, 1)
+</code></pre>
+<p>The node sends a message to the <code>/cmd_vel</code> topic when a measurement from the right sensor is received. The <code>command_message</code> will register at least a forward speed in <code>linear.x</code> in order to make the robot move when no obstacle is detected. If any of the two sensors detect an obstacle, <code>command_message</code> will also register a rotational speed in <code>angular.z</code> in order to make the robot turn right:</p>
+<pre><code class="language-bash">def __right_sensor_callback(self, message):
+    self.__right_sensor_value = message.range
+
+    command_message = Twist()
+
+    command_message.linear.x = 0.1
+
+    if self.__left_sensor_value &lt; 0.9 * MAX_RANGE or self.__right_sensor_value &lt; 0.9 * MAX_RANGE:
+        command_message.angular.z = -2.0
+
+    self.__publisher.publish(command_message)
+</code></pre>
+<h3 id="add-the-new-node-to-plugin-setup">Add the new Node to Plugin Setup</h3>
+<p>Edit <code>setup.py</code> and add the new entry point to <code>console_scripts</code> with:</p>
+<pre><code class="language-bash">nano hello_webots/setup.py
+</code></pre>
+<pre><code class="language-bash">&#x27;console_scripts&#x27;: [
+    &#x27;my_robot_driver = hello_webots.my_robot_driver:main&#x27;,
+    &#x27;obstacle_avoider = hello_webots.obstacle_avoider:main&#x27;
+],
+</code></pre>
+<p>This will add an entry point for the <code>obstacle_avoider</code> node.</p>
+<p>Go to the file <code>robot_launch.py</code> and add the obstacle avoider to <code>generate_launch_description()</code> with:</p>
+<pre><code class="language-bash">nano hello_webots/launch/robot_launch.py
+</code></pre>
+<pre><code class="language-py">from rclpy.node import Node
+
+...
+
+def generate_launch_description():
+    
+    ...
+
+    obstacle_avoider = Node(
+        package=&#x27;hello_webots&#x27;,
+        executable=&#x27;obstacle_avoider&#x27;,
+    )
+
+    return LaunchDescription([
+        webots,
+        my_robot_driver,
+        obstacle_avoider,
+        launch.actions.RegisterEventHandler(
+            event_handler=launch.event_handlers.OnProcessExit(
+                target_action=webots,
+                on_exit=[launch.actions.EmitEvent(event=launch.events.Shutdown())],
+            )
+        )
+    ])
+</code></pre>
+<h3 id="test-run-1">Test Run</h3>
+<p>From a terminal in your ROS2 workspace run:</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+colcon build
+source install/local_setup.bash
+ros2 launch hello_webots robot_launch.py
+</code></pre>
+<p>This will launch the simulation:</p>
+<p><img alt="ROS2 Webots Robot Simulation" src="/assets/images/ROS2_Webots_03-6445656e56b908117193e77ba7298b26.webp" width="1569" height="854"></p>
+<p>Your robot should go forward and before hitting the wall it should turn clockwise. You can press Ctrl+F10 in Webots or go to the View menu, Optional Rendering and Show DistanceSensor Rays to display the range of the distance sensors of the robot.</p>
+<h2 id="adding-reset-handler">Adding Reset Handler</h2>
+<p>Extend a robot simulation with a reset handler to restart nodes when the reset button of Webots is pressed.</p>
+<p>The Webots reset button reverts the world to the initial state and restarts controllers. It is convenient as it quickly resets the simulation, but in the context of ROS 2, robot controllers are not started again making the simulation stop. The reset handler allows you to restart specific nodes or perform additional actions when the reset button in Webots is pressed.</p>
+<p>On reset, Webots kills all driver nodes. Therefore, to start them again after reset, you should set the `respawn`` property of the driver node in the launch file to True. It will ensure driver nodes are up and running after the reset:</p>
+<pre><code class="language-bash">nano ~/ros2_ws/src/hello_webots/launch/robot_launch.py
+</code></pre>
+<pre><code class="language-py">def generate_launch_description():
+    robot_driver = WebotsController(
+        robot_name=&#x27;my_robot&#x27;,
+        parameters=[
+            {&#x27;robot_description&#x27;: robot_description_path}
+        ],
+
+        # Every time one resets the simulation the controller is automatically respawned
+        respawn=True
+    )
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_aHIs padding--none margin-left--sm"><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/robotics">Robotics</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/simulation">Simulation</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/ros">ROS</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/webots">Webots</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_NulP" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated__GQF"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/robotics--simulation"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Robotics &amp; Simulation</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-gazebo-simulation/2023-11-26"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">ROS2 Gazebo Robot Simulation</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_IS5x thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#installation" class="table-of-contents__link toc-highlight">Installation</a></li><li><a href="#robot-simulation-and-control" class="table-of-contents__link toc-highlight">Robot Simulation and Control</a><ul><li><a href="#create-the-package-structure" class="table-of-contents__link toc-highlight">Create the Package Structure</a></li><li><a href="#edit-the-driver-plugin" class="table-of-contents__link toc-highlight">Edit the Driver Plugin</a></li><li><a href="#declare-the-plugin" class="table-of-contents__link toc-highlight">Declare the Plugin</a></li><li><a href="#create-the-launch-file" class="table-of-contents__link toc-highlight">Create the Launch File</a></li><li><a href="#add-added-files-to-plugin-setup" class="table-of-contents__link toc-highlight">Add added Files to Plugin Setup</a></li><li><a href="#test-run" class="table-of-contents__link toc-highlight">Test Run</a></li></ul></li><li><a href="#integrating-sensors" class="table-of-contents__link toc-highlight">Integrating Sensors</a><ul><li><a href="#updating-the-plugin-declaration" class="table-of-contents__link toc-highlight">Updating the Plugin Declaration</a></li><li><a href="#creating-a-ros-sensor-node" class="table-of-contents__link toc-highlight">Creating a ROS Sensor Node</a></li><li><a href="#add-the-new-node-to-plugin-setup" class="table-of-contents__link toc-highlight">Add the new Node to Plugin Setup</a></li><li><a href="#test-run-1" class="table-of-contents__link toc-highlight">Test Run</a></li></ul></li><li><a href="#adding-reset-handler" class="table-of-contents__link toc-highlight">Adding Reset Handler</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2023 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>

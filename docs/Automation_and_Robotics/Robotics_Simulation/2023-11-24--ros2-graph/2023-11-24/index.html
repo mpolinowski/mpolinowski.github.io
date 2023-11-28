@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.0">
+<title data-rh="true">ROS2 Graph Concepts | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ROS2 Graph Concepts | Mike Polinowski"><meta data-rh="true" name="description" content="ROS2 Architecture and Concepts"><meta data-rh="true" property="og:description" content="ROS2 Architecture and Concepts"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.dcca9435.css">
+<script src="/assets/js/runtime~main.9a0cc3b5.js" defer="defer"></script>
+<script src="/assets/js/main.6d14a3ae.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_gu5v" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--light_dGsa"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_ZRzL themedComponent--dark_pzCA"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_kWbt colorModeToggle_GwZs"><button class="clean-btn toggleButton_fOL9 toggleButtonDisabled_STpu" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_DCeJ"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_DFgp"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_IP3a"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_IbdI"><div class="docsWrapper_JGIH"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_SdI4" type="button"></button><div class="docRoot_eRbX"><aside class="theme-doc-sidebar-container docSidebarContainer_Ta75"><div class="sidebarViewport_fgog"><div class="sidebar_oDHW"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_vPEQ"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/development">Development</a><button aria-label="Expand sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Collapse sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/home-automation">Home Automation</a><button aria-label="Expand sidebar category &#x27;Home Automation&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/mqtt">MQTT</a><button aria-label="Expand sidebar category &#x27;MQTT&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/robotics--simulation">Robotics &amp; Simulation</a><button aria-label="Collapse sidebar category &#x27;Robotics &amp; Simulation&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-webots/2023-11-26">ROS2 Webots Robot Simulation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-gazebo-simulation/2023-11-26">ROS2 Gazebo Robot Simulation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/2023-11-24">ROS2 Graph Concepts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-19--ros2-gazebo-installation/2023-11-19">Gazebo &amp; ROS2 Basic Installation</a></li></ul></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_lg0V"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_nDJs"><div class="docItemContainer_OGiL"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_k3Z9" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_JACu"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/automation-deep-vision-and-robotics"><span itemprop="name">Automation, Deep Vision and Robotics</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/robotics--simulation"><span itemprop="name">Robotics &amp; Simulation</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">ROS2 Graph Concepts</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_QCOD theme-doc-toc-mobile tocMobile_N0YI"><button type="button" class="clean-btn tocCollapsibleButton_pHwF">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>ROS2 Graph Concepts</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-252551beac0b36b4ba53ccd380897f8e.jpg" width="1500" height="620"></p>
+<blockquote>
+<p>Excerpt from <a href="https://docs.ros.org/en/iron/index.html">ROS 2 Documentation (IRON)</a>: The Robot Operating System (ROS) is a set of software libraries and tools for building robot applications. From drivers and state-of-the-art algorithms to powerful developer tools, ROS has the open source tools you need for your next robotics project.</p>
+</blockquote>
+<ul>
+<li><a href="#the-ros-2-graph">The ROS 2 Graph</a>
+<ul>
+<li><a href="#nodes">Nodes</a>
+<ul>
+<li><a href="#run">Run</a></li>
+<li><a href="#list">List</a></li>
+<li><a href="#remap">Remap</a></li>
+<li><a href="#info">Info</a></li>
+</ul>
+</li>
+<li><a href="#topics">Topics</a>
+<ul>
+<li><a href="#list-1">List</a></li>
+<li><a href="#echo">Echo</a></li>
+<li><a href="#info-1">Info</a></li>
+<li><a href="#pub">Pub</a></li>
+</ul>
+</li>
+<li><a href="#services">Services</a>
+<ul>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#types">Types</a></li>
+<li><a href="#find">Find</a></li>
+<li><a href="#interfaces">Interfaces</a></li>
+<li><a href="#call">Call</a></li>
+</ul>
+</li>
+<li><a href="#parameters">Parameters</a>
+<ul>
+<li><a href="#list-2">List</a></li>
+<li><a href="#get">Get</a></li>
+<li><a href="#set">Set</a></li>
+<li><a href="#param-dump">Param Dump</a></li>
+<li><a href="#param-load">Param Load</a></li>
+</ul>
+</li>
+<li><a href="#actions">Actions</a>
+<ul>
+<li><a href="#node-info">Node Info</a></li>
+<li><a href="#action-list">Action List</a></li>
+<li><a href="#action-types">Action Types</a></li>
+<li><a href="#action-info">Action Info</a></li>
+<li><a href="#interface">Interface</a></li>
+<li><a href="#action-send-goal">Action Send Goal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#creating-a-workspace">Creating a Workspace</a>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#create-a-new-directory">Create a new Directory</a></li>
+<li><a href="#clone-a-sample-repo">Clone a Sample Repo</a></li>
+<li><a href="#build-the-workspace-with-colcon">Build the Workspace with Colcon</a></li>
+<li><a href="#source-the-overlay">Source the Overlay</a></li>
+<li><a href="#run-the-build-package">Run the Build Package</a>
+<ul>
+<li><a href="#modify-the-overlay">Modify the Overlay</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#creating-a-package">Creating a Package</a>
+<ul>
+<li><a href="#build-a-package">Build a Package</a></li>
+<li><a href="#source-the-setup-file">Source the Setup File</a></li>
+<li><a href="#customize-packagexml">Customize package.xml</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="the-ros-2-graph">The ROS 2 Graph</h2>
+<p>Start by verifying your <a href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-19--ros2-gazebo-installation/2023-11-19">installation</a>:</p>
+<pre><code class="language-bash">printenv | grep -i ROS
+
+ROS_VERSION=2
+ROS_PYTHON_VERSION=3
+ROS_DISTRO=iron
+ROS_DOMAIN_ID=88
+...
+</code></pre>
+<p>The ROS graph is a network of ROS 2 elements processing data together at the same time. It encompasses all executables in nodes and the connections between them. Each node in ROS should be responsible for a single, modular purpose, e.g. controlling the wheel motors or publishing the sensor data from a laser range-finder. Each node can send and receive data from other nodes via topics, services, actions, or parameters.</p>
+<p>A full robotic system is comprised of many nodes working in concert. In ROS 2, a single executable (C++ program, Python program, etc.) can contain one or more nodes.</p>
+<h3 id="nodes">Nodes</h3>
+<h4 id="run">Run</h4>
+<p>The command ros2 run launches an executable from a package.</p>
+<pre><code class="language-bash">ros2 run &lt;package_name&gt; &lt;executable_name&gt;
+</code></pre>
+<p>For example for the <code>turtlesim</code> enter the following command:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtle_teleop_key
+</code></pre>
+<h4 id="list">List</h4>
+<p>Open a new terminal while <code>turtlesim</code> is still running in the other one, and enter the following command:</p>
+<pre><code class="language-bash">ros2 node list
+</code></pre>
+<p>The terminal will return the <strong>Node Name</strong>:</p>
+<pre><code class="language-bash">/turtlesim
+/teleop_turtle
+</code></pre>
+<h4 id="remap">Remap</h4>
+<p><a href="https://design.ros2.org/articles/ros_command_line_arguments.html#name-remapping-rules">Remapping</a> allows you to reassign default node properties, like node name, topic names, service names, etc., to custom values.</p>
+<p>E.g. you  can reassign the name of our /turtlesim node. In a new terminal, run the following command:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node --ros-args --remap __node:=heroturtlesim
+</code></pre>
+<p>Since you’re calling ros2 run on turtlesim again, another turtlesim window will open. However, now if you return to the terminal where you ran ros2 node list, and run it again, you will see three node names:</p>
+<pre><code class="language-bash">/heroturtlesim
+/turtlesim
+/teleop_turtle
+</code></pre>
+<h4 id="info">Info</h4>
+<p>Now that you know the names of your nodes, you can access more information about them with:</p>
+<pre><code class="language-bash">ros2 node info &lt;node_name&gt;
+</code></pre>
+<p>To examine your latest node, heroturtlesim, run the following command:</p>
+<pre><code class="language-bash">ros2 node info /heroturtlesim
+
+/heroturtlesim
+  Subscribers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /turtle1/cmd_vel: geometry_msgs/msg/Twist
+  Publishers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+    /turtle1/color_sensor: turtlesim/msg/Color
+    /turtle1/pose: turtlesim/msg/Pose
+  Service Servers:
+    /clear: std_srvs/srv/Empty
+    /kill: turtlesim/srv/Kill
+    /heroturtlesim/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /heroturtlesim/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /heroturtlesim/get_parameters: rcl_interfaces/srv/GetParameters
+    /heroturtlesim/list_parameters: rcl_interfaces/srv/ListParameters
+    /heroturtlesim/set_parameters: rcl_interfaces/srv/SetParameters
+    /heroturtlesim/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+    /reset: std_srvs/srv/Empty
+    /spawn: turtlesim/srv/Spawn
+    /turtle1/set_pen: turtlesim/srv/SetPen
+    /turtle1/teleport_absolute: turtlesim/srv/TeleportAbsolute
+    /turtle1/teleport_relative: turtlesim/srv/TeleportRelative
+  Service Clients:
+
+  Action Servers:
+    /turtle1/rotate_absolute: turtlesim/action/RotateAbsolute
+  Action Clients:
+</code></pre>
+<h3 id="topics">Topics</h3>
+<p>ROS 2 breaks complex systems down into many modular nodes. Topics are a vital element of the ROS graph that act as a bus for nodes to exchange messages. A node may publish data to any number of topics and simultaneously have subscriptions to any number of topics.</p>
+<p>First make sure that <code>turtlesim</code> is still running:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node
+ros2 run turtlesim turtle_teleop_key
+</code></pre>
+<h4 id="list-1">List</h4>
+<p>We now have two <strong>Nodes</strong>:</p>
+<pre><code class="language-bash">ros2 node list
+
+/turtlesim
+/teleop_turtle
+</code></pre>
+<p>With 4 active <strong>Topics</strong>:</p>
+<pre><code class="language-bash">ros2 topic list -t
+
+/parameter_events [rcl_interfaces/msg/ParameterEvent]
+/rosout [rcl_interfaces/msg/Log]
+/turtle1/cmd_vel [geometry_msgs/msg/Twist]
+/turtle1/color_sensor [turtlesim/msg/Color]
+/turtle1/pose [turtlesim/msg/Pose]
+</code></pre>
+<p>Now open <code>rqt_graph</code> by opening `rqt`` and selecting <strong>Plugins</strong> &gt; <strong>Introspection</strong> &gt; <strong>Node Graph</strong>:</p>
+<p><img alt="ROS2 Architecture and Concepts" src="/assets/images/ROS2_01-b265b0fb73a75a1247225217109bfadb.webp" width="1846" height="539"></p>
+<p>The graph is depicting how the <code>/turtlesim</code> node and the <code>/teleop_turtle</code> node are communicating with each other over a topic. The <code>/teleop_turtle</code> node is publishing data (the keystrokes you enter to move the turtle around) to the <code>/turtle1/cmd_vel</code> topic, and the <code>/turtlesim</code> node is subscribed to that topic to receive the data.</p>
+<h4 id="echo">Echo</h4>
+<p>To inspect incoming messages on a topic run the <code>echo</code> command and send a test message - e.g. on the <code>cmd_vel</code> topic and use the <code>teleop_turtle</code> node to send commands to your <code>turtlesim</code> node:</p>
+<pre><code class="language-bash">ros2 topic echo /turtle1/cmd_vel
+</code></pre>
+<p>The position data being published for every movement you make:</p>
+<pre><code class="language-bash">linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 2.0
+  ---
+</code></pre>
+<p>You can update the graph (make sure that debug nodes/topics are not hidden) and see that there is a new <code>ros2cli</code> node subscribed to the <code>/turtle1/cmd_vel</code>.</p>
+<h4 id="info-1">Info</h4>
+<p>We can also verify the subscription using the <code>info</code> command:</p>
+<pre><code class="language-bash">ros2 topic info /turtle1/cmd_vel
+
+Type: geometry_msgs/msg/Twist
+Publisher count: 1
+Subscription count: 2
+</code></pre>
+<p>That is telling us that only one node is publishing to this topic but we now have 2 subscriber. We also see the type here that allows us to check the required formatting of messages send through this topic:</p>
+<pre><code class="language-bash">ros2 interface show geometry_msgs/msg/Twist
+
+This expresses velocity in free space broken into its linear and angular parts.
+
+    Vector3  linear
+            float64 x
+            float64 y
+            float64 z
+    Vector3  angular
+            float64 x
+            float64 y
+            float64 z
+</code></pre>
+<h4 id="pub">Pub</h4>
+<p>Now knowing the topic and the expected message structure we can publish our own messages directly though the ROS2 CLI. It’s important to note that this argument needs to be input in YAML syntax. Input the full command like so:</p>
+<pre><code class="language-bash">ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist &quot;{linear: {x: 5.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}&quot;
+
+
+publisher: beginning loop
+publishing #1: geometry_msgs.msg.Twist(linear=geometry_msgs.msg.Vector3(x=5.0, y=0.0, z=0.0), angular=geometry_msgs.msg.Vector3(x=0.0, y=0.0, z=1.8))
+</code></pre>
+<p><code>--once</code> is an optional argument meaning <em>publish one message then exit</em>. Since robots require a steady stream of commands to operate continuously we can replace the <code>--once</code> option with the <code>--rate 1</code> option, which tells ros2 topic pub to publish the command in a steady stream at 1 Hz:</p>
+<pre><code class="language-bash">ros2 topic pub --rate 1 /turtle1/cmd_vel geometry_msgs/msg/Twist &quot;{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}&quot;
+
+
+publisher: beginning loop
+publishing #1: geometry_msgs.msg.Twist(linear=geometry_msgs.msg.Vector3(x=5.0, y=0.0, z=0.0), angular=geometry_msgs.msg.Vector3(x=0.0, y=0.0, z=1.8))
+
+
+publishing #2: geometry_msgs.msg.Twist(linear=geometry_msgs.msg.Vector3(x=5.0, y=0.0, z=0.0), angular=geometry_msgs.msg.Vector3(x=0.0, y=0.0, z=1.8))
+...
+</code></pre>
+<h3 id="services">Services</h3>
+<p>Services are another method of communication for nodes in the ROS graph. Services are based on a call-and-response model versus the publisher-subscriber model of topics. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.</p>
+<h4 id="lists">Lists</h4>
+<p>Running the following command in a new terminal will return a list of all the services currently active in the system:</p>
+<pre><code class="language-bash">ros2 service list
+
+
+/clear
+/kill
+/reset
+/spawn
+/teleop_turtle/describe_parameters
+/teleop_turtle/get_parameter_types
+/teleop_turtle/get_parameters
+/teleop_turtle/list_parameters
+/teleop_turtle/set_parameters
+/teleop_turtle/set_parameters_atomically
+/turtle1/set_pen
+/turtle1/teleport_absolute
+/turtle1/teleport_relative
+/turtlesim/describe_parameters
+/turtlesim/get_parameter_types
+/turtlesim/get_parameters
+/turtlesim/list_parameters
+/turtlesim/set_parameters
+/turtlesim/set_parameters_atomically
+</code></pre>
+<h4 id="types">Types</h4>
+<p>Services have types that describe how the request and response data of a service is structured. Service types are defined similarly to topic types, except service types have two parts: one message for the request and another for the response:</p>
+<pre><code class="language-bash">ros2 service type /clear
+
+std_srvs/srv/Empty
+</code></pre>
+<h4 id="find">Find</h4>
+<p>The <code>Empty</code> type means the service call sends no data when making a request and receives no data when receiving a response. To find all the services of a specific type, you can use the command:</p>
+<pre><code class="language-bash">ros2 service find std_srvs/srv/Empty
+
+/clear
+/reset
+</code></pre>
+<h4 id="interfaces">Interfaces</h4>
+<p>To get the structure of a service that expects structured data you can use the <code>interface</code> command:</p>
+<pre><code class="language-bash">ros2 service list -t
+
+...
+/spawn [turtlesim/srv/Spawn]
+...
+</code></pre>
+<pre><code class="language-bash">ros2 interface show turtlesim/srv/Spawn
+
+float32 x
+float32 y
+float32 theta
+string name # Optional.  A unique name will be created and returned if this is empty
+---
+string name
+</code></pre>
+<p>The output tells us that to spawn another turtle bot we need to provide x,y coordinates plus a direction angle. We can also provide a name - but this will be autogenerated if empty. The service then expects a response with the name of the spawned bot.</p>
+<h4 id="call">Call</h4>
+<p>To call a service from the ROS2 CLI we can use the <code>call</code> command - which is similar to the <code>pub</code> command used above to update topics:</p>
+<pre><code class="language-bash">ros2 service call &lt;service_name&gt; &lt;service_type&gt; &lt;arguments&gt;
+</code></pre>
+<p>For example the <code>/clear</code> service does not require any arguments and simply deletes the lines drawn when moving the turtle bot and does not return any data:</p>
+<pre><code class="language-bash">ros2 service call /clear std_srvs/srv/Empty
+
+waiting for service to become available...
+requester: making request: std_srvs.srv.Empty_Request()
+
+response:
+std_srvs.srv.Empty_Response()
+</code></pre>
+<p>As seen above the <code>/spawn</code> service requires the following arguments to work:</p>
+<pre><code class="language-bash">ros2 service call /spawn turtlesim/srv/Spawn &quot;{x: 2, y: 2, theta: 0.2, name: &#x27;heroturtle&#x27;}&quot;
+
+requester: making request: turtlesim.srv.Spawn_Request(x=2.0, y=2.0, theta=0.2, name=&#x27;heroturtle&#x27;)
+
+response:
+turtlesim.srv.Spawn_Response(name=&#x27;heroturtle&#x27;)
+</code></pre>
+<h3 id="parameters">Parameters</h3>
+<p>A parameter is a configuration value of a node. A node can store parameters as integers, floats, booleans, strings, and lists.</p>
+<h4 id="list-2">List</h4>
+<p>To see the parameters belonging to your nodes, open a new terminal and enter the command:</p>
+<pre><code class="language-bash">ros2 param list
+</code></pre>
+<p>You will see the node namespaces, <code>/teleop_turtle</code> and <code>/turtlesim</code>, followed by each node’s parameters:</p>
+<pre><code class="language-bash">/teleop_turtle:
+  qos_overrides./parameter_events.publisher.depth
+  qos_overrides./parameter_events.publisher.durability
+  qos_overrides./parameter_events.publisher.history
+  qos_overrides./parameter_events.publisher.reliability
+  scale_angular
+  scale_linear
+  use_sim_time
+/turtlesim:
+  background_b
+  background_g
+  background_r
+  qos_overrides./parameter_events.publisher.depth
+  qos_overrides./parameter_events.publisher.durability
+  qos_overrides./parameter_events.publisher.history
+  qos_overrides./parameter_events.publisher.reliability
+  use_sim_time
+</code></pre>
+<h4 id="get">Get</h4>
+<p>Now that we have the list of active parameter for our two nodes we can read their values using:</p>
+<pre><code class="language-bash">ros2 param get /turtlesim background_b
+
+Integer value is: 255
+</code></pre>
+<p>As to be expected for the blue background colour the <code>b</code> in <code>rgb</code> has the value <code>255</code>.</p>
+<h4 id="set">Set</h4>
+<p>We can use the <code>set</code> command to make changes to the node parameter. The following command will turn the background of the <code>turtlesim</code> window magenta:</p>
+<pre><code class="language-bash">ros2 param set /turtlesim background_r 255
+</code></pre>
+<h4 id="param-dump">Param Dump</h4>
+<p>To save all parameter of your current session you can print them using the <code>dump</code> command and save them into a yaml file:</p>
+<pre><code class="language-bash">ros2 param dump /turtlesim &gt; turtlesim.yml
+</code></pre>
+<pre><code class="language-bash">cat turtlesim.yml
+
+/turtlesim:
+  ros__parameters:
+    background_b: 255
+    background_g: 86
+    background_r: 255
+    holonomic: false
+    qos_overrides:
+      /parameter_events:
+        publisher:
+          depth: 1000
+          durability: volatile
+          history: keep_last
+          reliability: reliable
+    start_type_description_service: true
+    use_sim_time: false
+</code></pre>
+<h4 id="param-load">Param Load</h4>
+<p>You can edit the file and restore the sims state from it, e.g. changing <code>background_g: 0</code> to make the background screaming pink:</p>
+<pre><code class="language-bash">ros2 param load /turtlesim turtlesim.yml
+</code></pre>
+<p>Or restart the simulation with the restored parameter:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node --ros-args --params-file turtlesim.yaml
+</code></pre>
+<h3 id="actions">Actions</h3>
+<p>Actions are one of the communication types in ROS 2 and are intended for long running tasks. They consist of three parts: a goal, feedback, and a result.</p>
+<p>Actions are built on topics and services. Their functionality is similar to services, except actions can be canceled. They also provide steady feedback, as opposed to services which return a single response. An “action client” node sends a goal to an “action server” node that acknowledges the goal and returns a stream of feedback and a result.</p>
+<p>When you launch the /teleop_turtle node, you will see the following message in your terminal:</p>
+<pre><code class="language-bash">Use arrow keys to move the turtle.
+Use G|B|V|C|D|E|R|T keys to rotate to absolute orientations. &#x27;F&#x27; to cancel a rotation.
+</code></pre>
+<p>Pay attention to the terminal where the <code>/turtlesim</code> node is running. Each time you press one of these keys, you are sending a goal to an action server that is part of the <code>/turtlesim</code> node. The goal is to rotate the turtle to face a particular direction. A message relaying the result of the goal should display once the turtle completes its rotation:</p>
+<pre><code class="language-bash">[INFO] [turtlesim]: Rotation goal completed successfully
+</code></pre>
+<h4 id="node-info">Node Info</h4>
+<p>To see the list of actions a node provides, /turtlesim in this case, open a new terminal and run the command:</p>
+<pre><code class="language-bash">ros2 node info /turtlesim
+</code></pre>
+<p>Which will return a list of <code>/turtlesim</code>’s <strong>Subscribers</strong>, <strong>Publishers</strong>, <strong>Services</strong>, <strong>Action Servers</strong> and <strong>Action Clients</strong>:</p>
+<pre><code class="language-bash">/turtlesim
+  Subscribers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /turtle1/cmd_vel: geometry_msgs/msg/Twist
+  Publishers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+    /turtle1/color_sensor: turtlesim/msg/Color
+    /turtle1/pose: turtlesim/msg/Pose
+  Service Servers:
+    /clear: std_srvs/srv/Empty
+    /kill: turtlesim/srv/Kill
+    /reset: std_srvs/srv/Empty
+    /spawn: turtlesim/srv/Spawn
+    /turtle1/set_pen: turtlesim/srv/SetPen
+    /turtle1/teleport_absolute: turtlesim/srv/TeleportAbsolute
+    /turtle1/teleport_relative: turtlesim/srv/TeleportRelative
+    /turtlesim/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /turtlesim/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /turtlesim/get_parameters: rcl_interfaces/srv/GetParameters
+    /turtlesim/list_parameters: rcl_interfaces/srv/ListParameters
+    /turtlesim/set_parameters: rcl_interfaces/srv/SetParameters
+    /turtlesim/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+    /turtle1/rotate_absolute: turtlesim/action/RotateAbsolute
+  Action Clients:
+</code></pre>
+<h4 id="action-list">Action List</h4>
+<p>To identify all the actions in the ROS graph, run the command:</p>
+<pre><code class="language-bash">ros2 action list
+</code></pre>
+<p>Which will return:</p>
+<pre><code class="language-bash">/turtle1/rotate_absolute
+</code></pre>
+<p>This is the only action in the ROS graph right now controling the turtle’s rotation. There is one <strong>Action Client</strong> (part of <code>/teleop_turtle</code>) and one <strong>Action Server</strong> (part of <code>/turtlesim</code>) for this action - see <code>ros2 node info &lt;node_name&gt;</code> command above.</p>
+<h4 id="action-types">Action Types</h4>
+<pre><code class="language-bash">ros2 action list -t
+
+/turtle1/rotate_absolute [turtlesim/action/RotateAbsolute]
+</code></pre>
+<p>The type, e.g. <code>turtlesim/action/RotateAbsolute</code> when executing an action from the command line or from code.</p>
+<h4 id="action-info">Action Info</h4>
+<p>You can further introspect the <code>/turtle1/rotate_absolute</code> action with the command:</p>
+<pre><code class="language-bash">ros2 action info /turtle1/rotate_absolute
+</code></pre>
+<p>Which will return:</p>
+<pre><code class="language-bash">Action: /turtle1/rotate_absolute
+Action clients: 1
+    /teleop_turtle
+Action servers: 1
+    /turtlesim
+</code></pre>
+<p>The <code>/teleop_turtle</code> node has an action client and the <code>/turtlesim</code> node has an action server for the <code>/turtle1/rotate_absolute action</code>.</p>
+<h4 id="interface">Interface</h4>
+<p>To get the corresponding data formatting for an action type run the following command</p>
+<pre><code class="language-bash">ros2 interface show turtlesim/action/RotateAbsolute
+</code></pre>
+<p>Which will return:</p>
+<pre><code class="language-bash">The desired heading in radians
+float32 theta
+---
+
+The angular displacement in radians to the starting position
+float32 delta
+---
+
+The remaining rotation in radians
+float32 remaining
+</code></pre>
+<p>The section of this message above the first <code>---</code> is the structure (data type and name) of the <strong>Goal</strong> request. The next section is the structure of the <strong>Result</strong>. The last section is the structure of the <strong>Feedback</strong>.</p>
+<h4 id="action-send-goal">Action Send Goal</h4>
+<pre><code class="language-bash">ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute &quot;{theta: 1.37}&quot;
+
+
+Waiting for an action server to become available...
+Sending goal:
+     theta: 1.37
+
+Goal accepted with ID: 8bd5cf1c1d5f4f5a9047469113c681f6
+
+Result:
+    delta: -1.343999981880188
+
+Goal finished with status: SUCCEEDED
+</code></pre>
+<h2 id="creating-a-workspace">Creating a Workspace</h2>
+<p>A workspace is a directory containing ROS 2 packages. You also have the option of sourcing an “overlay” - a secondary workspace where you can add new packages without interfering with the existing ROS 2 workspace that you’re extending, or “underlay”. Your underlay must contain the dependencies of all the packages in your overlay. Packages in your overlay will override packages in the underlay.</p>
+<p>This is a brief tutorial on how to create and build a ROS 2 workspace with <a href="https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html">colcon</a>.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<pre><code class="language-bash">sudo apt install python3-colcon-common-extensions
+</code></pre>
+<h3 id="create-a-new-directory">Create a new Directory</h3>
+<pre><code class="language-bash">mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+</code></pre>
+<h3 id="clone-a-sample-repo">Clone a Sample Repo</h3>
+<p>ROS provides a <a href="https://github.com/ros/ros_tutorials/">repository</a> with ready-to-use examples - also containing the <code>turtlesim</code> - that we can use:</p>
+<pre><code class="language-bash">git clone https://github.com/ros/ros_tutorials.git -b iron
+</code></pre>
+<p>From the root of your workspace (<code>~/ros2_ws1</code>), run the following command to resolve the package dependencies (<code>cd</code> if you&#x27;re still in the <code>src</code> directory with the <code>ros_tutorials</code> clone):</p>
+<pre><code class="language-bash">sudo apt install python3-rosdep2
+</code></pre>
+<pre><code class="language-bash">rosdep install -i --from-path src --rosdistro iron -y
+
+#All required rosdeps installed successfully
+</code></pre>
+<h3 id="build-the-workspace-with-colcon">Build the Workspace with Colcon</h3>
+<pre><code class="language-bash">colcon build
+</code></pre>
+<p>And you will see that <code>colcon`` has created new directories: </code>build<code>  </code>install<code>  </code>log<code>  </code>src`. The install directory is where your workspace’s setup files are, which you can use to source your overlay.</p>
+<h3 id="source-the-overlay">Source the Overlay</h3>
+<blockquote>
+<p>Before sourcing the overlay, it is very important that you open a new terminal, separate from the one where you built the workspace. Sourcing an overlay in the same terminal where you built, or likewise building where an overlay is sourced, may <strong>create complex issues</strong>. <em>what is that supposed to mean?? hmm</em></p>
+</blockquote>
+<p>In the new terminal, source your main ROS 2 environment as the “underlay”, so you can build the overlay “on top of” it:</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+source install/local_setup.bash
+</code></pre>
+<h3 id="run-the-build-package">Run the Build Package</h3>
+<p>Now you can run the <code>turtlesim</code> package from the overlay:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node
+</code></pre>
+<h4 id="modify-the-overlay">Modify the Overlay</h4>
+<p>To verify that the simulation is this time executed from the overlay we can modify its source code. You can modify <code>turtlesim</code> in your overlay by editing the title bar on the <code>turtlesim</code> window. To do this, locate the <code>turtle_frame.cpp</code> file in <code>~/ros2_ws/src/ros_tutorials/turtlesim/src</code>. Open <code>turtle_frame.cpp</code> with your preferred text editor.</p>
+<p>On line 52 you will see the function <code>setWindowTitle(&quot;TurtleSim&quot;);</code>. Change the value &quot;TurtleSim&quot; to &quot;HeroTurtleSim&quot;, and save the file.</p>
+<p>Return to the first terminal where you ran <code>colcon build</code> earlier and run it again. Return to the second terminal (where the overlay is sourced) and run turtlesim again:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node
+</code></pre>
+<p><img alt="ROS2 Architecture and Concepts" src="/assets/images/ROS2_02-e91e55559657f27cbaaeac50f5ce69fa.webp" width="1250" height="525"></p>
+<p>To see that your underlay is still intact, open a brand new terminal and source only your ROS 2 installation. Run turtlesim again:</p>
+<pre><code class="language-bash">ros2 run turtlesim turtlesim_node
+</code></pre>
+<h2 id="creating-a-package">Creating a Package</h2>
+<p>A package is an organizational unit for your ROS2 code. Package creation in ROS2 uses <code>ament</code> as its build system and <code>colcon</code> as its build tool. You can create a package using either CMake or Python. The min requirements for a Python package are:</p>
+<ul>
+<li><code>package.xml</code> file containing meta information about the package</li>
+<li><code>resource/&lt;package_name&gt;</code> marker file for the package</li>
+<li><code>setup.cfg</code> is required when a package has executables, so ros2 run can find them</li>
+<li><code>setup.py</code> containing instructions for how to install the package</li>
+<li><code>&lt;package_name&gt;</code> - a directory with the same name as your package, used by ROS 2 tools to find your package, contains <code>__init__.py</code></li>
+</ul>
+<p>The simplest possible package may have a file structure that looks like:</p>
+<pre><code class="language-bash">my_package/
+      package.xml
+      resource/my_package
+      setup.cfg
+      setup.py
+      my_package/
+</code></pre>
+<p>A single workspace can contain as many packages as you want, each in their own folder. You can also have packages of different build types in one workspace (CMake, Python, etc.). You cannot have nested packages.</p>
+<p>The command syntax for creating a new package in ROS2 is:</p>
+<pre><code class="language-bash">cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python --node-name my_node my_package --license Apache-2.0
+
+
+package name: my_package
+destination directory: ~/ros2_ws/src
+package format: 3
+version: 0.0.0
+description: TODO: Package description
+maintainer: [&#x27;me &lt;me@todo.todo&gt;&#x27;]
+licenses: [&#x27;Apache-2.0&#x27;]
+build type: ament_python
+dependencies: []
+node_name: my_node
+creating folder ./my_package
+creating ./my_package/package.xml
+creating source folder
+creating folder ./my_package/my_package
+creating ./my_package/setup.py
+creating ./my_package/setup.cfg
+creating folder ./my_package/resource
+creating ./my_package/resource/my_package
+creating ./my_package/my_package/__init__.py
+creating folder ./my_package/test
+creating ./my_package/test/test_copyright.py
+creating ./my_package/test/test_flake8.py
+creating ./my_package/test/test_pep257.py
+creating ./my_package/my_package/my_node.py
+</code></pre>
+<h3 id="build-a-package">Build a Package</h3>
+<pre><code class="language-bash">cd ~/ros2_ws
+colcon build
+</code></pre>
+<p>This will build all packages inside the <code>scr</code> dir - you can also specify exactly which one you want to be build with the following command:</p>
+<pre><code class="language-bash">colcon build --packages-select my_package
+</code></pre>
+<h3 id="source-the-setup-file">Source the Setup File</h3>
+<p>Switch to another terminal and from inside the <code>ros2_ws</code> directory, run the following command to source your workspace:</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+source install/local_setup.bash
+</code></pre>
+<p>To run the executable you created using the <code>--node-name</code> argument during package creation, enter the command:</p>
+<pre><code class="language-bash">ros2 run my_package my_node
+</code></pre>
+<p>Which will return a message to your terminal: <code>Hi from my_package.</code></p>
+<h3 id="customize-packagexml">Customize package.xml</h3>
+<p>You may have noticed in the return message after creating your package that the fields <code>description</code> and <code>license</code> contain <code>TODO</code> notes. That’s because the package description and license declaration are not automatically set, but are required if you ever want to release your package. The <code>maintainer</code> field may also need to be filled in:</p>
+<pre><code class="language-bash">nano ~/ros2_ws/src/my_package/package.xml
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_aHIs padding--none margin-left--sm"><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/robotics">Robotics</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/simulation">Simulation</a></li><li class="tag_nwHU"><a class="tag_QDqo tagRegular_RTiO" href="/docs/tags/ros">ROS</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-24--ros2-graph/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_NulP" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated__GQF"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-26--ros2-gazebo-simulation/2023-11-26"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ROS2 Gazebo Robot Simulation</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Automation_and_Robotics/Robotics_Simulation/2023-11-19--ros2-gazebo-installation/2023-11-19"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Gazebo &amp; ROS2 Basic Installation</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_IS5x thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#the-ros-2-graph" class="table-of-contents__link toc-highlight">The ROS 2 Graph</a><ul><li><a href="#nodes" class="table-of-contents__link toc-highlight">Nodes</a></li><li><a href="#topics" class="table-of-contents__link toc-highlight">Topics</a></li><li><a href="#services" class="table-of-contents__link toc-highlight">Services</a></li><li><a href="#parameters" class="table-of-contents__link toc-highlight">Parameters</a></li><li><a href="#actions" class="table-of-contents__link toc-highlight">Actions</a></li></ul></li><li><a href="#creating-a-workspace" class="table-of-contents__link toc-highlight">Creating a Workspace</a><ul><li><a href="#prerequisites" class="table-of-contents__link toc-highlight">Prerequisites</a></li><li><a href="#create-a-new-directory" class="table-of-contents__link toc-highlight">Create a new Directory</a></li><li><a href="#clone-a-sample-repo" class="table-of-contents__link toc-highlight">Clone a Sample Repo</a></li><li><a href="#build-the-workspace-with-colcon" class="table-of-contents__link toc-highlight">Build the Workspace with Colcon</a></li><li><a href="#source-the-overlay" class="table-of-contents__link toc-highlight">Source the Overlay</a></li><li><a href="#run-the-build-package" class="table-of-contents__link toc-highlight">Run the Build Package</a></li></ul></li><li><a href="#creating-a-package" class="table-of-contents__link toc-highlight">Creating a Package</a><ul><li><a href="#build-a-package" class="table-of-contents__link toc-highlight">Build a Package</a></li><li><a href="#source-the-setup-file" class="table-of-contents__link toc-highlight">Source the Setup File</a></li><li><a href="#customize-packagexml" class="table-of-contents__link toc-highlight">Customize package.xml</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_T11m"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2023 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>
