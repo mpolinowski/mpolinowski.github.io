@@ -1,0 +1,1608 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Development/Javascript/2023-12-14-reactjs-typescript-2023/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.0.1">
+<title data-rh="true">React.js with Typescript 2023 | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="React.js with Typescript 2023 | Mike Polinowski"><meta data-rh="true" name="description" content="Looking into using Typescript in building React.js Frontends"><meta data-rh="true" property="og:description" content="Looking into using Typescript in building React.js Frontends"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.08c8c484.css">
+<script src="/assets/js/runtime~main.c6ee2a03.js" defer="defer"></script>
+<script src="/assets/js/main.a26008f3.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/development">Development</a><button aria-label="Collapse sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/javascript">Javascript</a><button aria-label="Collapse sidebar category &#x27;Javascript&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14">React.js with Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04">Node / Express with Typescript - (Re)Introduction 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-04-01-reactjs-2023/2023-04-01">React.js 2023 - A (Re)Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-13-gatsby-meili-search-starter/2023-02-13">MeiLi Search for your Gatsby.js Blog</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-12-react-meili-search-starter/2023-02-12">React Frontend for MeiLi Search</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-29-reactive-search-starter/2022-12-29">Reactive Search Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-11-11ty-starter/2022-12-11">11ty Static Site Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-29-react-typescript-intro-2023/2022-11-29">TypeScript 2.0 in React 19 (2023)</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-19-web3-javascript-app/2022-11-19">Web3.js Blockchain Application</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-10-webrtc-introduction-video-chat-part2/2022-11-10">WebRTC Introduction - Interactive Connectivity Establishment</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-30-webrtc-introduction-video-chat-part1/2022-10-30">WebRTC Introduction - Client Side Signalling</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-29-webrtc-introduction-realtime-chat/2022-10-29">WebRTC Introduction - Realtime Chat</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-07-01-docusaurus-introduction/2022-07-01">Docusaurus Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-03-01--json-apis-training/2022-03-01">Working with JSON APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--websocket-recconects/2021-09-10">Reconnecting Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--notifications-alerts-as-toast/2021-09-10">Convert Alerts into Toasts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-NGINX/2021-09-09">NGINX as a Proxy for Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-HAproxy/2021-09-09">HAProxy Loadbalancing and Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-08--websockets-html-video/2021-09-08">HTML Video over Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-07--intro-to-websockets/2021-09-07">Introduction to Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-04--mqtt-dashboard-react/2021-06-04">React Dashboard for MQTT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-02--mqtt-cheat-sheet/2021-06-02">Mosquitto MQTT Cheat Sheet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-01--mqtt-with-reactjs/2021-06-01">MQTT Webfrontend with React.js</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-12-carbon-design-react-part3/2021-05-12">Carbon Design System in React.js - Part III</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-11-carbon-design-react-part2/2021-05-11">Carbon Design System in React.js - Part II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-10-carbon-design-react/2021-05-10">Carbon Design System in React.js - Part I</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-09-electron13-and-react/2021-05-09">Electron@13 and Create-React-App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-08-electron13-gatsby-wrapper/2021-05-08">Electron@13 as a Gatsby.js Wrapper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-07-electron-cross-platform-apps/2021-05-07">Electron for Cross Platform Applications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-02-14-next-js-2021/2021-02-14">Next.js in 2021</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2020-01-12--node-express-redirect-server/2020-01-12">Web traffic redirection with Node and Express on CentOS8</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2019-08-02--building-an-mqtt-interface/2019-08-02">Building a MQTT Interface</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-17--server-side-render-react-router/2018-01-17">Server Rendering with React and React Router</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-15--react-transition-group-demo/2018-01-15">react-transition-group</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-07--gatsby-material-ui-starter/2018-01-07">Gatsby Material UI Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-17--gatsby-reactstrap/2017-12-17">Gatsby.js with Bootstrap 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-14--gatsby-wiki/2017-12-14">Gatsby.js Knowledgebase</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-09--next-start/2017-12-09">Next.js Server Side Rendering</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-07--react-router-4/2017-12-07">React Router 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-09-03--react-under-the-hood/2017-09-03">React under the Hood</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-21--reactive-material/2017-08-21">create-react-app and Material-UI</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-15--gatsby-blog-starter/2017-08-15">Gatsby Blog Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-07--google-analytics-amp/2017-08-07">Google Analytics in AMP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-24--obligatory-react-todo-list/2017-07-24">React TODO List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-22--caloric-burn/2017-07-22">Food Caloric Table App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-04--random-password-generator/2017-07-04">Random Password Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-08-11--node-express-static-wiki/2016-08-11">Node Express Static</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-06-01--node-express-mongodb/2016-06-01">Node/Express with MongoDB</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-05-27--javascript-apis-and-ajax/2016-05-27">JavaScript and Getting Started with APIs and AJAX</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-05--markdown-live-code/2010-01-05">React-Live &amp; Code example</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-01--mdx/2010-01-01">Markdown Cheatsheet</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/python">Python</a><button aria-label="Expand sidebar category &#x27;Python&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/go">Go</a><button aria-label="Expand sidebar category &#x27;Go&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/graphs">Graphs</a><button aria-label="Expand sidebar category &#x27;Graphs&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/react-native">React Native</a><button aria-label="Expand sidebar category &#x27;React Native&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/magento">Magento</a><button aria-label="Expand sidebar category &#x27;Magento&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/misc">Misc</a><button aria-label="Expand sidebar category &#x27;Misc&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Expand sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/development"><span itemprop="name">Development</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/javascript"><span itemprop="name">Javascript</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">React.js with Typescript 2023</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>React.js with Typescript 2023</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-c3aedc7eed015cc5372c21f9c394693d.jpg" width="2359" height="864"></p>
+<ul>
+<li><a href="https://github.com/mpolinowski/react-typescript">Github Repository</a></li>
+</ul>
+<ul>
+<li><a href="#foundation">Foundation</a></li>
+<li><a href="#typescript-basics">Typescript Basics</a>
+<ul>
+<li><a href="#type-declaration">Type Declaration</a></li>
+<li><a href="#aliases">Aliases</a></li>
+<li><a href="#interfaces">Interfaces</a></li>
+<li><a href="#enumerations">Enumerations</a></li>
+</ul>
+</li>
+<li><a href="#react-typescript">React Typescript</a>
+<ul>
+<li><a href="#effect-hook">Effect Hook</a>
+<ul>
+<li><a href="#data-fetching">Data Fetching</a></li>
+</ul>
+</li>
+<li><a href="#state-hook">State Hook</a></li>
+<li><a href="#ref-hook">Ref Hook</a></li>
+<li><a href="#memo-hook">Memo Hook</a></li>
+<li><a href="#callback-hook">Callback Hook</a></li>
+</ul>
+</li>
+<li><a href="#styling-react">Styling React</a>
+<ul>
+<li><a href="#vanilla-css">Vanilla CSS</a></li>
+<li><a href="#tailwind-css">Tailwind CSS</a>
+<ul>
+<li><a href="#shadcn-ui">ShadCN UI</a></li>
+<li><a href="#importing-svgs">Importing SVGs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#react-router">React Router</a>
+<ul>
+<li><a href="#route-parameter">Route Parameter</a></li>
+<li><a href="#lazy-loading">Lazy Loading</a></li>
+<li><a href="#react-router-form">React Router Form</a></li>
+<li><a href="#form-hooks">Form Hooks</a></li>
+</ul>
+</li>
+<li><a href="#redux-state-management">Redux State Management</a>
+<ul>
+<li><a href="#store">Store</a></li>
+<li><a href="#select-state">Select State</a></li>
+<li><a href="#dispatch-state-updates">Dispatch State Updates</a></li>
+<li><a href="#working-with-user-roles">Working with User Roles</a></li>
+</ul>
+</li>
+<li><a href="#restful-apis">RESTful APIs</a>
+<ul>
+<li><a href="#effect-fetching">Effect Fetching</a></li>
+<li><a href="#effect-posting">Effect Posting</a></li>
+<li><a href="#react-router-data-loading">React Router Data Loading</a></li>
+</ul>
+</li>
+<li><a href="#video-embedding">Video Embedding</a>
+<ul>
+<li><a href="#hls-streams">hls Streams</a></li>
+<li><a href="#video-file-playback">Video File Playback</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="foundation">Foundation</h2>
+<ul>
+<li><a href="https://vitejs.dev/">Vite.js</a>: <code>npm create vite@latest react-ts -- --template react-swc-ts</code></li>
+<li><a href="https://tailwindcss.com/docs/installation">TailwindCSS</a>: <code>npm install -D tailwindcss postcss autoprefixer</code></li>
+<li><a href="https://ui.shadcn.com/docs/installation/vite">ShadCN UI</a>: <code>npx shadcn-ui@latest init</code></li>
+<li><a href="https://reactrouter.com/en/main">React Router</a>: <code>npm install react-router-dom</code></li>
+<li><a href="https://lucide.dev/guide/packages/lucide-react">Lucide Icons</a>: <code>npm install lucide-react</code></li>
+<li><a href="https://react-hook-form.com/">Performant, flexible and extensible forms with easy-to-use validation.</a>: <code>npm install react-hook-form</code></li>
+<li><a href="https://redux-toolkit.js.org">Redux State Management</a>: <code>npm i @reduxjs/toolkit react-redux</code></li>
+</ul>
+<h2 id="typescript-basics">Typescript Basics</h2>
+<h3 id="type-declaration">Type Declaration</h3>
+<p>Assigning types when declaring variables:</p>
+<pre><code class="language-ts">let flag: boolean;
+</code></pre>
+<pre><code class="language-ts">const numbers: number[] = [];
+</code></pre>
+<pre><code class="language-ts">let lastOrder: Date | null;
+lastOrder = new Date();
+</code></pre>
+<p>In objects optional variables can be assigned types using a <code>?</code>:</p>
+<pre><code class="language-ts">const productA: { name: string; unitPrice?: number } = {
+    name: &quot;Product A&quot;,
+};
+</code></pre>
+<p>Handling types in functions:</p>
+<pre><code class="language-ts">function getTotal(
+    unitPrice: number,
+    quantity: number,
+    discount: number
+    ): number {
+        const priceWithoutDiscount = unitPrice * quantity;
+        const discountAmount = priceWithoutDiscount * discount;
+        return priceWithoutDiscount - discountAmount;
+}
+</code></pre>
+<p>Use <code>unknown</code> instead of <code>any</code> to be able to widen the type once it&#x27;s type becomes defined:</p>
+<pre><code class="language-ts">fetch(&quot;https://swapi.dev/api/people/1&quot;)
+  .then((response) =&gt; response.json())
+  .then((data: unknown) =&gt; {
+    if (isCharacter(data)) {
+      console.log(&quot;name&quot;, data.name);
+    }  
+  });
+
+function isCharacter(
+  character: any
+): character is { name: string } {
+  return &quot;name&quot; in character;
+}
+</code></pre>
+<p>Use <code>void</code> instead of <code>undefined</code> for functions that don&#x27;t have a return statement:</p>
+<pre><code class="language-ts">function logText(text: string): void {
+    console.log(text);
+}
+</code></pre>
+<p>Function with unreachable return statements should use <code>never</code> instead:</p>
+<pre><code class="language-ts">function taskLoop(taskName: string): never {
+    while (true) {
+        console.log(`${taskName} is running...`);
+    }
+}
+</code></pre>
+<p>Working with classes:</p>
+<pre><code class="language-ts">class Product {
+    constructor(public name: string, public unitPrice: number) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+    }
+    getDiscountedPrice(discount: number): number {
+        return this.unitPrice - discount;
+    }
+}
+
+const productA = new Product(&quot;Product A&quot;, 45);
+console.log(productA.getDiscountedPrice(5));
+</code></pre>
+<h3 id="aliases">Aliases</h3>
+<p>To clean-up the type declaration we can use aliases:</p>
+<pre><code class="language-ts">type Product = { name: string; unitPrice?: number };
+type DiscountedProduct = Product &amp; { discount: number };
+
+let productA: Product = { name: &quot;Product A&quot; };
+let productB: DiscountedProduct = { name: &quot;Product B&quot;, unitPrice: 299, discount: 15 };
+</code></pre>
+<p>Using type aliases to represent functions:</p>
+<pre><code class="language-ts">type Purchase = (quantity: number) =&gt; void;
+
+type Product = {
+    name: string;
+    unitPrice?: number;
+    purchase: Purchase;
+};
+</code></pre>
+<pre><code class="language-ts">let productA: Product = {
+    name: &quot;Product A&quot;,
+    purchase: (quantity) =&gt;
+    console.log(`${quantity} Product A sold.`),
+};
+
+table.purchase(4);
+</code></pre>
+<h3 id="interfaces">Interfaces</h3>
+<p>Interfaces instead of type aliases:</p>
+<pre><code class="language-ts">interface Product {
+    name: string;
+    unitPrice?: number;
+}
+
+interface DiscountedProduct extends Product {
+    discount: number;
+}
+</code></pre>
+<pre><code class="language-ts">interface Purchase {(quantity: number): void}
+
+interface Product {
+    name: string;
+    unitPrice?: number;
+    purchase: Purchase;
+}
+
+let productA: Product = {
+    name: &quot;Product A&quot;,
+    purchase: (quantity) =&gt;
+    console.log(`${quantity} Product A sold.`),
+};
+
+productA.purchase(4);
+</code></pre>
+<h3 id="enumerations">Enumerations</h3>
+<p>You can use union types to declare sets of allowed names:</p>
+<pre><code class="language-ts">type Colour = &quot;red&quot; | &quot;green&quot; | &quot;blue&quot;;
+
+let colour: Colour = &quot;red&quot;;
+console.log(colour);
+</code></pre>
+<p>Enumerations allow the declaration of sets like:</p>
+<pre><code class="language-ts">enum Level {
+    Info,
+    Warning,
+    Error
+}
+
+let level = Level.Info;
+console.log(level);
+
+let level = Level[1];
+console.log(level);
+</code></pre>
+<pre><code class="language-ts">enum Level {
+    Low = &quot;L&quot;,
+    Medium = &quot;M&quot;,
+    High = &quot;H&quot;
+}
+
+let level = Level.High;
+console.log(level);
+</code></pre>
+<h2 id="react-typescript">React Typescript</h2>
+<h3 id="effect-hook">Effect Hook</h3>
+<p>The effect Hook is used to execute component side effects when a component is rendered or when certain props or states change.</p>
+<pre><code class="language-ts">import { useEffect, useState } from &quot;react&quot;;
+
+export function EffectHookClick() {
+
+    const [clicked, setClicked] = useState(false);
+
+    useEffect(() =&gt; {
+        if (clicked) {
+                console.log(&quot;INFO :: Effect Hooked&quot;);
+        }
+    }, [clicked]);
+
+    function handleClick() {
+        setClicked(true);
+    }
+    return &lt;button onClick={handleClick}&gt;Cause effect&lt;/button&gt;;
+}
+</code></pre>
+<pre><code class="language-ts">function EffectHookCondition({someProp}) {
+    useEffect(() =&gt; {
+        if (someProp) {
+            console.log(&quot;Some effect&quot;);
+        }
+    });
+    if (!someProp) {
+        return null
+    }
+    return
+}
+</code></pre>
+<pre><code class="language-ts">function EffectHookReturnFunction({ onClickAnywhere }) {
+    useEffect(() =&gt; {
+        
+        function handleClick() {
+            onClickAnywhere();
+        }
+
+        document.addEventListener(&quot;click&quot;, listener);
+
+        return () =&gt; {
+            document.removeEventListener(&quot;click&quot;, listener);
+        };
+    });
+    return
+}
+</code></pre>
+<h4 id="data-fetching">Data Fetching</h4>
+<p>A common use case for the effect Hook is fetching data:</p>
+<pre><code class="language-ts">import { useEffect } from &#x27;react&#x27;;
+
+type Person = {
+  name: string,
+};
+
+export function simAPIRequest(): Promise&lt;Person&gt; {
+  return new Promise((resolve) =&gt;
+    setTimeout(() =&gt; resolve({ name: &quot;George González&quot; }), 1000)
+  );
+}
+
+export function DisplayAPIResponse() {
+  useEffect(() =&gt; {
+    simAPIRequest().then((person) =&gt; console.log(person));
+  }, []);
+
+  return null;
+}
+</code></pre>
+<h3 id="state-hook">State Hook</h3>
+<p>State hooks can be used to store and update state. E.g. you can write the API response from above into a state variable:</p>
+<pre><code class="language-ts">export function DisplayAPIResponse()  {
+  const [name, setName] = useState&lt;string | undefined&gt;();
+  const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() =&gt; {
+    simAPIRequest().then((person) =&gt;  {
+      setLoading(false);
+      setName(person.name);
+    });
+  }, []);
+
+  if (loading) {
+    return &lt;div&gt;Loading ...&lt;/div&gt;;
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h3&gt;{name}, {score}&lt;/h3&gt;
+      &lt;button onClick={() =&gt; setScore(score + 1)}&gt;Add&lt;/button&gt;
+      &lt;button onClick={() =&gt; setScore(score - 1)}&gt;Subtract&lt;/button&gt;
+      &lt;button onClick={() =&gt; setScore(0)}&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h3 id="ref-hook">Ref Hook</h3>
+<p><code>useRef</code> returns a variable whose value is persisted for the lifetime of a component:</p>
+<pre><code class="language-ts">const ref = useRef&lt;Ref&gt;(initialValue);
+</code></pre>
+<pre><code class="language-ts">ref.current = newValue;
+console.log(&quot;Current ref value&quot;, ref.current);
+</code></pre>
+<pre><code class="language-ts">import { useRef } from &quot;react&quot;;
+
+export function InputComponent() {
+    const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+  
+    function logInput() {
+      console.log(inputRef.current);
+    }
+    return &lt;input ref={inputRef} onChange={logInput} type=&quot;text&quot; /&gt;;
+}
+</code></pre>
+<p>Use a ref hook to focus a HTML element after a component is loaded:</p>
+<pre><code class="language-ts">const addButtonRef = useRef&lt;HTMLButtonElement&gt;(null);
+
+useEffect(() =&gt; {
+    if (!loading) {
+      addButtonRef.current?.focus();
+    }
+  }, [loading]);
+
+return (
+    &lt;button ref={addButtonRef}&gt;Add&lt;/button&gt;
+  );
+</code></pre>
+<h3 id="memo-hook">Memo Hook</h3>
+<p>Memo Hooks can be used to store values that have computationally expensive calculations. E.g. the following value is recalculated every time the variable <code>a</code> or <code>b</code> change:</p>
+<pre><code class="language-ts">import { useMemo } from &#x27;react&#x27;;
+
+const memoValue = useMemo&lt;number&gt;(
+  () =&gt; thisWillTakeAWhile(a, b),
+  [a, b]
+);
+</code></pre>
+<p>As long as <code>a</code> and <code>b</code> don&#x27;t change the calculation is only done once when the component is loaded:</p>
+<pre><code class="language-ts">function calculateScore() {
+    console.log(&quot;INFO :: Score is being calculated.&quot;);
+    let sum = 0;
+    for (let i = 0; i &lt; 10000; i++) {
+      sum += i;
+    }
+    return sum;
+}
+
+const getScore = useMemo(
+      () =&gt; calculateScore(),
+      []
+);
+
+return (
+  &lt;p&gt;{getScore}&lt;/p&gt;
+);
+</code></pre>
+<h3 id="callback-hook">Callback Hook</h3>
+<p>While the Memo Hook is used to cache values the Callback Hook holds an entire function. The memo function wraps the component and memoizes the result for a given set of props preventing unnecessary  re-rendering of slow components:</p>
+<pre><code class="language-ts">const memoizedValue = useCallback&lt; () =&gt; void &gt; (
+  () =&gt; someFunction (),
+  []
+);
+</code></pre>
+<h2 id="styling-react">Styling React</h2>
+<h3 id="vanilla-css">Vanilla CSS</h3>
+<pre><code class="language-tsx">import &#x27;./App.css&#x27;;
+
+function App() {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      ...
+    &lt;/div&gt;
+);
+}
+</code></pre>
+<h3 id="tailwind-css">Tailwind CSS</h3>
+<p>Install <code>tailwindcss</code> and its peer dependencies, then generate your <code>tailwind.config.js</code> and <code>postcss.config.js</code> files:</p>
+<pre><code class="language-bash">npm install -D tailwindcss postcss autoprefixer
+ 
+npx tailwindcss init -p
+
+Created Tailwind CSS config file: tailwind.config.js
+Created PostCSS config file: postcss.config.js
+</code></pre>
+<p>And add the following code to the <code>tsconfig.json</code> file to resolve paths:</p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    // ...
+    &quot;baseUrl&quot;: &quot;.&quot;,
+    &quot;paths&quot;: {
+      &quot;@/*&quot;: [
+        &quot;./src/*&quot;
+      ]
+    }
+    // ...
+  }
+}
+</code></pre>
+<p>Add the following code to the <code>vite.config.ts</code> so your app can resolve paths without error:</p>
+<pre><code class="language-bash"># (so you can import &quot;path&quot; without error)
+npm i -D @types/node
+npm i @vitejs/plugin-react
+</code></pre>
+<pre><code class="language-ts">import path from &quot;path&quot;
+import react from &quot;@vitejs/plugin-react&quot;
+import { defineConfig } from &quot;vite&quot;
+ 
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      &quot;@&quot;: path.resolve(__dirname, &quot;./src&quot;),
+    },
+  },
+})
+</code></pre>
+<h4 id="shadcn-ui">ShadCN UI</h4>
+<p>Run the <a href="https://ui.shadcn.com/docs/installation/vite">shadcn-ui</a> init command to setup your project:</p>
+<pre><code class="language-bash">npx shadcn-ui@latest init
+</code></pre>
+<p>You will be asked a few questions to configure <code>components.json</code>:</p>
+<pre><code class="language-bash">Would you like to use TypeScript (recommended)? no / yes
+Which style would you like to use? › Default
+Which color would you like to use as base color? › Slate
+Where is your global CSS file? › › src/index.css
+Do you want to use CSS variables for colors? › no / yes
+Where is your tailwind.config.js located? › tailwind.config.js
+Configure the import alias for components: › @/components
+Configure the import alias for utils: › @/lib/utils
+Are you using React Server Components? › no / yes (no)
+</code></pre>
+<p>You can now start adding components to your project.</p>
+<pre><code class="language-bash">npx shadcn-ui@latest add button
+</code></pre>
+<p>The command above will add the <a href="https://ui.shadcn.com/docs/components/button">Button component</a> to your project. You can then import it like this:</p>
+<pre><code class="language-ts">import { Button } from &quot;@/components/ui/button&quot;
+ 
+export default function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Button&gt;Click me&lt;/Button&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<h4 id="importing-svgs">Importing SVGs</h4>
+<pre><code class="language-bash">npm install --save-dev vite-plugin-svgr
+</code></pre>
+<p>Add the following to <code>tsconfig.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    &quot;types&quot;: [&quot;vite/client&quot;, &quot;vite-plugin-svgr/client&quot;],
+</code></pre>
+<p>And import the plugin to <code>vite.config.ts</code>:</p>
+<pre><code class="language-json">import svgr from &quot;vite-plugin-svgr&quot;;
+
+export default defineConfig({
+  plugins: [
+    svgr()
+  ],
+</code></pre>
+<p>You can now import SVGs like:</p>
+<pre><code class="language-ts">import AlertIcon from &quot;@/assets/alert-triangle.svg?react&quot;;
+
+...
+
+return (
+  &lt;AlertIcon /&gt;
+</code></pre>
+<h2 id="react-router">React Router</h2>
+<pre><code class="language-bash">npm i react-router-dom
+</code></pre>
+<p>Prepare a set of nested routes for your app. Here all pages will be rendered as children inside the App component:</p>
+<p><em>@/routes/Routes.tsx</em></p>
+<pre><code class="language-ts">import {
+    createBrowserRouter,
+    RouterProvider,
+    Navigate
+} from &#x27;react-router-dom&#x27;;
+
+import { App } from &#x27;@/App&#x27;
+import { FrontPage } from &#x27;@/pages/Frontpage&#x27;;
+import { CameraList } from &#x27;@/pages/Camera_List&#x27;;
+
+const router = createBrowserRouter(
+    [{
+        path: &#x27;/&#x27;,
+        element: &lt;App /&gt;,
+        errorElement: &lt;ErrorPage /&gt;,
+        children: [
+            {
+                path: &#x27;dashboard&#x27;,
+                element: &lt;FrontPage /&gt;,
+            },
+            {
+                path: &#x27;camera-list&#x27;,
+                element: &lt;CameraList /&gt;,
+            },
+            {
+                path: &#x27;*&#x27;,
+                element: &lt;Navigate to=&quot;dashboard&quot; replace /&gt;,
+            },
+        ]}
+    ]);
+
+export function Routes() {
+    return &lt;RouterProvider router={router} /&gt;;
+}
+</code></pre>
+<p>The App component only contains an Outlet for the child components and components you want to be displayed on all pages - navigation bars, side navigation, etc.:</p>
+<p><em>@/App.tsx</em></p>
+<pre><code class="language-ts">import { Outlet } from &#x27;react-router-dom&#x27;;
+import { NavBar } from &#x27;@/components/NavBar&#x27;
+
+export function App() {
+  return (
+    &lt;&gt;
+        &lt;NavBar /&gt;
+        &lt;Outlet /&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<p>The routes are now imported into Main:</p>
+<p><em>@/main.tsx</em></p>
+<pre><code class="language-ts">import React from &#x27;react&#x27;
+import ReactDOM from &#x27;react-dom/client&#x27;
+import { Routes } from &#x27;@/routes/Routes&#x27;
+import { ThemeProvider } from &quot;@/components/Theme-Provider&quot;
+import &#x27;@/styles/index.css&#x27;
+
+
+
+ReactDOM.createRoot(document.getElementById(&#x27;root&#x27;)!).render(
+  &lt;React.StrictMode&gt;
+    &lt;ThemeProvider defaultTheme=&quot;dark&quot; storageKey=&quot;vite-ui-theme&quot;&gt;
+      &lt;Routes /&gt;
+    &lt;/ThemeProvider&gt;
+  &lt;/React.StrictMode&gt;,
+)
+</code></pre>
+<h3 id="route-parameter">Route Parameter</h3>
+<p>Add another route that selects a single camera by ID:</p>
+<p><em>@/routes/Routes.tsx</em></p>
+<pre><code class="language-ts">{
+    path: &#x27;camera/:id&#x27;,
+    element: &lt;CameraPage /&gt;,
+},
+</code></pre>
+<p>Mock an API request to retrieve the camera information:</p>
+<p><em>@/data/cameras.ts</em></p>
+<pre><code class="language-ts">export type Camera = {
+    id: number;
+    name: string;
+    recordings: number;
+    ip: string;
+  };
+  
+  export const cameras: Camera[] = [
+    {
+      id: 0,
+      name: &#x27;IN-9420 2K+ WQHD&#x27;,
+      recordings: 21,
+      ip: &#x27;192.168.2.21&#x27;,
+    },
+    ...
+</code></pre>
+<p>Retrieve camera ID from the URL parameter and find the camera in the list above to display its details:</p>
+<p><em>@/pages/CameraPage.tsx</em></p>
+<pre><code class="language-ts">import { useParams, Link } from &#x27;react-router-dom&#x27;;
+
+type Params = {
+    id: string;
+};
+
+
+export function CameraPage() {
+    const params = useParams&lt;Params&gt;();
+    // get camera ID from URL param
+    const id = params.id === undefined ? undefined : parseInt(params.id)
+    // find corresponding camera
+    const camera = cameras.find(
+            (camera) =&gt; camera.id === id
+        )
+        
+    return (
+        &lt;div className=&quot;text-center p-5 text-xl&quot;&gt;
+            {camera === undefined ? (
+                &lt;h1 className=&quot;text-xl&quot;&gt;
+                    ERROR :: Camera not available
+                &lt;/h1&gt;
+        ) : (
+        &lt;&gt;
+            &lt;h1 className=&quot;text-xl&quot;&gt;
+                Camera Name: {camera.name}
+            &lt;/h1&gt;
+            &lt;p className=&quot;text-base&quot;&gt;
+                Camera IP: {camera.ip}
+            &lt;/p&gt;
+            &lt;p className=&quot;text-base&quot;&gt;
+                Recordings: {camera.recordings}
+            &lt;/p&gt;
+        &lt;/&gt;
+        )}
+    &lt;/div&gt;
+)}
+</code></pre>
+<h3 id="lazy-loading">Lazy Loading</h3>
+<p>To lazy load &#x27;heavy&#x27; pages add suspense to the route definition:</p>
+<pre><code class="language-ts">import { lazy, Suspense } from &#x27;react&#x27;
+
+import { App } from &#x27;@/App&#x27;
+import { ErrorPage } from &#x27;@/pages/ErrorPage&#x27;
+const Dashboard = lazy(() =&gt; import(&#x27;@/pages/Dashboard&#x27;));
+
+const router = createBrowserRouter(
+    [{
+        path: &#x27;/&#x27;,
+        element: &lt;App /&gt;,
+        errorElement: &lt;ErrorPage /&gt;,
+        children: [
+            {
+                path: &#x27;dashboard&#x27;,
+                element:  (
+                    &lt;Suspense fallback={
+                        &lt;div&gt;
+                            Loading...
+                        &lt;/div&gt;
+                    }&gt;
+                        &lt;Dashboard /&gt;
+                    &lt;/Suspense&gt;
+                )
+            }
+            ...
+</code></pre>
+<h3 id="react-router-form">React Router Form</h3>
+<pre><code class="language-ts">import {
+    Form,
+    ActionFunctionArgs,
+    redirect,
+  } from &#x27;react-router-dom&#x27;;
+  
+
+import { Button } from &quot;@/components/ui/button&quot;
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from &quot;@/components/ui/card&quot;
+
+import { Input } from &quot;@/components/ui/input&quot;
+import { Label } from &quot;@/components/ui/label&quot;
+
+type LoginType = {
+  name: string;
+  password: string;
+}
+
+
+export function LoginForm() {
+
+  return (
+    &lt;div className=&#x27;container mx-auto h-screen flex justify-center&#x27;&gt;
+      &lt;Card className=&quot;w-fit h-fit mt-16&quot;&gt;
+        &lt;CardHeader&gt;
+            &lt;CardTitle&gt;Login&lt;/CardTitle&gt;
+            &lt;CardDescription&gt;Please use your user login to access your cameras.&lt;/CardDescription&gt;
+        &lt;/CardHeader&gt;
+        &lt;CardContent&gt;
+            &lt;Form method=&quot;post&quot; className=&quot;space-y-8&quot;&gt;
+                &lt;div className=&quot;grid w-full max-w-sm items-center gap-1.5&quot;&gt;
+                    &lt;Label htmlFor=&quot;name&quot;&gt;Username&lt;/Label&gt;
+                    &lt;Input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; placeholder=&quot;Username&quot; required /&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;grid w-full max-w-sm items-center gap-1.5&quot;&gt;
+                    &lt;Label htmlFor=&quot;password&quot;&gt;Password&lt;/Label&gt;
+                    &lt;Input type=&quot;password&quot; id=&quot;password&quot; name=&quot;password&quot; placeholder=&quot;Password&quot; required /&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;Button type=&quot;submit&quot;&gt;
+                        Submit
+                    &lt;/Button&gt;
+                &lt;/div&gt;
+            &lt;/Form&gt;
+        &lt;/CardContent&gt;
+      &lt;/Card&gt;
+    &lt;/div&gt;
+  );
+}
+
+export async function loginFormAction({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const login = {
+      name: formData.get(&#x27;name&#x27;),
+      password: formData.get(&#x27;password&#x27;),
+  } as LoginType;
+
+  console.log(&#x27;Login details:&#x27;, login);
+
+  return redirect(`/start/`);
+}
+</code></pre>
+<pre><code class="language-ts">import { App } from &#x27;@/App&#x27;
+import { ErrorPage } from &#x27;@/pages/ErrorPage&#x27;
+
+import { Welcome } from &#x27;@/pages/Welcome&#x27;
+import { loginFormAction } from &#x27;@/components/welcome/Login&#x27;
+
+const router = createBrowserRouter(
+    [{
+        path: &#x27;/&#x27;,
+        element: &lt;App /&gt;,
+        errorElement: &lt;ErrorPage /&gt;,
+        children: [
+            {
+                index: true,
+                element: &lt;Welcome /&gt;,
+                action: loginFormAction,
+            },
+        ...
+</code></pre>
+<h3 id="form-hooks">Form Hooks</h3>
+<blockquote>
+<p>npm install react-hook-form`</p>
+</blockquote>
+<pre><code class="language-ts">import { useForm, FieldError } from &#x27;react-hook-form&#x27;;
+import { useNavigate } from &#x27;react-router-dom&#x27;;
+
+import { Button } from &quot;@/components/ui/button&quot;
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from &quot;@/components/ui/card&quot;
+
+import { Input } from &quot;@/components/ui/input&quot;
+import { Label } from &quot;@/components/ui/label&quot;
+
+import { Textarea } from &quot;@/components/ui/textarea&quot;
+
+import { ValidationError } from &#x27;@/components/create_user/ValidationError&#x27;
+
+type UserType = {
+    name: string;
+    password: string;
+    email?: string;
+    level: string;
+    notes?: string;
+}
+
+
+export function UserForm() {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting }
+    } = useForm&lt;UserType&gt;({
+        mode: &quot;onBlur&quot;,
+        reValidateMode: &quot;onBlur&quot;
+    })
+
+    const navigate = useNavigate()
+
+    function onSubmit(user: UserType) {
+        console.log(&#x27;Submitted details:&#x27;, user);
+        navigate(`/user-details/${user.name}`);
+    }
+
+    function getEditorStyle(fieldError: FieldError |
+        undefined) {
+        return fieldError ? &#x27;border-red-500&#x27; : &#x27;&#x27;;
+    }
+
+    return (
+        &lt;div className=&#x27;container mx-auto h-screen flex justify-center&#x27;&gt;
+          &lt;Card className=&quot;w-fit h-fit mt-4&quot;&gt;
+            &lt;CardHeader&gt;
+                &lt;CardTitle&gt;Add a User&lt;/CardTitle&gt;
+                &lt;CardDescription&gt;Fill out the username, password and access level to create a new user.&lt;/CardDescription&gt;
+            &lt;/CardHeader&gt;
+            &lt;CardContent&gt;
+                &lt;form noValidate onSubmit={handleSubmit(onSubmit)}&gt;
+                    &lt;div&gt;
+                        &lt;Label htmlFor=&quot;name&quot;&gt;Your user name&lt;/Label&gt;
+                        &lt;Input 
+                            type=&quot;text&quot;
+                            id=&quot;name&quot;
+                            disabled={isSubmitting}
+                            {...register(&#x27;name&#x27;, {
+                                required: &#x27;You must enter your name.&#x27;,
+                            })}
+                            className={getEditorStyle(errors.name)}
+                        /&gt;
+                        &lt;ValidationError fieldError={errors.name} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&#x27;mt-4&#x27;&gt;
+                        &lt;Label htmlFor=&quot;password&quot; className=&#x27;my-4&#x27;&gt;Your user password&lt;/Label&gt;
+                        &lt;Input 
+                            type=&quot;password&quot;
+                            id=&quot;password&quot;
+                            disabled={isSubmitting}
+                            {...register(&#x27;password&#x27;, {
+                                required: &#x27;You must enter your password.&#x27;,
+                            })}
+                            className={getEditorStyle(errors.password)}
+                        /&gt;
+                        &lt;ValidationError fieldError={errors.password} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&#x27;mt-4&#x27;&gt;
+                        &lt;Label htmlFor=&quot;email&quot; className=&#x27;my-2&#x27;&gt;Your email address&lt;/Label&gt;
+                        &lt;Input
+                            type=&quot;email&quot;
+                            id=&quot;email&quot;
+                            disabled={isSubmitting}
+                            {...register(&#x27;email&#x27;, {
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                    message: &#x27;Entered value does not match email format.&#x27;,
+                                },
+                            })}
+                            className={getEditorStyle(errors.email)}
+                        /&gt;
+                        &lt;ValidationError fieldError={errors.email} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&#x27;mt-4&#x27;&gt;
+
+                        &lt;Label htmlFor=&quot;level&quot; className=&#x27;my-2&#x27;&gt;Granted access level&lt;/Label&gt;
+                        &lt;div className=&#x27;flex flex-col&#x27;&gt;
+                            &lt;select
+                                id=&quot;level&quot;
+                                disabled={isSubmitting}
+                                {...register(&#x27;level&#x27;, {
+                                    required: &#x27;You must enter the authorization level.&#x27;,
+                                })}
+                                className=&#x27;flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-5&#x27;
+                            &gt;
+                                &lt;option value=&quot;&quot;&gt;Select an authorization level...&lt;/option&gt;
+                                &lt;option value=&quot;user&quot;&gt;User&lt;/option&gt;
+                                &lt;option value=&quot;operator&quot;&gt;Operator&lt;/option&gt;
+                                &lt;option value=&quot;administrator&quot;&gt;Administrator&lt;/option&gt;
+                            &lt;/select&gt;
+                            &lt;ValidationError fieldError={errors.level} /&gt;
+                        &lt;/div&gt;
+                        
+                    &lt;/div&gt;
+                    &lt;div className=&#x27;mt-4&#x27;&gt;
+                        &lt;Label htmlFor=&quot;notes&quot;&gt;Additional notes&lt;/Label&gt;
+                        &lt;Textarea id=&quot;notes&quot; disabled={isSubmitting}  {...register(&#x27;notes&#x27;)} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&#x27;mt-4&#x27;&gt;
+                        &lt;Button type=&quot;submit&quot;&gt;
+                            Submit
+                        &lt;/Button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+        &lt;/CardContent&gt;
+        &lt;/Card&gt;
+    &lt;/div&gt;
+    );
+}
+</code></pre>
+<pre><code class="language-ts">import { FieldError } from &#x27;react-hook-form&#x27;;
+
+type Props = {
+    fieldError: FieldError | undefined;
+};
+
+export function ValidationError({ fieldError }: Props) {
+    
+    if (!fieldError) {
+        return null;
+    }
+
+    return (
+        &lt;div role=&quot;alert&quot; className=&quot;text-red-500 text-xs mt-1&quot;&gt;
+            {fieldError.message}
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+<h2 id="redux-state-management">Redux State Management</h2>
+<h3 id="store">Store</h3>
+<p>Create a store using the Redux Toolkit:</p>
+<p><em>@/store/store.tsx</em></p>
+<pre><code class="language-ts">import { configureStore } from &#x27;@reduxjs/toolkit&#x27;;
+import userReducer from &#x27;./userSlice&#x27;;
+
+export const store = configureStore({
+  reducer: {
+      user: userReducer,
+      camera: cameraReducer,
+    },
+});
+
+//  ReturnType infers the type of the full state object
+export type RootState = ReturnType&lt;typeof store.getState&gt;;
+</code></pre>
+<p>Every app feature has its own slice of the state accessible by its own reducer function:</p>
+<p><em>@/store/userSlice.tsx</em></p>
+<pre><code class="language-ts">import { createSlice } from &#x27;@reduxjs/toolkit&#x27;
+import type { PayloadAction } from &#x27;@reduxjs/toolkit&#x27;
+// mocked API request to get current user - see below
+import { User } from &#x27;@/api/authenticate&#x27;
+
+type State = {
+  user: undefined | User;
+  permissions: undefined | string[];
+  loading: boolean;
+}
+
+const initialState: State = {
+  user: undefined,
+  permissions: undefined,
+  loading: false,
+}
+
+export const userSlice = createSlice({
+  name: &#x27;user&#x27;,
+  initialState,
+  reducers: {
+    authenticateAction: (state) =&gt; {
+      state.loading = true;
+    },
+    authenticatedAction: (state, action: PayloadAction&lt;User | undefined&gt;) =&gt; {
+      state.user = action.payload;
+      state.loading = false;
+    },
+    authorizeAction: (state) =&gt; {
+      state.loading = true;
+    },
+    authorizedAction: (state, action: PayloadAction&lt;string[]&gt;) =&gt; {
+      state.permissions = action.payload;
+      state.loading = false;
+    },
+  },
+})
+
+export const { authenticateAction, authenticatedAction, authorizeAction, authorizedAction } =
+  userSlice.actions
+
+export default userSlice.reducer
+</code></pre>
+<p>The Redux store needs to be provided to our React component tree:</p>
+<p><em>@/App.tsx</em></p>
+<pre><code class="language-ts">import { Provider } from &#x27;react-redux&#x27;;
+
+import { Outlet } from &#x27;react-router-dom&#x27;;
+import { NavBar } from &#x27;@/components/navbar/NavBar&#x27;
+import { store } from &#x27;@/store/store&#x27;;
+
+export function App() {
+  return (
+    &lt;&gt;
+    &lt;Provider store={store}&gt;
+      &lt;NavBar /&gt;
+      &lt;Outlet /&gt;
+    &lt;/Provider&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<h3 id="select-state">Select State</h3>
+<p><em>@/components/navbar/NavBar.tsx</em></p>
+<pre><code class="language-ts">import { useSelector, useDispatch } from &#x27;react-redux&#x27;
+
+import { authenticate } from &#x27;@/api/authenticate&#x27;
+import { authorize } from &#x27;@/api/authorize&#x27;
+import type { RootState } from &#x27;@/store/store&#x27;
+
+export function NavBar() {
+  const user = useSelector((state: RootState) =&gt; state.user.user);
+  const loading = useSelector((state: RootState) =&gt; state.user.loading);
+
+  ...
+  
+  return (
+    ...
+    &lt;NavigationMenuItem&gt;
+        {user ? (
+          &lt;span className=&quot;ml-auto&quot;&gt;Welcome back {user.name}!&lt;/span&gt;
+        ) : (
+          &lt;Button variant=&quot;outline&quot;
+            onClick={handleSignInClick}
+            disabled={loading}
+          &gt;
+            {loading ? &#x27;...&#x27; : &#x27;Sign in&#x27;}
+          &lt;/Button&gt;
+        )}
+    &lt;/NavigationMenuItem&gt;
+  ...
+</code></pre>
+<h3 id="dispatch-state-updates">Dispatch State Updates</h3>
+<p>The <code>handleSignInClick()</code> dispatches a sign-in request:</p>
+<pre><code class="language-ts">export function NavBar() {
+  ...
+
+  const dispatch = useDispatch();
+
+  async function handleSignInClick() {
+    // set loading to true
+    dispatch(authenticateAction());
+    // get authenticated user from API
+    const authenticatedUser = await authenticate();
+    // set authenticated user to current logged in user
+    dispatch(authenticatedAction(authenticatedUser));
+    // once the user is known set its permissions
+    if (authenticatedUser !== undefined) {
+      dispatch(authorizeAction());
+      const authorizedPermissions = await authorize(authenticatedUser.id);
+      dispatch(authorizedAction(authorizedPermissions));
+    }
+  }
+
+  ...
+</code></pre>
+<p>The user name and its permissions are retrieved from a mocked API request:</p>
+<p><em>@/api/authenticate.ts</em></p>
+<pre><code class="language-ts">export type User = {
+  id: string;
+  name: string;
+};
+export function authenticate(): Promise&lt;User | undefined&gt; {
+  return new Promise((resolve) =&gt; setTimeout(() =&gt; resolve({ id: &#x27;1&#x27;, name: &#x27;Admin&#x27; }), 1000));
+}
+</code></pre>
+<p><em>@/api/authorize.ts</em></p>
+<pre><code class="language-ts">export function authorize(id: string): Promise&lt;string[]&gt; {
+  return new Promise((resolve) =&gt; setTimeout(() =&gt; resolve([&#x27;admin&#x27;]), 1000));
+}
+</code></pre>
+<h3 id="working-with-user-roles">Working with User Roles</h3>
+<p>Conditional loading of content based on user roles:</p>
+<p><em>@/components/login/Vault.tsx</em></p>
+<pre><code class="language-ts">import { useSelector } from &#x27;react-redux&#x27;
+import { RootState } from &#x27;@/store/store&#x27;
+
+type Content = {
+  children: JSX.Element
+}
+
+export function Vault({ children }: Content) {
+  // get array of permissions for current user
+  const permissions = useSelector((state: RootState) =&gt; state.user.permissions);
+  // if permissions exist and include &#x27;admin&#x27; load children
+  if (permissions &amp;&amp; permissions.includes(&#x27;admin&#x27;)) {
+    return &lt;div&gt;{ children }&lt;/div&gt;;
+  }
+  return &lt;h3 className=&quot;mt-8 text-center&quot;&gt;Please sign in to view this content!&lt;/h3&gt;;
+}
+</code></pre>
+<p>Wrap all sensitive components inside a Vault instance:</p>
+<pre><code class="language-ts">import { Vault } from &#x27;@/components/login/Vault&#x27;
+
+export function PageComponent() {
+  return (
+    &lt;Vault&gt;
+      &lt;div className=&quot;App&quot;&gt;
+      ...
+      &lt;/div&gt;
+    &lt;/Vault&gt;
+  );
+}
+</code></pre>
+<h2 id="restful-apis">RESTful APIs</h2>
+<p>Data for a JSON mock API:</p>
+<p><em>api.json</em></p>
+<pre><code class="language-json">{
+    &quot;events&quot;: [
+        {
+          &quot;uuid&quot;: &quot;90080d52-f2ac-46e1-ad1e-ec7d6ab304a1&quot;,
+          &quot;title&quot;: &quot;#6534 Entrance Left&quot;,
+          &quot;description&quot;: &quot;2023-12-26 15:51:32: [Alarm]: Motion in area [1]&quot;
+        },
+        {
+          &quot;uuid&quot;: &quot;c8ada1fe-318b-43a4-adc5-367d526cc5dd&quot;,
+          &quot;title&quot;: &quot;#6533 Lobby&quot;,
+          &quot;description&quot;: &quot;2023-12-26 15:50:38: [Event]: admin has logged in from 192.168.2.112&quot;
+        },
+        {
+          &quot;uuid&quot;: &quot;762ad93a-4bcc-4f8d-97d1-93d4f1da1f35&quot;,
+          &quot;title&quot;: &quot;#6456 Elevator&quot;,
+          &quot;description&quot;: &quot;2023-12-26 15:44:19: [Event]: Switching to night mode&quot;
+        }
+    ]
+}
+</code></pre>
+<p>Requirements:</p>
+<ul>
+<li><code>npm i -D json-server</code></li>
+<li><code>npm</code> start script in <code>package.json</code></li>
+</ul>
+<pre><code class="language-json">{
+  ...,
+  &quot;scripts&quot;: {
+    ...,
+    &quot;api&quot;: &quot;json-server --watch api.json --port 8080 --delay 2500&quot;
+  },
+...
+}
+</code></pre>
+<p>Execute the script and verify that the API is accessible:</p>
+<p><img alt="React Typescript" src="/assets/images/reactjs-typescript_01-8f0e2bc544354932dee93abc16c9cf9d.png" width="818" height="307"></p>
+<p><a href="https://vitejs.dev/guide/env-and-mode#env-files">Vite.js Environment Variables</a>: To prevent accidentally leaking env variables to the client, only variables prefixed with VITE_ are exposed to your Vite-processed code. e.g.:</p>
+<p><em>.env</em></p>
+<pre><code class="language-bash">VITE_API_URL = http://localhost:8080/events/
+</code></pre>
+<p>The URL is now exposed:</p>
+<pre><code class="language-ts">console.log(import.meta.env.VITE_API_URL)
+</code></pre>
+<p>To get TypeScript IntelliSense for user-defined env variables you can create an <code>env.d.ts</code> in src directory, then augment ImportMetaEnv like this:</p>
+<p><em>@/env.d.ts</em></p>
+<pre><code class="language-ts">/// &lt;reference types=&quot;vite/client&quot; /&gt;
+
+interface ImportMetaEnv {
+    readonly VITE_API_URL: string
+    // more .env variables...
+}
+  
+interface ImportMeta {
+    readonly env: ImportMetaEnv
+}
+</code></pre>
+<p><img alt="React Typescript" src="/assets/images/reactjs-typescript_02-272610ceebb6df66e939412f13b6907c.png" width="983" height="169"></p>
+<h3 id="effect-fetching">Effect Fetching</h3>
+<p>Get JSON data from your API:</p>
+<p><em>@/components/reports/GetReports.ts</em></p>
+<pre><code class="language-ts">export type ReportData = {
+    uuid: number;
+    title: string;
+    description: string;
+}
+
+export async function getReports() {
+    const response = await fetch(
+        // add &#x27;!&#x27; to assert that expression can’t be null or undefined
+        import.meta.env.VITE_API_URL!
+    );
+    const body = (await response.json()) as unknown
+    // type assertion for API response
+    assertIsReports(body);
+    return body;
+}
+
+
+export function assertIsReports(
+    reportData: unknown
+): asserts reportData is ReportData[] {
+    if (!Array.isArray(reportData)) {
+        throw new Error(&quot;ERROR :: Report isn&#x27;t an array&quot;);
+    }
+    if (reportData.length === 0) {
+        return
+    }
+    reportData.forEach((report) =&gt; {
+        if (!(&#x27;uuid&#x27; in report)) {
+            throw new Error(&quot;ERROR :: Report doesn&#x27;t contain an UUID&quot;);
+        }
+        if (typeof report.uuid !== &#x27;string&#x27;) {
+            throw new Error(&#x27;ERROR :: UUID is not a string&#x27;);
+        }
+        if (!(&#x27;title&#x27; in report)) {
+            throw new Error(&quot;ERROR :: Report doesn&#x27;t contain title&quot;);
+        }
+        if (typeof report.title !== &#x27;string&#x27;) {
+            throw new Error(&#x27;ERROR :: Title is not a string&#x27;);
+        }
+        if (!(&#x27;description&#x27; in report)) {
+            throw new Error(&quot;ERROR :: Report doesn&#x27;t contain description&quot;);
+        }
+        if (typeof report.description != &#x27;string&#x27;) {
+            throw new Error(&#x27;ERROR :: Description is not a string&#x27;);
+        }
+    })
+}
+</code></pre>
+<p>The fetched JSON data can now be displayed in the report list component:</p>
+<p><em>@/components/reports/ReportList.tsx</em></p>
+<pre><code class="language-ts">import {
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from &quot;@/components/ui/card&quot;
+
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from &quot;@/components/ui/table&quot;
+
+import { ReportData } from &#x27;./GetReports&#x27;
+
+type Props = {
+    reports: ReportData[];
+}
+
+export function ReportList({ reports }: Props) {
+    return (
+        &lt;Card className=&quot;w-3/4&quot;&gt;
+            &lt;CardHeader&gt;
+                &lt;CardTitle&gt;Surveillance Log&lt;/CardTitle&gt;
+                &lt;CardDescription&gt;Recorded camera events&lt;/CardDescription&gt;
+            &lt;/CardHeader&gt;
+            &lt;CardContent&gt;
+                &lt;Table&gt;
+                    &lt;TableCaption&gt;Latest Events&lt;/TableCaption&gt;
+                    &lt;TableHeader&gt;
+                        &lt;TableRow&gt;
+                        &lt;TableHead&gt;Camera&lt;/TableHead&gt;
+                        &lt;TableHead&gt;Description&lt;/TableHead&gt;
+                        &lt;/TableRow&gt;
+                    &lt;/TableHeader&gt;
+                    &lt;TableBody&gt;
+                        {reports.map((report) =&gt; (
+                        &lt;TableRow key={report.uuid}&gt;
+                            &lt;TableCell className=&quot;font-bold text-left&quot;&gt;{report.title}&lt;/TableCell&gt;
+                            &lt;TableCell className=&quot;text-left&quot;&gt;{report.description}&lt;/TableCell&gt;
+                        &lt;/TableRow&gt;
+                        ))}
+                    &lt;/TableBody&gt;
+                &lt;/Table&gt;
+            &lt;/CardContent&gt;
+        &lt;/Card&gt;
+    )   
+}
+</code></pre>
+<p>The list view can now be used in any page:</p>
+<pre><code class="language-ts">import { useEffect, useState } from &#x27;react&#x27;;
+
+import { getReports, ReportData } from &#x27;@/components/reports/GetReports&#x27;
+import { ReportList } from &#x27;@/components/reports/ReportList&#x27;
+
+export function ReportPage() {
+
+  const [isLoading, setIsLoading] = useState(true)
+  const [reports, setReports] = useState&lt;ReportData[]&gt;([])
+
+  useEffect(() =&gt; {
+    let cancel = false
+    // fetch data from api
+    getReports().then((data) =&gt; {
+      if (!cancel) {
+        setReports(data);
+      setIsLoading(false);
+      }
+    })
+    // cancel load if component is unmounted
+    return () =&gt; {
+      cancel = true;
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      &lt;div className=&quot;w-96 mx-auto mt-6&quot;&gt;
+        Loading ...
+      &lt;/div&gt;
+    );
+  }
+
+  return (
+    ...
+        &lt;ReportList reports={reports} /&gt;
+    ...
+  );
+}
+</code></pre>
+<h3 id="effect-posting">Effect Posting</h3>
+<p><em>@/components/reports/NewReport.ts</em></p>
+<pre><code class="language-ts">export type NewReportData = {
+    title: string;
+    description: string;
+}
+    
+
+export type SavedReportData = {
+    uuid: string;
+}
+
+export async function savePost( newReportData: NewReportData ) {
+    const response = await fetch(
+        import.meta.env.VITE_API_URL!,
+        {
+            method: &#x27;POST&#x27;,
+            body: JSON.stringify(newReportData),
+            headers: {&#x27;Content-Type&#x27;: &#x27;application/json&#x27;}
+        }
+    )
+    const body = (await response.json()) as unknown;
+    assertIsSavedReport(body);
+
+    return { ...newReportData, ...body };
+}
+
+function assertIsSavedReport( post: any ):
+    asserts post is SavedReportData {
+        if (!(&#x27;uuid&#x27; in post)) {
+            throw new Error(&quot;ERROR :: Post doesn&#x27;t contain an uuid&quot;)
+        }
+        if (typeof post.uuid !== &#x27;number&#x27;) {
+            throw new Error(&#x27;ERROR :: uuid is not a number&#x27;);
+        }
+}
+</code></pre>
+<h3 id="react-router-data-loading">React Router Data Loading</h3>
+<p>Use React Router to get the data before it renders a component defined on the route. This can be done by adding the <code>getReports</code> function as a loader:</p>
+<pre><code class="language-ts">import {
+    createBrowserRouter,
+    RouterProvider,
+    Navigate,
+    defer
+} from &#x27;react-router-dom&#x27;;
+
+import { CameraPage } from &#x27;@/pages/CameraPage&#x27;
+import { getReports } from &#x27;@/components/reports/GetReports&#x27;
+
+const router = createBrowserRouter(
+    [{
+        ...
+            {
+                path: &#x27;camera/:id&#x27;,
+                element: &lt;CameraPage /&gt;,
+                loader: async () =&gt; defer({ reports: getReports() })
+            },
+        ...
+</code></pre>
+<p>The data is now fetched when the route is triggered and made available to our component via a useLoaderData hook::</p>
+<p><em>@/pages/CameraPage.tsx</em></p>
+<pre><code class="language-tsx">import { Suspense } from &#x27;react&#x27;
+
+import {
+    useParams,
+    useLoaderData,
+    Await,
+    Link
+} from &#x27;react-router-dom&#x27;
+
+import { ReportList } from &#x27;@/components/reports/ReportList&#x27;
+import { assertIsReports } from &#x27;@/components/reports/GetReports&#x27;
+import { ReportData } from &#x27;@/components/reports/types&#x27;
+
+export function CameraPage() {
+    
+    ...
+    
+    // get camera reports from react-router route
+    const data = useLoaderData()
+    assertIsData(data)
+        
+    return (
+            ...
+
+              &lt;CardContent&gt;
+                  &lt;Suspense fallback={&lt;div&gt;Fetching...&lt;/div&gt;}&gt;
+                      &lt;Await resolve={data.reports}&gt;
+                      {(reports) =&gt; {
+                          assertIsReports(reports)
+                          return &lt;ReportList reports={reports} /&gt;
+                      }}
+                      &lt;/Await&gt;
+                  &lt;/Suspense&gt;
+              &lt;/CardContent&gt;
+                    
+            ...
+)}
+
+type Data = {
+    reports: ReportData[];
+}
+
+export function assertIsData(data: unknown): asserts data is Data {
+  if (typeof data !== &#x27;object&#x27;) {
+    throw new Error(&quot;ERROR :: Sent report data isn&#x27;t an object&quot;);
+  }
+  if (data === null) {
+    throw new Error(&#x27;ERROR :: Report data is null&#x27;);
+  }
+  if (!(&#x27;reports&#x27; in data)) {
+    throw new Error(&quot;ERROR :: data doesn&#x27;t contain reports&quot;);
+  }
+}
+</code></pre>
+<h2 id="video-embedding">Video Embedding</h2>
+<h3 id="hls-streams">hls Streams</h3>
+<ul>
+<li><a href="https://github.com/devcshort/react-hls#README">hls.js</a></li>
+</ul>
+<pre><code class="language-bash">npm install react-hls-player
+</code></pre>
+<p><em>@/components/video_streamer/HLSPlayer.tsx</em></p>
+<pre><code class="language-ts">import ReactHlsPlayer from &#x27;react-hls-player&#x27;
+
+export function HLSPlayer( href: { url: string } ) {
+
+  return (
+    &lt;&gt;
+      &lt;ReactHlsPlayer
+          src={href.url.toString()}
+          autoPlay={false}
+          controls={true}
+          width=&quot;100%&quot;
+          height=&quot;auto&quot;
+          hlsConfig={{
+            maxLoadingDelay: 4,
+            minAutoBitrate: 0,
+            lowLatencyMode: true,
+          }}
+      /&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+<p><em>@/components/video_streamer/VideoWall.tsx</em></p>
+<pre><code class="language-ts">import { HLSPlayer } from &#x27;@/components/video_player/HLSPlayer&#x27;
+
+const href: URL = new URL(&quot;https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8&quot;)
+
+export function VideoWall() {
+  return (
+    &lt;Card className=&quot;mt-12&quot;&gt;
+      &lt;CardHeader&gt;
+        &lt;CardTitle&gt;Camera Live Video&lt;/CardTitle&gt;
+        &lt;CardDescription&gt;Embedded HLS stream unsing hls.js&lt;/CardDescription&gt;
+      &lt;/CardHeader&gt;
+      &lt;CardContent&gt;
+        &lt;div className=&quot;grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-2&quot;&gt;
+          &lt;div className=&quot;col-span-2 row-span-2&quot;&gt;
+            &lt;HLSPlayer url={href} /&gt;
+          &lt;/div&gt;
+          ...
+</code></pre>
+<h3 id="video-file-playback">Video File Playback</h3>
+<ul>
+<li><a href="https://videojs.com/">Video.js</a></li>
+</ul>
+<pre><code class="language-bash">npm install video.js
+npm install -D @types/video.js
+</code></pre>
+<p><em>@/components/video_player/VideoPlayer</em></p>
+<pre><code class="language-ts">import { useRef, useEffect } from &#x27;react&#x27;
+import videojs from &#x27;video.js&#x27;
+import &#x27;video.js/dist/video-js.css&#x27;
+
+export const VideoPlayer = (props) =&gt; {
+  const videoRef = useRef(null)
+  const playerRef = useRef(null)
+  
+  const {options, onReady} = props;
+
+  useEffect(() =&gt; {
+
+    // Make sure Video.js player is only initialized once
+    if (!playerRef.current) {
+      // The Video.js player needs to be _inside_ the component el for React 18 Strict Mode. 
+      const videoElement = document.createElement(&quot;video-js&quot;);
+
+      videoElement.classList.add(&#x27;vjs-big-play-centered&#x27;);
+      videoRef.current.appendChild(videoElement);
+
+      const player = playerRef.current = videojs(videoElement, options, () =&gt; {
+        videojs.log(&#x27;player is ready&#x27;);
+        onReady &amp;&amp; onReady(player);
+      });
+
+    // You could update an existing player in the `else` block here
+    // on prop change, for example:
+    } else {
+      const player = playerRef.current;
+
+      player.autoplay(options.autoplay);
+      player.src(options.sources);
+    }
+  }, [options, videoRef]);
+
+  // Dispose the Video.js player when the functional component unmounts
+  useEffect(() =&gt; {
+    const player = playerRef.current;
+
+    return () =&gt; {
+      if (player &amp;&amp; !player.isDisposed()) {
+        player.dispose();
+        playerRef.current = null;
+      }
+    };
+  }, [playerRef]);
+
+  return (
+    &lt;div data-vjs-player&gt;
+      &lt;div ref={videoRef} /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p><em>@/components/video_player/VideoWall</em></p>
+<pre><code class="language-ts">import { useRef } from &#x27;react&#x27;
+import videojs from &#x27;video.js&#x27;
+
+import { VideoPlayer } from &#x27;@/components/video_player/VideoPlayer&#x27;
+
+const videoJsOptions = {
+  autoplay: false,
+  controls: true,
+  responsive: true,
+  fluid: true,
+  sources: [
+    {
+      src: &quot;//vjs.zencdn.net/v/oceans.mp4&quot;,
+      type: &quot;video/mp4&quot;
+    }
+  ]
+};
+
+export function VideoWall(id: {camera: string}) {
+
+  const playerRef = useRef(null)
+
+  const handlePlayerReady = (player) =&gt; {
+    playerRef.current = player
+
+    // You can handle player events here, for example:
+    player.on(&#x27;waiting&#x27;, () =&gt; {
+      videojs.log(&#x27;player is waiting&#x27;)
+    })
+
+    player.on(&#x27;dispose&#x27;, () =&gt; {
+      videojs.log(&#x27;player will dispose&#x27;)
+    })
+  }
+
+  return (
+      &lt;div className=&quot;col-span-2 row-span-2&quot;&gt;
+        &lt;VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /&gt;
+      &lt;/div&gt;
+  );
+}
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/javascript">Javascript</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/react">React</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/cheating">Cheating</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/javascript"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Javascript</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Node / Express with Typescript - (Re)Introduction 2023</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#foundation" class="table-of-contents__link toc-highlight">Foundation</a></li><li><a href="#typescript-basics" class="table-of-contents__link toc-highlight">Typescript Basics</a><ul><li><a href="#type-declaration" class="table-of-contents__link toc-highlight">Type Declaration</a></li><li><a href="#aliases" class="table-of-contents__link toc-highlight">Aliases</a></li><li><a href="#interfaces" class="table-of-contents__link toc-highlight">Interfaces</a></li><li><a href="#enumerations" class="table-of-contents__link toc-highlight">Enumerations</a></li></ul></li><li><a href="#react-typescript" class="table-of-contents__link toc-highlight">React Typescript</a><ul><li><a href="#effect-hook" class="table-of-contents__link toc-highlight">Effect Hook</a></li><li><a href="#state-hook" class="table-of-contents__link toc-highlight">State Hook</a></li><li><a href="#ref-hook" class="table-of-contents__link toc-highlight">Ref Hook</a></li><li><a href="#memo-hook" class="table-of-contents__link toc-highlight">Memo Hook</a></li><li><a href="#callback-hook" class="table-of-contents__link toc-highlight">Callback Hook</a></li></ul></li><li><a href="#styling-react" class="table-of-contents__link toc-highlight">Styling React</a><ul><li><a href="#vanilla-css" class="table-of-contents__link toc-highlight">Vanilla CSS</a></li><li><a href="#tailwind-css" class="table-of-contents__link toc-highlight">Tailwind CSS</a></li></ul></li><li><a href="#react-router" class="table-of-contents__link toc-highlight">React Router</a><ul><li><a href="#route-parameter" class="table-of-contents__link toc-highlight">Route Parameter</a></li><li><a href="#lazy-loading" class="table-of-contents__link toc-highlight">Lazy Loading</a></li><li><a href="#react-router-form" class="table-of-contents__link toc-highlight">React Router Form</a></li><li><a href="#form-hooks" class="table-of-contents__link toc-highlight">Form Hooks</a></li></ul></li><li><a href="#redux-state-management" class="table-of-contents__link toc-highlight">Redux State Management</a><ul><li><a href="#store" class="table-of-contents__link toc-highlight">Store</a></li><li><a href="#select-state" class="table-of-contents__link toc-highlight">Select State</a></li><li><a href="#dispatch-state-updates" class="table-of-contents__link toc-highlight">Dispatch State Updates</a></li><li><a href="#working-with-user-roles" class="table-of-contents__link toc-highlight">Working with User Roles</a></li></ul></li><li><a href="#restful-apis" class="table-of-contents__link toc-highlight">RESTful APIs</a><ul><li><a href="#effect-fetching" class="table-of-contents__link toc-highlight">Effect Fetching</a></li><li><a href="#effect-posting" class="table-of-contents__link toc-highlight">Effect Posting</a></li><li><a href="#react-router-data-loading" class="table-of-contents__link toc-highlight">React Router Data Loading</a></li></ul></li><li><a href="#video-embedding" class="table-of-contents__link toc-highlight">Video Embedding</a><ul><li><a href="#hls-streams" class="table-of-contents__link toc-highlight">hls Streams</a></li><li><a href="#video-file-playback" class="table-of-contents__link toc-highlight">Video File Playback</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>
