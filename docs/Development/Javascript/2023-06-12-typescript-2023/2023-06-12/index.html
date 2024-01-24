@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Development/Javascript/2023-06-12-typescript-2023/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Typescript 2023 | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Typescript 2023 | Mike Polinowski"><meta data-rh="true" name="description" content="Using Typescript 5 to consume Web Application Programming Interfaces"><meta data-rh="true" property="og:description" content="Using Typescript 5 to consume Web Application Programming Interfaces"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.08c8c484.css">
+<script src="/assets/js/runtime~main.839e810d.js" defer="defer"></script>
+<script src="/assets/js/main.9aa3fe7c.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/development">Development</a><button aria-label="Collapse sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/javascript">Javascript</a><button aria-label="Collapse sidebar category &#x27;Javascript&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-15-reactjs-typescript-redux/2023-12-15">Simple Redux</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-31-js-typescript-rest/2023-12-31">Typescript for Web APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14">React.js with Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13">Typescript DOM Webpack</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom/2023-06-13">Typescript DOM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-pattern/2023-06-12">Typescript Design Pattern</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12">Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04">Node / Express with Typescript - (Re)Introduction 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-04-01-reactjs-2023/2023-04-01">React.js 2023 - A (Re)Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-13-gatsby-meili-search-starter/2023-02-13">MeiLi Search for your Gatsby.js Blog</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-12-react-meili-search-starter/2023-02-12">React Frontend for MeiLi Search</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-29-reactive-search-starter/2022-12-29">Reactive Search Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-11-11ty-starter/2022-12-11">11ty Static Site Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-29-react-typescript-intro-2023/2022-11-29">TypeScript 2.0 in React 19 (2023)</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-19-web3-javascript-app/2022-11-19">Web3.js Blockchain Application</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-10-webrtc-introduction-video-chat-part2/2022-11-10">WebRTC Introduction - Interactive Connectivity Establishment</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-30-webrtc-introduction-video-chat-part1/2022-10-30">WebRTC Introduction - Client Side Signalling</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-29-webrtc-introduction-realtime-chat/2022-10-29">WebRTC Introduction - Realtime Chat</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-07-01-docusaurus-introduction/2022-07-01">Docusaurus Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-03-01--json-apis-training/2022-03-01">Working with JSON APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--websocket-recconects/2021-09-10">Reconnecting Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--notifications-alerts-as-toast/2021-09-10">Convert Alerts into Toasts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-NGINX/2021-09-09">NGINX as a Proxy for Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-HAproxy/2021-09-09">HAProxy Loadbalancing and Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-08--websockets-html-video/2021-09-08">HTML Video over Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-07--intro-to-websockets/2021-09-07">Introduction to Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-04--mqtt-dashboard-react/2021-06-04">React Dashboard for MQTT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-02--mqtt-cheat-sheet/2021-06-02">Mosquitto MQTT Cheat Sheet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-01--mqtt-with-reactjs/2021-06-01">MQTT Webfrontend with React.js</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-12-carbon-design-react-part3/2021-05-12">Carbon Design System in React.js - Part III</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-11-carbon-design-react-part2/2021-05-11">Carbon Design System in React.js - Part II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-10-carbon-design-react/2021-05-10">Carbon Design System in React.js - Part I</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-09-electron13-and-react/2021-05-09">Electron@13 and Create-React-App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-08-electron13-gatsby-wrapper/2021-05-08">Electron@13 as a Gatsby.js Wrapper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-07-electron-cross-platform-apps/2021-05-07">Electron for Cross Platform Applications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-02-14-next-js-2021/2021-02-14">Next.js in 2021</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2020-01-12--node-express-redirect-server/2020-01-12">Web traffic redirection with Node and Express on CentOS8</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2019-08-02--building-an-mqtt-interface/2019-08-02">Building a MQTT Interface</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-17--server-side-render-react-router/2018-01-17">Server Rendering with React and React Router</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-15--react-transition-group-demo/2018-01-15">react-transition-group</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-07--gatsby-material-ui-starter/2018-01-07">Gatsby Material UI Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-17--gatsby-reactstrap/2017-12-17">Gatsby.js with Bootstrap 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-14--gatsby-wiki/2017-12-14">Gatsby.js Knowledgebase</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-09--next-start/2017-12-09">Next.js Server Side Rendering</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-07--react-router-4/2017-12-07">React Router 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-09-03--react-under-the-hood/2017-09-03">React under the Hood</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-21--reactive-material/2017-08-21">create-react-app and Material-UI</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-15--gatsby-blog-starter/2017-08-15">Gatsby Blog Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-07--google-analytics-amp/2017-08-07">Google Analytics in AMP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-24--obligatory-react-todo-list/2017-07-24">React TODO List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-22--caloric-burn/2017-07-22">Food Caloric Table App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-04--random-password-generator/2017-07-04">Random Password Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-08-11--node-express-static-wiki/2016-08-11">Node Express Static</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-06-01--node-express-mongodb/2016-06-01">Node/Express with MongoDB</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-05-27--javascript-apis-and-ajax/2016-05-27">JavaScript and Getting Started with APIs and AJAX</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-05--markdown-live-code/2010-01-05">React-Live &amp; Code example</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-01--mdx/2010-01-01">Markdown Cheatsheet</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/python">Python</a><button aria-label="Expand sidebar category &#x27;Python&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/go">Go</a><button aria-label="Expand sidebar category &#x27;Go&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/graphs">Graphs</a><button aria-label="Expand sidebar category &#x27;Graphs&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/react-native">React Native</a><button aria-label="Expand sidebar category &#x27;React Native&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/magento">Magento</a><button aria-label="Expand sidebar category &#x27;Magento&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/misc">Misc</a><button aria-label="Expand sidebar category &#x27;Misc&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Expand sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/development"><span itemprop="name">Development</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/javascript"><span itemprop="name">Javascript</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Typescript 2023</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Typescript 2023</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-c3aedc7eed015cc5372c21f9c394693d.jpg" width="2359" height="864"></p>
+<ul>
+<li><a href="#typescript-setup">Typescript Setup</a>
+<ul>
+<li><a href="#typescript-compiler">TypeScript Compiler</a></li>
+</ul>
+</li>
+<li><a href="#playground">Playground</a>
+<ul>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#arrays">Arrays</a></li>
+<li><a href="#tuples--enums">Tuples &amp; Enums</a></li>
+<li><a href="#interfaces">Interfaces</a></li>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#generics">Generics</a></li>
+<li><a href="#type-narrowing">Type Narrowing</a></li>
+<li><a href="#type-predicates">Type Predicates</a></li>
+<li><a href="#discriminated-unions">Discriminated Unions</a></li>
+<li><a href="#organizing-code-in-es-modules">Organizing Code in ES Modules</a></li>
+<li><a href="#type-declaration-files">Type Declaration Files</a></li>
+<li><a href="#external-libraries">External Libraries</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="typescript-setup">Typescript Setup</h2>
+<pre><code class="language-bash">npm init -y
+npm install --save-dev typescript
+mkdir -p ./src &amp;&amp; touch ./src/index.ts
+echo &#x27;console.log(&quot;Hello World!&quot;)&#x27; &gt; ./src/index.ts
+</code></pre>
+<h3 id="typescript-compiler">TypeScript Compiler</h3>
+<pre><code class="language-bash">tsc --init
+</code></pre>
+<p>``./tsconfig.json`</p>
+<pre><code class="language-json">{
+  &quot;include&quot;: [&quot;./src&quot;],
+  &quot;exclude&quot;: [&quot;./node_modules&quot;, &quot;./src/bak&quot;],
+  &quot;compilerOptions&quot;: {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    /* Language and Environment */
+    &quot;target&quot;: &quot;es2022&quot;,                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    &quot;lib&quot;: [&quot;DOM&quot;, &quot;ES2022&quot;],                            /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    /* Modules */
+    &quot;module&quot;: &quot;ES2022&quot;,                                /* Specify what module code is generated. */
+    &quot;sourceMap&quot;: true,                                /* Create source map files for emitted JavaScript files. */
+    &quot;outDir&quot;: &quot;./dist&quot;,                                   /* Specify an output folder for all emitted files. */
+    &quot;noEmitOnError&quot;: true,                            /* Disable emitting files if any type checking errors are reported. */
+    &quot;esModuleInterop&quot;: true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables &#x27;allowSyntheticDefaultImports&#x27; for type compatibility. */
+    &quot;forceConsistentCasingInFileNames&quot;: true,            /* Ensure that casing is correct in imports. */
+    /* Type Checking */
+    &quot;strict&quot;: true,                                      /* Enable all strict type-checking */
+    &quot;skipLibCheck&quot;: true                                 /* Skip type checking all .d.ts files. */
+  }
+}
+</code></pre>
+<p>Add the following npm scripts to your <code>./package.json</code> file:</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;tsc&quot;: &quot;tsc --watch&quot;,
+    &quot;start&quot;: &quot;node ./dist/index.js&quot;
+  }
+</code></pre>
+<p>And execute both scripts in two separate terminals:</p>
+<pre><code class="language-bash">npm run tsc
+npm run start
+
+&gt; typescript-2023@1.0.0 start
+&gt; node ./src/index.js
+
+Hello World!
+</code></pre>
+<h2 id="playground">Playground</h2>
+<h3 id="functions">Functions</h3>
+<pre><code class="language-ts">const greeting = (name: string = &#x27;World&#x27;): string =&gt; {
+    return `Hello ${name}!`
+}
+
+console.log(greeting())
+</code></pre>
+<pre><code class="language-ts">function square(number: number): number {
+    return (number * number)
+}
+
+const currency = (string: string = &#x27;$&#x27;): string =&gt; {
+    return (string)
+}
+
+console.log(square(16), currency(&#x27;HK$&#x27;))
+</code></pre>
+<pre><code class="language-ts">// Every year that is exactly divisible by four is a leap year, except for years
+// that are exactly divisible by 100, but these centurial years are leap years if
+// they are exactly divisible by 400.
+
+function leapYear(year: number): boolean {
+    let isLeapYear: boolean
+
+    if (year % 4 === 0 &amp;&amp; year % 100 !== 0 || year % 400 === 0) {
+        return isLeapYear = true
+    } else {
+        return isLeapYear = false
+    }
+}
+
+console.log(leapYear(2012))
+console.log(leapYear(2013))662607
+
+</code></pre>
+<pre><code class="language-ts">const array: (string|number)[] = [&#x27;sdfgdgsdf&#x27;, &#x27;asdfdsgdfg&#x27;, &#x27;agdfgdsfg&#x27;, &#x27;gds&#x27;]
+
+const assignment = (array: (string|number)[]): string|number  =&gt; {
+    let string!: string;
+
+    for (let seq of array) {
+        if (typeof seq !== &quot;number&quot;) {
+            if(seq.length === 3){
+                string: string = seq
+            }
+        } else {
+            return seq * seq
+        }
+    }
+
+    return string
+}
+
+const consolePrint = (array: (string|number)[]): void =&gt; {
+    console.log(assignment(array))
+}
+
+consolePrint(array)
+</code></pre>
+<h3 id="objects">Objects</h3>
+<pre><code class="language-ts">let product1: {title: string, type: string[], price: number, readonly availability?: boolean} = {
+    title: &#x27;IN-8415 2K+ WQHD&#x27;,
+    type: [&#x27;indoor&#x27;, &#x27;wqhd&#x27;, &#x27;pt&#x27;],
+    price: 149.99
+}
+
+let product2: {title: string, type: string[], price: number, readonly availability?: boolean} = {
+    title: &#x27;IN-9420 2K+ WQHD&#x27;,
+    type: [&#x27;outdoor&#x27;, &#x27;wqhd&#x27;, &#x27;ptz&#x27;],
+    price: 299.99,
+    availability: true
+}
+
+function printProduct(
+    product: {
+        title: string,
+        type?: string[],
+        requirements?: Requirements,
+        price: number,
+        readonly availability?: boolean,
+        shop?: string
+    }): void {
+        if (!product.availability) {
+            console.log(`ERROR :: ${product.title} not available!`)
+        } else if (!product.requirements) {
+            console.log(
+                `Camera\n Camera Model: ${product.title}\n Camera Type: ${product.type}\n Camera Price: ${product.price}`
+            )
+        } else if (!product.shop) {
+            console.log(
+                `Software\n Title: ${product.title}\n Requirements: \n    Operating System: ${product.requirements.os}\n    Minimum Version: ${product.requirements.minVersion}\n    Minimum Storage (MB): ${product.requirements.storageMb}\n Software Price: ${product.price}`
+            )
+        } else {
+            console.log(
+                `Software\n Title: ${product.title}\n Requirements: \n    Operating System: ${product.requirements.os}\n    Minimum Version: ${product.requirements.minVersion}\n    Minimum Storage (MB): ${product.requirements.storageMb}\n Software Price: ${product.price}\n Download: ${product.shop}`
+            )
+        }
+}
+
+printProduct(product1)
+
+printProduct(product2)
+</code></pre>
+<pre><code class="language-ts">type Requirements = {
+    os: &#x27;Windows&#x27; | &#x27;macOS&#x27; | &#x27;LINUX&#x27; | &#x27;Android&#x27; | &#x27;iOS&#x27;;
+    minVersion: number;
+    storageMb: number;
+}
+
+type SoftwareProduct = {
+    title: string;
+    requirements: Requirements;
+    price: number;
+    readonly availability?: boolean;
+}
+
+let product3: SoftwareProduct = {
+    title: &#x27;InstarVision 3&#x27;,
+    requirements: {
+        os: &#x27;Windows&#x27;,
+        minVersion: 8.1,
+        storageMb: 74 
+    },
+    price: 24.99,
+    availability: true
+}
+
+printProduct(product3)
+</code></pre>
+<pre><code class="language-ts">type MobileSoftware = {
+    shop: string;
+}
+
+let product4: SoftwareProduct &amp; MobileSoftware = {
+    title: &#x27;InstarVision App&#x27;,
+    requirements: {
+        os: &#x27;Android&#x27;,
+        minVersion: 14,
+        storageMb: 23
+    },
+    price: 2.99,
+    availability: true,
+    shop: &#x27;Google Play&#x27;
+}
+
+printProduct(product4)
+</code></pre>
+<h3 id="arrays">Arrays</h3>
+<pre><code class="language-ts">const indoorCameras: string[] = []
+
+indoorCameras.push(&#x27;in-8415&#x27;, &#x27;in-8403&#x27;, &#x27;in-8401&#x27;)
+
+console.log(indoorCameras)
+</code></pre>
+<pre><code class="language-ts">type Point = {
+    x: number;
+    y: number;
+    z: number
+}
+
+const coords: Point[] = []
+
+coords.push(
+    {x: 212, y: 54, z: 23},
+    {x: 324, y: 56, z: 63},
+    {x: 223, y: 76, z: 34}
+)
+
+console.log(coords)
+</code></pre>
+<pre><code class="language-ts">const tictac: (string | number)[][] = [
+    [&#x27;X&#x27;, &#x27;0&#x27;, &#x27;X&#x27;],
+    [&#x27;0&#x27;, &#x27;X&#x27;, &#x27;O&#x27;],
+    [&#x27;X&#x27;, &#x27;0&#x27;, &#x27;X&#x27;]
+]
+
+console.log(tictac)
+</code></pre>
+<pre><code class="language-ts">type Product = {
+    name: string;
+    price: number
+}
+
+const basket: Product[] = [
+    { name: &#x27;in-8415&#x27;, price: 149.99 },
+    { name: &#x27;in-8403&#x27;, price: 129.99 },
+    { name: &#x27;in-8401&#x27;, price: 109.99 },
+]
+
+const getTotal = (basket: Product[]): number =&gt; {
+
+    let priceArray: number[] = []
+
+    for (let order of basket) {
+        priceArray.push(order.price)
+    }
+
+    const total = priceArray.reduce((a, b) =&gt; a + b)
+    
+    return total
+}
+
+console.log(getTotal(basket))
+</code></pre>
+<h3 id="tuples--enums">Tuples &amp; Enums</h3>
+<p>Tuples only exists in Typescript and are arrays of a fixed length and are ordered with specific types:</p>
+<pre><code class="language-ts">let tuple: [string, number]
+
+// tuple = [149.99, &#x27;in-8415&#x27;] not assignable
+tuple = [&#x27;in-8415&#x27;, 149.99]
+</code></pre>
+<pre><code class="language-ts">type ServerError = [
+    500 | 501 | 502 | 503 | 504,
+    &#x27;Internal Server Error&#x27; | &#x27;Not Implemented&#x27; | &#x27;Bad Gateway&#x27; | &#x27;Service Unavailable&#x27; | &#x27;Gateway Timeout&#x27;
+]
+    
+const serverErrorResponse: ServerError = [503, &#x27;Bad Gateway&#x27;]
+</code></pre>
+<p>Enums are a set of named constants:</p>
+<pre><code class="language-ts">const enum ServerResonse {
+    OK = 200,
+    UNAUTHORIZED = 401
+}
+
+const makeRequest = (): void =&gt; {
+    let status = 200
+    if (status === ServerResonse.OK) {
+        console.log(&#x27;INFO :: API request was successful&#x27;)
+    }
+}
+
+makeRequest()
+</code></pre>
+<h3 id="interfaces">Interfaces</h3>
+<pre><code class="language-ts">interface AlarmEvent {
+    type: string
+    trigger: string[]
+    object?: string[]
+    readonly timestamp: string
+}
+
+interface AlarmPush extends AlarmEvent {
+    push: (timestamp: string, type: string) =&gt; string
+}
+
+const alarm: AlarmPush = {
+    type : &#x27;Motion Detection&#x27;,
+    trigger : [&#x27;Area1&#x27;, &#x27;Area2&#x27;, &#x27;PIR&#x27;],
+    object : [&#x27;Car&#x27;,&#x27;Person&#x27;],
+    timestamp : &#x27;Monday, January 15, 2024 AM01:20:39 HKT&#x27;,
+    push: (timestamp, type) =&gt; {
+        return `${timestamp} :: ${type}`
+    }
+}
+
+const pushNotification = (event: AlarmPush): void =&gt; {
+    console.log(event.push(event.timestamp, event.type))
+}
+
+pushNotification(alarm)
+</code></pre>
+<h3 id="classes">Classes</h3>
+<pre><code class="language-ts">interface OperatorUser {
+    username: string,
+    readonly email: string,
+    privileges: string[]
+}
+
+class Operator implements OperatorUser {
+
+    constructor(
+        public username: string,
+        protected readonly _email: string,
+        protected _privileges: string[] = [&#x27;operator&#x27;]
+    ) {}
+
+    private notify(email: string): void {
+        console.log(`INFO :: Email send to ${email}`)
+    }
+
+    alarm(): void {
+        this.notify(this.email)
+    }
+
+    get email(): string {
+        return this._email
+    }
+
+    get privileges(): string[] {
+        return this._privileges
+    }
+
+    get userPrivileges(): string {
+        return `INFO :: Active user privileges ${this._privileges}`
+    }
+
+    get nickname(): string {
+        return `INFO :: Active user nickname ${this.username}`
+    }
+
+    set nickname(newUsername: string) {
+        if (newUsername.length &gt; 3) {
+            this.username = newUsername
+        } else {
+            console.log(&#x27;ERROR :: Username must be longer than 3 characters!&#x27;)
+        }
+    }
+
+}
+</code></pre>
+<p>Class inheritance:</p>
+<pre><code class="language-ts">interface AdminUser extends OperatorUser {
+    isAdmin: boolean
+}
+
+class Administrator extends Operator implements AdminUser {
+    
+    constructor(
+        username: string,
+        readonly _email: string,
+        _privileges: string[] = [&#x27;administrator&#x27;],
+        public isAdmin: boolean = true
+        ) {
+            super(username, _email, _privileges)
+        }
+    
+    addPermissions(permission: string) {
+        this.privileges.push(permission)
+    }
+
+}
+
+const administrator = new Administrator(&#x27;admin&#x27;, &#x27;admin@instar.com&#x27;, [&#x27;administrator&#x27;])
+
+console.log(&#x27;INFO :: Active user is admin: &#x27;, administrator.isAdmin)
+
+administrator.alarm()
+
+
+console.log(administrator.nickname)
+administrator.nickname = &#x27;Mike&#x27;
+console.log(administrator.nickname)
+
+console.log(administrator.userPrivileges)
+administrator.addPermissions(&#x27;superadmin&#x27;)
+console.log(administrator.userPrivileges)
+</code></pre>
+<h3 id="generics">Generics</h3>
+<p>Provide a type when your generic function is being executed:</p>
+<pre><code class="language-ts">function id&lt;genericType&gt;(item: genericType): genericType {
+    return item
+}
+
+console.log(id&lt;string&gt;(&#x27;1337&#x27;))
+console.log(id&lt;number&gt;(1337))
+</code></pre>
+<pre><code class="language-ts">interface Parts {
+    id: number
+    article: string
+}
+
+const getRandomElement = &lt;T = number&gt;(list: T[]): T =&gt; {
+    const randIndex = Math.floor(Math.random() * list.length)
+    return list[randIndex]
+}
+
+console.log(getRandomElement&lt;string&gt;([&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;]))
+console.log(getRandomElement&lt;number&gt;([0,1,2,3,4]))
+console.log(
+    getRandomElement&lt;Parts&gt;([
+        { id: 1, article: &#x27;EF5436&#x27; },
+        { id: 2, article: &#x27;EF3245&#x27; },
+        { id: 3, article: &#x27;EF1245&#x27; },
+        { id: 4, article: &#x27;EF6794&#x27; },
+        { id: 5, article: &#x27;EF2358&#x27; },
+    ])
+)
+</code></pre>
+<pre><code class="language-ts">interface RMA {
+    rmaid: number
+    defect: string
+}
+
+function merge&lt;T,U&gt;(prod: T, part: U) {
+    return {
+        ...prod,
+        ...part
+    }
+}
+
+let productToRepair = merge&lt;RMA, Parts&gt;(
+    { &#x27;rmaid&#x27;: 456, &#x27;defect&#x27;: &#x27;no wifi connection&#x27; },
+    { &#x27;id&#x27;: 1, article: &#x27;EF5436&#x27;} 
+)
+
+console.log(productToRepair)
+</code></pre>
+<h3 id="type-narrowing">Type Narrowing</h3>
+<p>Using a <code>typeof</code> <strong>Type Guard</strong> to narrow down union types:</p>
+<pre><code class="language-ts">function doMath(value: number | string): string {
+    if (typeof value === &#x27;number&#x27;) {
+        return &#x27;INFO :: The triple value is: &#x27; + value * 3
+    } else {
+        return &#x27;INFO :: The triple value is: &#x27; + Number(value) * 3
+    }
+}
+
+console.log(doMath(33))
+console.log(doMath(&#x27;33&#x27;))
+console.log(doMath(&#x27;EE&#x27;))
+</code></pre>
+<p>Using a <strong>Truth Guard</strong> to narrow down your types:</p>
+<pre><code class="language-ts">function registerUser(nickname: string | null, email: string| null): void {
+    if (!nickname) {
+        console.log(&#x27;ERROR :: You need to add a nickname for new user!&#x27;)
+    } else if (!email) {
+        console.log(&#x27;ERROR :: You need to add an email for new user!&#x27;)
+    } else {
+        console.log(`INFO :: User ${nickname} registered sucessfully!`)
+    }
+}
+
+registerUser(null, null)
+registerUser(&#x27;player1&#x27;, null)
+registerUser(&#x27;player1&#x27;, &#x27;player1@game.com&#x27;)
+</code></pre>
+<p><strong>Equality</strong> narrowing:</p>
+<pre><code class="language-ts">function compareFunc (x: number | string, y: number) {
+    if (x === y) {
+        console.log(&#x27;INFO :: Both variables are of type numbers!&#x27;)
+    } else  {
+        console.log(&#x27;INFO :: Variable x is of type string!&#x27;)
+    }
+
+}
+
+compareFunc(12, 12)
+compareFunc(&#x27;12&#x27;, 12)
+</code></pre>
+<p><strong>IN Operator</strong></p>
+<pre><code class="language-ts">interface IEEE1394 {
+    AS5643: boolean
+}
+
+interface USB {
+    TypeC: boolean
+}
+
+const connector = (iface: IEEE1394 | USB ): void =&gt; {
+    if (&#x27;AS5643&#x27; in iface) {
+        console.log(`INFO :: AS5643 interfcae available: ${iface.AS5643}`)
+    } else {
+        console.log(`INFO :: TypeC interfcae available: ${iface.TypeC}`)
+    }
+}
+
+const iface: IEEE1394 = {AS5643: true}
+
+connector(iface)
+</code></pre>
+<p><code>instanceof</code></p>
+<pre><code class="language-ts">function prettyUTCDate(date: string | Date) {
+    if (date instanceof Date) {
+        console.log(&#x27;INFO :: &#x27;, date.toUTCString())
+    } else {
+        let now = new Date(date)
+        return &#x27;INFO :: &#x27; + now.toUTCString() + &#x27;(from string)&#x27;
+    }
+}
+
+let date = new Date()
+
+prettyUTCDate(date)
+console.log(prettyUTCDate(String(date)))
+</code></pre>
+<h3 id="type-predicates">Type Predicates</h3>
+<pre><code class="language-ts">interface HardProduct {
+    name: string
+    type: string
+}
+
+interface SoftProduct {
+    name: string
+    os: string
+}
+
+let hardwareList: string[] = [&#x27;Hardware Products&#x27;]
+let softwareList: string[] = [&#x27;Software Products&#x27;]
+
+function isSoftware(product: HardProduct | SoftProduct): product is SoftProduct {
+    return (product as SoftProduct).os !== undefined
+}
+
+function listProducts (product: HardProduct | SoftProduct): void {
+    if (isSoftware(product)) {
+        softwareList.push(product.name)
+        console.log(softwareList)
+    } else {
+        hardwareList.push(product.name)
+        console.log(hardwareList)
+    }
+}
+
+let product_01: HardProduct = {
+    name: &#x27;IN-8415&#x27;,
+    type: &#x27;Indoor Camera&#x27;
+}
+
+listProducts(product_01)
+
+let product_02: SoftProduct = {
+    name: &#x27;InstarVision&#x27;,
+    os: &#x27;Windows&#x27;
+}
+
+listProducts(product_02)
+</code></pre>
+<h3 id="discriminated-unions">Discriminated Unions</h3>
+<pre><code class="language-ts">interface HardKind {
+    name: string
+    __type: &#x27;hardware&#x27;
+}
+
+interface SoftKind {
+    name: string
+    __type: &#x27;software&#x27;
+}
+
+type AllProducts = SoftKind | HardKind
+
+function productDiscriminator(product: AllProducts) {
+    switch(product.__type) {
+        case(&#x27;hardware&#x27;):
+            return &#x27;INFO :: Hardware Product&#x27;
+        case(&#x27;software&#x27;):
+            return &#x27;INFO :: Software Product&#x27;
+        default:
+            // If we end up here something went wrong
+            const __exhaustiveCheck: never = product
+    }
+}
+
+let mysteryProduct1: HardKind = {
+    name: &#x27;ICB Halford 2000&#x27;,
+    __type: &#x27;hardware&#x27;
+}
+
+let mysteryProduct2: SoftKind = {
+    name: &#x27;Davinci Resolve Studio&#x27;,
+    __type: &#x27;software&#x27;
+}
+
+console.log(productDiscriminator(mysteryProduct1))
+
+console.log(productDiscriminator(mysteryProduct2))
+</code></pre>
+<h3 id="organizing-code-in-es-modules">Organizing Code in ES Modules</h3>
+<p>To use import/export syntax in your codebase make sure that you configure TS to generate a browser-conform output:</p>
+<p><em>./tsconfig.json</em></p>
+<pre><code class="language-ts">/* Language and Environment */
+    &quot;target&quot;: &quot;es2022&quot;,                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    &quot;lib&quot;: [&quot;DOM&quot;, &quot;ES2022&quot;],                            /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    /* Modules */
+    &quot;module&quot;: &quot;ES2022&quot;,                                /* Specify what module code is generated. */
+    &quot;moduleResolution&quot;: &quot;Node&quot;,
+</code></pre>
+<p>And add the module type to your <code>./package.json</code> file to be able to execute the generated `js`` file inside node:</p>
+<pre><code class="language-json">...
+&quot;type&quot;: &quot;module&quot;,
+...
+</code></pre>
+<p>Also make sure that all your module imports into the <code>index.ts</code> file have the <code>js</code> extension:</p>
+<p><em>./src/modules/greeting.ts</em></p>
+<pre><code class="language-ts">export const greeting = (name: string = &#x27;World&#x27;): string =&gt; {
+    return `Hello ${name}!`
+}
+
+
+_./src/index.ts_
+</code></pre>
+<pre><code class="language-ts">import { greeting } from &quot;./modules/greeting.js&quot;;
+
+console.log(greeting())
+</code></pre>
+<p>And import the generated script as type module inside your HTML file, if needed:</p>
+<p>_./dist/index.html_s</p>
+<pre><code class="language-html">...
+&lt;script type=&quot;module&quot; src=&quot;index.js&quot;&gt;&lt;/script&gt;
+...
+</code></pre>
+<h3 id="type-declaration-files">Type Declaration Files</h3>
+<p>Move all type declaration and interfaces into a file <code>types/index.d.ts</code> and import them as <code>Types</code>:</p>
+<pre><code class="language-ts">import type * as Types from &quot;./types/index&quot;;
+</code></pre>
+<p>The types can now be used as:</p>
+<pre><code class="language-ts">type AllProducts = Types.SoftKind | Types.HardKind
+</code></pre>
+<h3 id="external-libraries">External Libraries</h3>
+<p>Axios comes with an <code>index.d.ts</code> type declaration and can be used in Typescript directly:</p>
+<pre><code class="language-bash">npm init -y
+npm install axios
+</code></pre>
+<p>An example for a JSON API we can send requests to:</p>
+<pre><code class="language-json">curl https://jsonplaceholder.typicode.com/users/1
+
+{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Leanne Graham&quot;,
+  &quot;username&quot;: &quot;Bret&quot;,
+  &quot;email&quot;: &quot;Sincere@april.biz&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Kulas Light&quot;,
+    &quot;suite&quot;: &quot;Apt. 556&quot;,
+    &quot;city&quot;: &quot;Gwenborough&quot;,
+    &quot;zipcode&quot;: &quot;92998-3874&quot;,
+    &quot;geo&quot;: {
+      &quot;lat&quot;: &quot;-37.3159&quot;,
+      &quot;lng&quot;: &quot;81.1496&quot;
+    }
+  },
+  &quot;phone&quot;: &quot;1-770-736-8031 x56442&quot;,
+  &quot;website&quot;: &quot;hildegard.org&quot;,
+  &quot;company&quot;: {
+    &quot;name&quot;: &quot;Romaguera-Crona&quot;,
+    &quot;catchPhrase&quot;: &quot;Multi-layered client-server neural-net&quot;,
+    &quot;bs&quot;: &quot;harness real-time e-markets&quot;
+  }
+}
+</code></pre>
+<p>We can add an type interface to <code>./types/index.d.ts</code> for our Axios GET request:</p>
+<pre><code class="language-ts">export interface UserGeo {
+    lat: string
+    lng: string
+}
+
+export interface UserAddress {
+    street: string
+    suite: string
+    city: string
+    zipcode: string
+    geo: UserGeo
+}
+
+export interface UserCompany {
+    name: string
+    catchPhrase: string
+    bs: string
+}
+
+export interface UserAPI {
+    id: number
+    name: string,
+    username: string,
+    email: string,
+    address: UserAddress
+    phone: string,
+    website: string,
+    company: UserCompany
+}
+</code></pre>
+<p>Now we can use Axios to make the request and work with the API response:</p>
+<pre><code class="language-ts">import axios from &#x27;axios&#x27;
+
+let apiurl: string = &#x27;https://jsonplaceholder.typicode.com/users&#x27;
+
+axios.get&lt;Types.UserAPI[]&gt;(apiurl).then((res) =&gt; {
+    res.data.forEach(printUser)
+}).catch(e =&gt; {
+    return console.log(&#x27;ERROR :: API GET request not successful!&#x27;)
+})
+
+
+function printUser(user: Types.UserAPI) {
+    const userArray: string[] = []
+    userArray.push(
+        String(user.id),
+        user.name,
+        user.email
+    )
+    console.log(userArray)
+}
+</code></pre>
+<p>A library that does not have types included is e.g. <code>lodash</code> where types have to be <a href="https://github.com/DefinitelyTyped/DefinitelyTyped">installed manually</a>:</p>
+<pre><code class="language-bash">npm install lodash
+npm install --save-dev @types/lodash
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/javascript">Javascript</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/cheating">Cheating</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Development/Javascript/2023-06-12-typescript-2023/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Development/Javascript/2023-06-12-typescript-pattern/2023-06-12"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Typescript Design Pattern</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Node / Express with Typescript - (Re)Introduction 2023</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#typescript-setup" class="table-of-contents__link toc-highlight">Typescript Setup</a><ul><li><a href="#typescript-compiler" class="table-of-contents__link toc-highlight">TypeScript Compiler</a></li></ul></li><li><a href="#playground" class="table-of-contents__link toc-highlight">Playground</a><ul><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a></li><li><a href="#objects" class="table-of-contents__link toc-highlight">Objects</a></li><li><a href="#arrays" class="table-of-contents__link toc-highlight">Arrays</a></li><li><a href="#tuples--enums" class="table-of-contents__link toc-highlight">Tuples &amp; Enums</a></li><li><a href="#interfaces" class="table-of-contents__link toc-highlight">Interfaces</a></li><li><a href="#classes" class="table-of-contents__link toc-highlight">Classes</a></li><li><a href="#generics" class="table-of-contents__link toc-highlight">Generics</a></li><li><a href="#type-narrowing" class="table-of-contents__link toc-highlight">Type Narrowing</a></li><li><a href="#type-predicates" class="table-of-contents__link toc-highlight">Type Predicates</a></li><li><a href="#discriminated-unions" class="table-of-contents__link toc-highlight">Discriminated Unions</a></li><li><a href="#organizing-code-in-es-modules" class="table-of-contents__link toc-highlight">Organizing Code in ES Modules</a></li><li><a href="#type-declaration-files" class="table-of-contents__link toc-highlight">Type Declaration Files</a></li><li><a href="#external-libraries" class="table-of-contents__link toc-highlight">External Libraries</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>

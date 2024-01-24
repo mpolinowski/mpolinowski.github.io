@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Development/Javascript/2023-06-13-typescript-dom-webpack/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.0">
+<title data-rh="true">Typescript DOM Webpack | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Typescript DOM Webpack | Mike Polinowski"><meta data-rh="true" name="description" content="Using Typescript 5 to build browser applications with Webpack"><meta data-rh="true" property="og:description" content="Using Typescript 5 to build browser applications with Webpack"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.08c8c484.css">
+<script src="/assets/js/runtime~main.839e810d.js" defer="defer"></script>
+<script src="/assets/js/main.9aa3fe7c.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/development">Development</a><button aria-label="Collapse sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/javascript">Javascript</a><button aria-label="Collapse sidebar category &#x27;Javascript&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-15-reactjs-typescript-redux/2023-12-15">Simple Redux</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-31-js-typescript-rest/2023-12-31">Typescript for Web APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14">React.js with Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13">Typescript DOM Webpack</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom/2023-06-13">Typescript DOM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-pattern/2023-06-12">Typescript Design Pattern</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12">Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04">Node / Express with Typescript - (Re)Introduction 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-04-01-reactjs-2023/2023-04-01">React.js 2023 - A (Re)Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-13-gatsby-meili-search-starter/2023-02-13">MeiLi Search for your Gatsby.js Blog</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-12-react-meili-search-starter/2023-02-12">React Frontend for MeiLi Search</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-29-reactive-search-starter/2022-12-29">Reactive Search Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-11-11ty-starter/2022-12-11">11ty Static Site Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-29-react-typescript-intro-2023/2022-11-29">TypeScript 2.0 in React 19 (2023)</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-19-web3-javascript-app/2022-11-19">Web3.js Blockchain Application</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-10-webrtc-introduction-video-chat-part2/2022-11-10">WebRTC Introduction - Interactive Connectivity Establishment</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-30-webrtc-introduction-video-chat-part1/2022-10-30">WebRTC Introduction - Client Side Signalling</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-29-webrtc-introduction-realtime-chat/2022-10-29">WebRTC Introduction - Realtime Chat</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-07-01-docusaurus-introduction/2022-07-01">Docusaurus Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-03-01--json-apis-training/2022-03-01">Working with JSON APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--websocket-recconects/2021-09-10">Reconnecting Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--notifications-alerts-as-toast/2021-09-10">Convert Alerts into Toasts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-NGINX/2021-09-09">NGINX as a Proxy for Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-HAproxy/2021-09-09">HAProxy Loadbalancing and Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-08--websockets-html-video/2021-09-08">HTML Video over Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-07--intro-to-websockets/2021-09-07">Introduction to Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-04--mqtt-dashboard-react/2021-06-04">React Dashboard for MQTT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-02--mqtt-cheat-sheet/2021-06-02">Mosquitto MQTT Cheat Sheet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-01--mqtt-with-reactjs/2021-06-01">MQTT Webfrontend with React.js</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-12-carbon-design-react-part3/2021-05-12">Carbon Design System in React.js - Part III</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-11-carbon-design-react-part2/2021-05-11">Carbon Design System in React.js - Part II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-10-carbon-design-react/2021-05-10">Carbon Design System in React.js - Part I</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-09-electron13-and-react/2021-05-09">Electron@13 and Create-React-App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-08-electron13-gatsby-wrapper/2021-05-08">Electron@13 as a Gatsby.js Wrapper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-07-electron-cross-platform-apps/2021-05-07">Electron for Cross Platform Applications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-02-14-next-js-2021/2021-02-14">Next.js in 2021</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2020-01-12--node-express-redirect-server/2020-01-12">Web traffic redirection with Node and Express on CentOS8</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2019-08-02--building-an-mqtt-interface/2019-08-02">Building a MQTT Interface</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-17--server-side-render-react-router/2018-01-17">Server Rendering with React and React Router</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-15--react-transition-group-demo/2018-01-15">react-transition-group</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-07--gatsby-material-ui-starter/2018-01-07">Gatsby Material UI Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-17--gatsby-reactstrap/2017-12-17">Gatsby.js with Bootstrap 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-14--gatsby-wiki/2017-12-14">Gatsby.js Knowledgebase</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-09--next-start/2017-12-09">Next.js Server Side Rendering</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-07--react-router-4/2017-12-07">React Router 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-09-03--react-under-the-hood/2017-09-03">React under the Hood</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-21--reactive-material/2017-08-21">create-react-app and Material-UI</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-15--gatsby-blog-starter/2017-08-15">Gatsby Blog Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-07--google-analytics-amp/2017-08-07">Google Analytics in AMP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-24--obligatory-react-todo-list/2017-07-24">React TODO List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-22--caloric-burn/2017-07-22">Food Caloric Table App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-04--random-password-generator/2017-07-04">Random Password Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-08-11--node-express-static-wiki/2016-08-11">Node Express Static</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-06-01--node-express-mongodb/2016-06-01">Node/Express with MongoDB</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-05-27--javascript-apis-and-ajax/2016-05-27">JavaScript and Getting Started with APIs and AJAX</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-05--markdown-live-code/2010-01-05">React-Live &amp; Code example</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-01--mdx/2010-01-01">Markdown Cheatsheet</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/python">Python</a><button aria-label="Expand sidebar category &#x27;Python&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/go">Go</a><button aria-label="Expand sidebar category &#x27;Go&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/graphs">Graphs</a><button aria-label="Expand sidebar category &#x27;Graphs&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/react-native">React Native</a><button aria-label="Expand sidebar category &#x27;React Native&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/magento">Magento</a><button aria-label="Expand sidebar category &#x27;Magento&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/misc">Misc</a><button aria-label="Expand sidebar category &#x27;Misc&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Expand sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/development"><span itemprop="name">Development</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/javascript"><span itemprop="name">Javascript</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Typescript DOM Webpack</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Typescript DOM Webpack</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-c3aedc7eed015cc5372c21f9c394693d.jpg" width="2359" height="864"></p>
+<ul>
+<li><a href="#setup">Setup</a>
+<ul>
+<li><a href="#adding-npm-modules">Adding NPM Modules</a></li>
+</ul>
+</li>
+<li><a href="#webpack">Webpack</a>
+<ul>
+<li><a href="#setup-1">Setup</a>
+<ul>
+<li><a href="#webpack-dev-server">Webpack Dev-Server</a></li>
+</ul>
+</li>
+<li><a href="#production">Production</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="setup">Setup</h2>
+<pre><code class="language-bash">tsc --init
+npm init -y
+npm install lite-server
+</code></pre>
+<p><em>./tsconfig.json</em></p>
+<pre><code class="language-json">{
+  &quot;include&quot;: &quot;./src&quot;,
+  &quot;exclude&quot;: &quot;./node_modules&quot;,
+  &quot;compilerOptions&quot;: {
+    &quot;target&quot;: &quot;ES2015&quot;,
+    &quot;module&quot;: &quot;ES2015&quot;, /* Specify what module code is generated. */
+    &quot;moduleResolution&quot;: &quot;node&quot;, /* Specify how TypeScript looks up a file from a given module specifier. */
+    &quot;sourceMap&quot;: true, /* Create source map files for emitted JavaScript files. */
+    &quot;outDir&quot;: &quot;./public&quot;, /* Specify an output folder for all emitted files. */
+    &quot;esModuleInterop&quot;: true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables &#x27;allowSyntheticDefaultImports&#x27; for type compatibility. */
+    &quot;forceConsistentCasingInFileNames&quot;: true, /* Ensure that casing is correct in imports. */
+    &quot;strict&quot;: true, /* Enable all strict type-checking options. */
+    &quot;skipLibCheck&quot;: true /* Skip type checking all .d.ts files. */
+  }
+}
+</code></pre>
+<p><em>./package.json</em></p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;tsc-webpack&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;src/index.ts&quot;,
+  &quot;type&quot;: &quot;module&quot;,
+  &quot;scripts&quot;: {
+    &quot;tsc&quot;: &quot;tsc --watch&quot;,
+    &quot;start&quot;: &quot;lite-server --baseDir=&#x27;public&#x27;&quot;,
+    &quot;dev&quot;: &quot;node public/index.js&quot;,
+    &quot;build&quot;: &quot;webpack&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: {
+    &quot;lite-server&quot;: &quot;^2.6.1&quot;
+  }
+}
+</code></pre>
+<pre><code class="language-bash">tree -L 2
+.
+├── public
+│   ├── index.js
+│   └── modules
+├── node_modules
+├── package.json
+├── package-lock.json
+├── src
+│   ├── index.html
+│   ├── index.tss
+│   └── modules
+│       ├── actions.ts
+│       ├── events.ts
+│       └── utils.ts
+└── tsconfig.json
+</code></pre>
+<p>Provide a couple of dummy functions and classes in <code>./src/modules</code> and import them into:</p>
+<p><em>./src/index.ts</em></p>
+<pre><code>import Event from &#x27;./modules/events.js&#x27;
+import Action from &#x27;./modules/actions.js&#x27;
+import { add, multiply, subtract } from &#x27;./modules/utils.js&#x27;
+
+console.log(&#x27;INFO :: Hello World!&#x27;)
+
+const processEvent = new Event(88, &#x27;motion detected&#x27;, &#x27;pir sensor&#x27;)
+processEvent.notify()
+
+const processAction = new Action(89, &#x27;motion detected&#x27;, &#x27;alarm input&#x27;, &#x27;recording triggered&#x27;)
+processAction.triggerAction()
+
+console.log(add(33, 77))
+console.log(multiply(33, 77))
+console.log(subtract(33, 77))
+</code></pre>
+<p>Run the <code>tsc</code> compiler and import the generated JS file into:</p>
+<p><em>./public/index.html</em></p>
+<pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;index.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Running the <code>dev</code> script as defined in <code>package.json</code> now executes all functions in the generated <code>public/index.js</code>:</p>
+<pre><code class="language-bash">npm run dev
+
+&gt; tsc-webpack@1.0.0 dev
+&gt; node public/index.js
+
+INFO :: Hello World!
+[ 88, &#x27;motion detected&#x27;, &#x27;pir sensor&#x27; ]
+INFO :: action alarm recording was triggered!
+110
+2541
+-44
+</code></pre>
+<p>The same works inside a web browser by running the <code>start</code> script:</p>
+<pre><code class="language-bash">npm run start
+
+&gt; tsc-webpack@1.0.0 start
+&gt; lite-server --baseDir=&#x27;public&#x27;
+
+[Browsersync] Access URLs:
+ --------------------------------------
+       Local: http://localhost:3000
+    External: http://192.168.2.112:3000
+ --------------------------------------
+          UI: http://localhost:3001
+ UI External: http://localhost:3001
+ --------------------------------------
+[Browsersync] Serving files from: public
+[Browsersync] Watching files...
+24.01.17 23:00:25 200 GET /index.html
+24.01.17 23:00:25 200 GET /index.js
+24.01.17 23:00:25 200 GET /modules/events.js
+24.01.17 23:00:25 200 GET /modules/actions.js
+24.01.17 23:00:25 200 GET /modules/utils.js
+24.01.17 23:00:37 200 GET /
+24.01.17 23:00:37 200 GET /index.js
+</code></pre>
+<p>All files are loaded successfully and the browser console output is identical to the terminal output from the previous step:</p>
+<pre><code class="language-bash">INFO :: Hello World! index.js:4:9
+Array(3) [ 88, &quot;motion detected&quot;, &quot;pir sensor&quot; ] events.js:10:17
+INFO :: action alarm recording was triggered! actions.js:11:17
+110 index.js:9:9
+2541 index.js:10:9
+-44 index.js:11:9
+</code></pre>
+<h3 id="adding-npm-modules">Adding NPM Modules</h3>
+<p>As a simple example install lodash to &#x27;empower&#x27; your <code>src/modules/utils.ts</code> file:</p>
+<pre><code class="language-bash">npm install lodash
+npm install --save-dev @types/lodash
+</code></pre>
+<pre><code class="language-ts">import _ from &#x27;lodash&#x27;
+
+export function add(x: number, y:number) {
+    return _.add(x, y)
+}
+
+export function multiply(x: number, y: number) {
+    return _.multiply(x, y)
+}
+
+export function subtract(x: number, y: number) {
+    return _.subtract(x, y)
+}
+</code></pre>
+<p>Rerun the <code>dev</code> script to execute the script in Node.js and you should see that it executes just fine. Running the <code>start</code> script, however, leads to the following error message inside your browser:</p>
+<pre><code class="language-bash">Uncaught TypeError: The specifier “lodash” was a bare specifier, but was not remapped to anything. Relative module specifiers must start with “./”, “../” or “/”.
+</code></pre>
+<p>This can be resolved by using <strong>Webpack</strong> to bundle all dependencies, including imported npm modules, into a single JS file.</p>
+<h2 id="webpack">Webpack</h2>
+<h3 id="setup-1">Setup</h3>
+<pre><code class="language-bash">npm install --save-dev webpack webpack-cli typescript ts-loader
+</code></pre>
+<ul>
+<li><a href="https://webpack.js.org/guides/typescript/">Basic configuration file</a></li>
+</ul>
+<p><em>./webpack.config.cjs</em></p>
+<pre><code class="language-js">const path = require(&#x27;path&#x27;);
+
+module.exports = {
+  mode: &quot;development&quot;, // production
+  entry: &#x27;./src/index.ts&#x27;,
+  devtool: &#x27;inline-source-map&#x27;, // remove in &#x27;production&#x27;
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: &#x27;ts-loader&#x27;,
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [&#x27;.tsx&#x27;, &#x27;.ts&#x27;, &#x27;.js&#x27;],
+  },
+  output: {
+    filename: &#x27;bundle.js&#x27;,
+    path: path.resolve(__dirname, &#x27;public&#x27;),
+    publicPath: &quot;/public&quot;s
+  },
+};
+</code></pre>
+<p>In the previous test run all imports had to have the <code>.js</code> file extension. For Webpack the need to be removed:</p>
+<p><em>Before</em>:</p>
+<pre><code class="language-ts">import Event from &#x27;./modules/events.js&#x27;
+import Action from &#x27;./modules/actions.js&#x27;
+import { add, multiply, subtract } from &#x27;./modules/utils.js&#x27;
+</code></pre>
+<p><em>After</em>:</p>
+<pre><code class="language-ts">import Event from &#x27;./modules/events&#x27;
+import Action from &#x27;./modules/actions&#x27;
+import { add, multiply, subtract } from &#x27;./modules/utils&#x27;
+</code></pre>
+<p>Now run the <code>build</code> script to run the bundler:</p>
+<pre><code class="language-bash">npm run build
+
+&gt; tsc-webpack@1.0.0 build
+&gt; webpack
+
+asset bundle.js 1.39 MiB [emitted] (name: main)
+runtime modules 1.25 KiB 6 modules
+cacheable modules 533 KiB
+  modules by path ./src/modules/*.ts 960 bytes
+    ./src/modules/events.ts 342 bytes [built] [code generated]
+    ./src/modules/actions.ts 412 bytes [built] [code generated]
+    ./src/modules/utils.ts 206 bytes [built] [code generated]
+  ./src/index.ts 476 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+webpack 5.89.0 compiled successfully in 1829 ms
+</code></pre>
+<p>Change to the HTML import to the following to use the newly generated bundled JS file and run the <code>start</code> script to verify that your browser is now able to find the imported lodash dependency:</p>
+<p><em>./public/index.html</em></p>
+<pre><code class="language-html">&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4 id="webpack-dev-server">Webpack Dev-Server</h4>
+<p>Replacing the <code>lite-server</code> with the official <a href="https://webpack.js.org/configuration/dev-server/">webpack-dev-server</a>:</p>
+<pre><code class="language-bash">npm install --save-dev webpack-dev-server
+</code></pre>
+<p>And replace the npm scripts accordingly:</p>
+<p><em>./package.json</em></p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;tsc&quot;: &quot;tsc --watch&quot;,
+    &quot;start&quot;: &quot;webpack serve&quot;,
+    &quot;dev&quot;: &quot;node public/bundle.js&quot;,
+    &quot;build&quot;: &quot;webpack&quot;
+  }
+</code></pre>
+<p>And add the following configuration to:</p>
+<p><em>./webpack.config.cjs</em></p>
+<pre><code class="language-js">devServer: {
+    static: {
+      directory: path.join(__dirname, &#x27;public&#x27;),
+      watch: true,
+    },
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: true
+      },
+      logging: &#x27;info&#x27;, // &#x27;log&#x27; | &#x27;info&#x27; | &#x27;warn&#x27; | &#x27;error&#x27; | &#x27;none&#x27; | &#x27;verbose&#x27;
+    },
+    compress: true,
+    port: 3000,
+  }
+</code></pre>
+<p>The <code>start</code> script will now run the dev server on port 3000:</p>
+<pre><code class="language-bash">npm run start
+
+&gt; tsc-webpack@1.0.0 start
+&gt; webpack serve
+
+&lt;i&gt; [webpack-dev-server] Project is running at:
+&lt;i&gt; [webpack-dev-server] Loopback: http://localhost:3000/
+asset bundle.js 1.99 MiB [emitted] (name: main)
+runtime modules 27.5 KiB 13 modules
+modules by path ./node_modules/ 709 KiB
+  modules by path ./node_modules/webpack-dev-server/client/ 71.8 KiB 16 modules
+  modules by path ./node_modules/webpack/hot/*.js 5.3 KiB 4 modules
+  modules by path ./node_modules/html-entities/lib/*.js 81.8 KiB
+    ./node_modules/html-entities/lib/index.js 7.91 KiB [built] [code generated]
+    + 3 modules
+  ./node_modules/ansi-html-community/index.js 4.16 KiB [built] [code generated]
+  ./node_modules/events/events.js 14.5 KiB [built] [code generated]
+  ./node_modules/lodash/lodash.js 531 KiB [built] [code generated]
+modules by path ./src/ 1.4 KiB
+  ./src/index.ts 476 bytes [built] [code generated]
+  ./src/modules/events.ts 342 bytes [built] [code generated]
+  ./src/modules/actions.ts 412 bytes [built] [code generated]
+  ./src/modules/utils.ts 206 bytes [built] [code generated]
+webpack 5.89.0 compiled successfully in 2123 ms
+</code></pre>
+<p>And the  browser console should show the results as before:</p>
+<pre><code class="language-bash">[webpack-dev-server] Server started: Hot Module Replacement enabled, Live Reloading enabled, Progress disabled, Overlay enabled. index.js:485
+[HMR] Waiting for update signal from WDS... log.js:39
+INFO :: Hello World! index.ts:5:8
+Array(3) [ 88, &quot;motion detected&quot;, &quot;pir sensor&quot; ] events.ts:15:16
+INFO :: action alarm recording was triggered! actions.ts:12:16
+110 index.ts:13:8
+2541 index.ts:14:8
+-44 index.ts:15:8
+</code></pre>
+<h3 id="production">Production</h3>
+<pre><code class="language-bash">npm install --save-dev clean-webpack-plugin html-webpack-plugin
+</code></pre>
+<p>Duplicate the Webpack configuration file and name those files:</p>
+<ul>
+<li><code>webpack.dev.config.cjs</code></li>
+<li><code>webpack.prod.config.cjs</code></li>
+</ul>
+<p>Keep the development/not-production file as is and change the latter to:</p>
+<p><em>./webpack.prod.config.cjs</em></p>
+<pre><code class="language-js">const path = require(&#x27;path&#x27;);
+const { CleanWebpackPlugin } = require(&#x27;clean-webpack-plugin&#x27;)
+const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;)
+
+module.exports = {
+  mode: &quot;production&quot;,
+  entry: &#x27;./src/index.ts&#x27;,
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: &#x27;ts-loader&#x27;,
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [&#x27;.tsx&#x27;, &#x27;.ts&#x27;, &#x27;.js&#x27;],
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin()
+  ],
+  output: {
+    filename: &#x27;[contenthash].bundle.js&#x27;,
+    path: path.resolve(__dirname, &#x27;public&#x27;)
+  }
+};
+</code></pre>
+<p>The <code>clean</code> webpack plugin will now delete all files inside the <code>public</code> directory. While the <code>html</code> plugin generates an HTML file in <code>public</code> that embeds <code>bundle.js</code> file that now contains hash in it&#x27;s name to prevent cashing.</p>
+<p>This configuration file can be referenced inside the build script:</p>
+<p><em>./package.json</em></p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;tsc&quot;: &quot;tsc --watch&quot;,
+    &quot;start&quot;: &quot;webpack serve --config webpack.dev.config.cjs&quot;,
+    &quot;dev&quot;: &quot;node public/bundle.js&quot;,
+    &quot;build&quot;: &quot;webpack --config webpack.prod.config.cjs&quot;
+  }
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/javascript">Javascript</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">React.js with Typescript 2023</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Development/Javascript/2023-06-13-typescript-dom/2023-06-13"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Typescript DOM</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#setup" class="table-of-contents__link toc-highlight">Setup</a><ul><li><a href="#adding-npm-modules" class="table-of-contents__link toc-highlight">Adding NPM Modules</a></li></ul></li><li><a href="#webpack" class="table-of-contents__link toc-highlight">Webpack</a><ul><li><a href="#setup-1" class="table-of-contents__link toc-highlight">Setup</a></li><li><a href="#production" class="table-of-contents__link toc-highlight">Production</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>
