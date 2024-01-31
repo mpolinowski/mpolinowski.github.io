@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Development/Javascript/2023-12-19-react-query-typescript/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.1">
+<title data-rh="true">React Query AsyncState Management | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-19-react-query-typescript/2023-12-19"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="React Query AsyncState Management | Mike Polinowski"><meta data-rh="true" name="description" content="Leveraging React Query to manage frontend state from REST JSON APIs"><meta data-rh="true" property="og:description" content="Leveraging React Query to manage frontend state from REST JSON APIs"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-19-react-query-typescript/2023-12-19"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-19-react-query-typescript/2023-12-19" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/Development/Javascript/2023-12-19-react-query-typescript/2023-12-19" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.08c8c484.css">
+<script src="/assets/js/runtime~main.003ec094.js" defer="defer"></script>
+<script src="/assets/js/main.0363f805.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/development">Development</a><button aria-label="Collapse sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/javascript">Javascript</a><button aria-label="Collapse sidebar category &#x27;Javascript&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-31-js-typescript-rest/2023-12-31">Typescript for Web APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/Development/Javascript/2023-12-19-react-query-typescript/2023-12-19">React Query AsyncState Management</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-18-reactjs-typescript-redux-toolkit/2023-12-18">Redux Toolkit Github API</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-16-reactjs-hooks-typescript/2023-12-16">React Hooks Typescript</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-15-reactjs-typescript-redux/2023-12-15">Simple Redux</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-12-14-reactjs-typescript-2023/2023-12-14">React.js with Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom-webpack/2023-06-13">Typescript DOM Webpack</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-13-typescript-dom/2023-06-13">Typescript DOM</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-pattern/2023-06-12">Typescript Design Pattern</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-12-typescript-2023/2023-06-12">Typescript 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-06-04-nodejs-typescript-sql/2023-06-04">Node / Express with Typescript - (Re)Introduction 2023</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-04-01-reactjs-2023/2023-04-01">React.js 2023 - A (Re)Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-13-gatsby-meili-search-starter/2023-02-13">MeiLi Search for your Gatsby.js Blog</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2023-02-12-react-meili-search-starter/2023-02-12">React Frontend for MeiLi Search</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-29-reactive-search-starter/2022-12-29">Reactive Search Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-12-11-11ty-starter/2022-12-11">11ty Static Site Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-29-react-typescript-intro-2023/2022-11-29">TypeScript 2.0 in React 19 (2023)</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-19-web3-javascript-app/2022-11-19">Web3.js Blockchain Application</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-11-10-webrtc-introduction-video-chat-part2/2022-11-10">WebRTC Introduction - Interactive Connectivity Establishment</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-30-webrtc-introduction-video-chat-part1/2022-10-30">WebRTC Introduction - Client Side Signalling</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-10-29-webrtc-introduction-realtime-chat/2022-10-29">WebRTC Introduction - Realtime Chat</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-07-01-docusaurus-introduction/2022-07-01">Docusaurus Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2022-03-01--json-apis-training/2022-03-01">Working with JSON APIs</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--websocket-recconects/2021-09-10">Reconnecting Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-10--notifications-alerts-as-toast/2021-09-10">Convert Alerts into Toasts</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-NGINX/2021-09-09">NGINX as a Proxy for Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-09--websocket-HAproxy/2021-09-09">HAProxy Loadbalancing and Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-08--websockets-html-video/2021-09-08">HTML Video over Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-09-07--intro-to-websockets/2021-09-07">Introduction to Websockets</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-04--mqtt-dashboard-react/2021-06-04">React Dashboard for MQTT</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-02--mqtt-cheat-sheet/2021-06-02">Mosquitto MQTT Cheat Sheet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-06-01--mqtt-with-reactjs/2021-06-01">MQTT Webfrontend with React.js</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-12-carbon-design-react-part3/2021-05-12">Carbon Design System in React.js - Part III</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-11-carbon-design-react-part2/2021-05-11">Carbon Design System in React.js - Part II</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-10-carbon-design-react/2021-05-10">Carbon Design System in React.js - Part I</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-09-electron13-and-react/2021-05-09">Electron@13 and Create-React-App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-08-electron13-gatsby-wrapper/2021-05-08">Electron@13 as a Gatsby.js Wrapper</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-05-07-electron-cross-platform-apps/2021-05-07">Electron for Cross Platform Applications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2021-02-14-next-js-2021/2021-02-14">Next.js in 2021</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2020-01-12--node-express-redirect-server/2020-01-12">Web traffic redirection with Node and Express on CentOS8</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2019-08-02--building-an-mqtt-interface/2019-08-02">Building a MQTT Interface</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-17--server-side-render-react-router/2018-01-17">Server Rendering with React and React Router</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-15--react-transition-group-demo/2018-01-15">react-transition-group</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2018-01-07--gatsby-material-ui-starter/2018-01-07">Gatsby Material UI Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-17--gatsby-reactstrap/2017-12-17">Gatsby.js with Bootstrap 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-14--gatsby-wiki/2017-12-14">Gatsby.js Knowledgebase</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-09--next-start/2017-12-09">Next.js Server Side Rendering</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-12-07--react-router-4/2017-12-07">React Router 4</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-09-03--react-under-the-hood/2017-09-03">React under the Hood</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-21--reactive-material/2017-08-21">create-react-app and Material-UI</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-15--gatsby-blog-starter/2017-08-15">Gatsby Blog Starter</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-08-07--google-analytics-amp/2017-08-07">Google Analytics in AMP</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-24--obligatory-react-todo-list/2017-07-24">React TODO List</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-22--caloric-burn/2017-07-22">Food Caloric Table App</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2017-07-04--random-password-generator/2017-07-04">Random Password Generator</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-08-11--node-express-static-wiki/2016-08-11">Node Express Static</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-06-01--node-express-mongodb/2016-06-01">Node/Express with MongoDB</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2016-05-27--javascript-apis-and-ajax/2016-05-27">JavaScript and Getting Started with APIs and AJAX</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-05--markdown-live-code/2010-01-05">React-Live &amp; Code example</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/Development/Javascript/2010-01-01--mdx/2010-01-01">Markdown Cheatsheet</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/python">Python</a><button aria-label="Expand sidebar category &#x27;Python&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/go">Go</a><button aria-label="Expand sidebar category &#x27;Go&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/graphs">Graphs</a><button aria-label="Expand sidebar category &#x27;Graphs&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/react-native">React Native</a><button aria-label="Expand sidebar category &#x27;React Native&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/magento">Magento</a><button aria-label="Expand sidebar category &#x27;Magento&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/misc">Misc</a><button aria-label="Expand sidebar category &#x27;Misc&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/devops">DevOps</a><button aria-label="Expand sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Expand sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/development"><span itemprop="name">Development</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/javascript"><span itemprop="name">Javascript</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">React Query AsyncState Management</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>React Query AsyncState Management</h1></header><p><img alt="TST, Hongkong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-c3aedc7eed015cc5372c21f9c394693d.jpg" width="2359" height="864"></p>
+<ul>
+<li><a href="#scaffolding">Scaffolding</a></li>
+<li><a href="#backend-api">Backend API</a></li>
+<li><a href="#adding-react-query">Adding React Query</a>
+<ul>
+<li><a href="#working-with-query-params">Working with Query Params</a></li>
+</ul>
+</li>
+<li><a href="#mutations">Mutations</a></li>
+</ul>
+<h2 id="scaffolding">Scaffolding</h2>
+<pre><code class="language-bash">npm create vite@latest redux-toolkit
+✔ Select a framework: › React
+✔ Select a variant: › TypeScript + SWC
+</code></pre>
+<pre><code class="language-bash">cd redux-toolkit
+npm install
+npm install react-query
+</code></pre>
+<p>Use <code>baseURL</code> to be able to work with absolute imports relative to the defined base:</p>
+<p><em>./tsconfig.json</em></p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    &quot;baseUrl&quot;: &quot;./src&quot;,
+    ...
+</code></pre>
+<p><em>./vite.config.js</em> <code>npm install vite-tsconfig-paths</code></p>
+<pre><code class="language-js">import { defineConfig } from &#x27;vite&#x27;
+import tsconfigPaths from &#x27;vite-tsconfig-paths&#x27;
+import react from &#x27;@vitejs/plugin-react-swc&#x27;
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tsconfigPaths()
+  ],
+})
+</code></pre>
+<p><em>./src/views/App.tsx</em></p>
+<pre><code class="language-tsx">import Users from &#x27;components/Users&#x27;
+
+import &#x27;styles/App.css&#x27;
+
+export default function App() {
+  
+  return (
+    &lt;&gt;
+          &lt;Users greeting=&#x27;Hello from React Typescript&#x27; /&gt;
+    &lt;/&gt;
+  )
+}
+</code></pre>
+<p><em>./src/components/Users.tsx</em></p>
+<pre><code class="language-tsx">import React from &#x27;react&#x27;
+import Typography from &#x27;@mui/material/Typography&#x27;;
+
+import { iUsersProps } from &#x27;types/interfaces&#x27;
+
+export default function Users({ greeting }: iUsersProps): React.JSX.Element {
+    return (
+        &lt;Typography variant=&quot;h1&quot; gutterBottom&gt;
+            { greeting }
+        &lt;/Typography&gt;
+    )
+}
+</code></pre>
+<pre><code class="language-bash">npm run dev
+</code></pre>
+<h2 id="backend-api">Backend API</h2>
+<pre><code class="language-bash">npm install json-server
+</code></pre>
+<p><em>./api/db.json</em></p>
+<pre><code class="language-json">{
+    &quot;users&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;name&quot;: &quot;Player1&quot;,
+            &quot;tier&quot;: 3
+        },
+        {
+            &quot;id&quot;: &quot;2&quot;,
+            &quot;name&quot;: &quot;Player2&quot;,
+            &quot;tier&quot;: 2
+        }
+    ]
+}
+</code></pre>
+<p><em>./package.json</em></p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;vite&quot;,
+    &quot;build&quot;: &quot;tsc &amp;&amp; vite build&quot;,
+    &quot;api&quot;: &quot;json-server api/db.json&quot;,
+    &quot;preview&quot;: &quot;vite preview&quot;
+  },
+</code></pre>
+<pre><code class="language-bash">npm run api
+</code></pre>
+<h2 id="adding-react-query">Adding React Query</h2>
+<p>Add the Query Provider to the entry point of your app:</p>
+<p><em>./src/main.tsx</em></p>
+<pre><code class="language-tsx">import React from &#x27;react&#x27;
+import ReactDOM from &#x27;react-dom/client&#x27;
+import { QueryClientProvider, QueryClient } from &#x27;react-query&#x27;
+import { ReactQueryDevtools } from &#x27;react-query/devtools&#x27;
+
+import App from &#x27;views/App.tsx&#x27;
+import &#x27;styles/index.css&#x27;
+
+const reactQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // use cache for 5s before refetching data
+      staleTime: 5 * 1000
+    }
+  }
+})
+
+ReactDOM.createRoot(document.getElementById(&#x27;root&#x27;)!).render(
+  &lt;React.StrictMode&gt;
+    &lt;QueryClientProvider client={reactQueryClient}&gt;
+      &lt;ReactQueryDevtools initialIsOpen={false} /&gt;
+      &lt;App /&gt;
+    &lt;/QueryClientProvider&gt;
+  &lt;/React.StrictMode&gt;,
+)
+</code></pre>
+<p>Now we can use ReactQuery to retrieve data from our JSON API and render it:</p>
+<p><em>./src/components/Users.tsx</em></p>
+<pre><code class="language-tsx">import React from &#x27;react&#x27;
+import { useQuery, UseQueryResult } from &#x27;react-query&#x27;
+
+import { iUsersProps, iUser } from &#x27;types/interfaces&#x27;
+
+const apiUrl = &#x27;http://localhost:3000/users&#x27;
+
+const fetchUsers = async(): Promise&lt;iUser[]&gt; =&gt; {
+        const res = await fetch(apiUrl)
+        if (res.ok) {
+            return res.json()
+        }
+        throw new Error(&#x27;ERROR :: Data fetching failed!&#x27;)
+}
+
+export default function UsersList({ greeting }: iUsersProps): React.JSX.Element {
+    const { isLoading, isError, error, data }: UseQueryResult&lt;iUser[], Error&gt; = useQuery&lt;iUser[], Error&gt;(
+        &#x27;users&#x27;, fetchUsers, {
+        // use cached values for 20s before re-running query
+        staleTime: 20 * 1000
+    })
+
+    if (isLoading) {
+    return (
+        &lt;&gt;
+            &lt;h1&gt;{ greeting }&lt;/h1&gt;
+            &lt;p&gt;loading...&lt;/p&gt;
+        &lt;/&gt;
+        )
+    }
+
+    if (isError) return &lt;p&gt;ERROR :: {error?.message}&lt;/p&gt;
+
+    return (
+        &lt;&gt;
+            &lt;h2&gt;All Users:&lt;/h2&gt;
+            &lt;ul&gt;
+                {
+                    data?.map((user) =&gt; {
+                        return(
+                            &lt;div key={user.id}&gt;
+                                &lt;li&gt;&lt;strong&gt;ID:&lt;/strong&gt;{user.id}&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Username:&lt;/strong&gt;{user.name}&lt;/li&gt;
+                                &lt;li&gt;&lt;strong&gt;Tier:&lt;/strong&gt;{user.tier}&lt;/li&gt;
+                                &lt;hr/&gt;
+                            &lt;/div&gt;
+                        )
+                    })
+                }
+            &lt;/ul&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<h3 id="working-with-query-params">Working with Query Params</h3>
+<p>The implementation above retrieves all users und displays them in a list. The json server also provides support for query parameter to retrieve a single entry.</p>
+<p><em>./src/components/User.tsx</em></p>
+<pre><code class="language-tsx">import React from &#x27;react&#x27;
+import { useQuery } from &#x27;react-query&#x27;
+
+import { iUser } from &#x27;types/interfaces&#x27;
+
+const apiUrl = &#x27;http://localhost:3000/users/&#x27;
+const id = &#x27;1&#x27; // pretend id was extracted from URL param
+
+const fetchUserById = async(id: string | undefined): Promise&lt;iUser&gt; =&gt; {
+    if (typeof id === &#x27;string&#x27;) {
+        const res = await fetch(apiUrl+id)
+        if (res.ok) {
+            return res.json()
+        }
+        throw new Error(&#x27;ERROR :: Data fetching failed!&#x27;)
+    }
+    throw new Error(&#x27;ERROR :: Invalid User ID!&#x27;)
+}
+
+export default function UserDetails(): React.JSX.Element {
+    const { isLoading, isError, error, data } = useQuery&lt;iUser, Error&gt;(
+        [&#x27;user&#x27;, id], () =&gt; fetchUserById(id), {
+        // use cached values for 20s before re-running query
+        staleTime: 20 * 1000,
+        // only run query when id is defined
+        enabled: !!id
+    })
+
+    if (isLoading) {
+        return &lt;p&gt;loading...&lt;/p&gt;
+    }
+
+    if (isError) return &lt;p&gt;ERROR :: {error?.message}&lt;/p&gt;
+
+    return (
+        &lt;&gt;
+            &lt;h2&gt;First User:&lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;strong&gt;ID:&lt;/strong&gt;{data?.id}&lt;/li&gt;
+                &lt;li&gt;&lt;strong&gt;Username:&lt;/strong&gt;{data?.name}&lt;/li&gt;
+                &lt;li&gt;&lt;strong&gt;Tier:&lt;/strong&gt;{data?.tier}&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<p><img alt="React Query AsyncState Management" src="/assets/images/React-Query_01-8231b4665d5a36a42320faf6e62438e6.png" width="1372" height="725"></p>
+<h2 id="mutations">Mutations</h2>
+<p>Using regular fetch works but has the disadvantage that we don&#x27;t see a refresh of our list component when we refresh:</p>
+<pre><code class="language-jsx">import React from &#x27;react&#x27;
+import { v4 as uuidv4 } from &#x27;uuid&#x27;
+
+import {fetchUsers} from &#x27;components/Users&#x27;
+
+const apiUrl = &#x27;http://localhost:3000/users/&#x27;
+
+const createUser = async(): Promise&lt;string&gt; =&gt; {
+
+    const usernames = [&#x27;Player3&#x27;,&#x27;Player4&#x27;,&#x27;Player5&#x27;,&#x27;Player6&#x27;]
+
+    const response = await fetch(apiUrl, {
+        method: &#x27;POST&#x27;,
+        body: JSON.stringify({
+            id: uuidv4(),
+            name: usernames[Math.floor(Math.random() * 4)],
+            tier: Math.floor(Math.random() * 4)
+        })
+    })
+    fetchUsers()
+    return response.statusText
+}
+
+export function AddUser(): React.JSX.Element {
+
+    return (
+        &lt;&gt;
+            &lt;button type=&quot;submit&quot; onClick={createUser}&gt;
+                Create New User (using regular fetch())
+            &lt;/button&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre>
+<p>Using <code>useMutation</code> instead allows us to use <code>queryClient.invalidateQueries(&#x27;users&#x27;)</code> to force a refresh of the <code>users</code> query which triggers a reload of the list component:</p>
+<pre><code class="language-jsx">import React, { FormEventHandler } from &#x27;react&#x27;
+import { v4 as uuidv4 } from &#x27;uuid&#x27;
+
+import { iUser } from &#x27;types/interfaces&#x27;
+import { useMutation, UseMutationResult, useQueryClient } from &#x27;react-query&#x27;
+
+const apiUrl = &#x27;http://localhost:3000/users/&#x27;
+
+const createUser = async(name: string, tier: number): Promise&lt;iUser&gt; =&gt; {
+
+    const response: Response = await fetch(apiUrl, {
+        method: &#x27;POST&#x27;,
+        body: JSON.stringify({
+            id: uuidv4(),
+            name,
+            tier
+        })
+    })
+    if (response.ok) {
+        return response.json()
+    }
+    throw new Error(&#x27;ERROR :: User could not be created!&#x27;)
+}
+
+export default function AddUserMutation(): React.JSX.Element {
+
+    const queryClient = useQueryClient()
+
+    const mutation:UseMutationResult&lt;iUser, Error, void&gt; = useMutation&lt;iUser, Error&gt;(
+          async ({ name, tier }) =&gt; createUser(name, tier), {
+            onSuccess: (data: iUser) =&gt; {
+              queryClient.invalidateQueries(&#x27;users&#x27;)
+            }
+          }
+        )
+
+    const onSubmit: FormEventHandler&lt;HTMLFormElement&gt; = async (event: React.SyntheticEvent) =&gt; {
+        event.preventDefault()
+
+        const target = event.target as typeof event.target &amp; {
+            name: { value: string }
+            tier: { value: number }
+        }
+
+        const name = target.name.value
+        const tier = target.tier.value
+        mutation.mutate({ name, tier })
+
+        return 
+    }
+
+    return (
+        &lt;&gt;
+          {mutation.isLoading ? (
+            &lt;p&gt;Adding todo&lt;/p&gt;
+          ) : (
+            &lt;&gt;
+              { mutation.isError ? &lt;div&gt;ERROR :: {mutation?.error?.message}&lt;/div&gt; : null }
+    
+              { mutation.isSuccess ? (
+                &lt;div&gt;
+                  User added :: Name: {mutation?.data?.name} &amp; Tier: {mutation?.data?.tier}
+                &lt;/div&gt;
+              ) : null }
+            &lt;/&gt;
+          )}
+    
+          &lt;form onSubmit={onSubmit}&gt;
+            &lt;label htmlFor=&quot;name&quot;&gt;Name:&lt;/label&gt;
+            &lt;br /&gt;
+            &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; /&gt;
+            &lt;br /&gt;
+            &lt;label htmlFor=&quot;tier&quot;&gt;Tier:&lt;/label&gt;
+            &lt;br /&gt;
+            &lt;select name=&quot;tier&quot; id=&quot;tier&quot;&gt;
+                &lt;option value=&quot;0&quot;&gt;0&lt;/option&gt;
+                &lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;
+                &lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;
+                &lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;br /&gt;
+            &lt;br /&gt;
+            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+          &lt;/form&gt;
+        &lt;/&gt;
+    )
+}
+</code></pre></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/javascript">Javascript</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/react">React</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Development/Javascript/2023-12-19-react-query-typescript/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/Development/Javascript/2023-12-31-js-typescript-rest/2023-12-31"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Typescript for Web APIs</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/Development/Javascript/2023-12-18-reactjs-typescript-redux-toolkit/2023-12-18"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Redux Toolkit Github API</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#scaffolding" class="table-of-contents__link toc-highlight">Scaffolding</a></li><li><a href="#backend-api" class="table-of-contents__link toc-highlight">Backend API</a></li><li><a href="#adding-react-query" class="table-of-contents__link toc-highlight">Adding React Query</a><ul><li><a href="#working-with-query-params" class="table-of-contents__link toc-highlight">Working with Query Params</a></li></ul></li><li><a href="#mutations" class="table-of-contents__link toc-highlight">Mutations</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>
