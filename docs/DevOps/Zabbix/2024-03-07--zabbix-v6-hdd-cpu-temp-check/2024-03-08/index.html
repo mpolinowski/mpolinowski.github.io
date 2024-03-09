@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.1.1">
+<title data-rh="true">Zabbix v6 SMART HDD and CPU Temperature Check | Mike Polinowski</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://mpolinowski.github.io/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/2024-03-08"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Zabbix v6 SMART HDD and CPU Temperature Check | Mike Polinowski"><meta data-rh="true" name="description" content="TST, Hong Kong"><meta data-rh="true" property="og:description" content="TST, Hong Kong"><link data-rh="true" rel="icon" href="/img/icons/favicon-32x32.png"><link data-rh="true" rel="canonical" href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/2024-03-08"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/2024-03-08" hreflang="en"><link data-rh="true" rel="alternate" href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/2024-03-08" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Mike Polinowski RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Mike Polinowski Atom Feed">
+
+
+
+
+<link rel="icon" href="/img/angular_momentum.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="rgb(37,194,160)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#000">
+<link rel="apple-touch-icon" href="/img/angular_momentum.png">
+<link rel="mask-icon" href="/img/angular_momentum.png" color="rgb(33,33,33)">
+<meta name="msapplication-TileImage" content="/img/angular_momentum.png">
+<meta name="msapplication-TileColor" content="#000">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P74BDWF0C6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-P74BDWF0C6",{})</script><link rel="stylesheet" href="/assets/css/styles.08c8c484.css">
+<script src="/assets/js/runtime~main.afcb95e1.js" defer="defer"></script>
+<script src="/assets/js/main.fb0a52c3.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/angular_momentum.png" alt="Mike Polinowski :: Dev Notebook" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">Mike Polinowski</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/docs/intro">Docs</a><a class="navbar__item navbar__link" href="/blog">Blog</a><a class="navbar__item navbar__link" href="/docs/tags">Tags</a><a class="navbar__item navbar__link" href="/Search">Search</a><a href="https://mpolinowski.github.io/Personal" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">About<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently dark mode)" aria-label="Switch between dark and light mode (currently dark mode)" aria-live="polite"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/docs/intro">Introduction</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/development">Development</a><button aria-label="Expand sidebar category &#x27;Development&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" href="/docs/category/devops">DevOps</a><button aria-label="Collapse sidebar category &#x27;DevOps&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/hashicorp">Hashicorp</a><button aria-label="Expand sidebar category &#x27;Hashicorp&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" aria-expanded="true" tabindex="0" href="/docs/category/zabbix">Zabbix</a><button aria-label="Collapse sidebar category &#x27;Zabbix&#x27;" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/2024-03-08">Zabbix v6 SMART HDD and CPU Temperature Check</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-07-15-zabbix-for-zimbra/2022-07-15">Zabbix &lt;3 Zimbra</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-16--zabbix-v6-baseline-monitoring/2022-01-16">Zabbix v6 Creating triggers for Baseline monitoring and Anomaly detection</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-15--zabbix-v6-smart-hdd-check/2022-01-15">Zabbix v6 SMART HDD Check</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-15--zabbix-v6-slack-notifications/2022-01-15">Zabbix v6 Slack Notifications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-15--zabbix-v6-email-notifications/2022-01-15">Zabbix v6 Email Notifications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-15--zabbix-grafana-dashboard/2022-01-15">Grafana Dashboard for Zabbix v6</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-14--zabbix-nginx-monitor/2022-01-14">Zabbix v6 NGINX Monitor</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-14--zabbix-http-cert-monitor/2022-01-14">Zabbix HTTPS Certificate Monitor</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-14--zabbix-docker-monitor/2022-01-14">Zabbix v6 Docker Monitor</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-14--zabbix-apache2-monitor/2022-01-14">Zabbix v6 Apache 2 Monitor</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-13--zabbix-server-v6/2022-01-13">Zabbix v6 Docker-Compose Setup</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2022-01-13--zabbix-api-testing/2022-01-13">Testing the Zabbix API with Postman</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2021-10-13--zabbix-compose-setup/2021-10-13">Zabbix Docker-Compose Setup</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2021-01-14--zabbix-apache2-monitor/2021-10-14">Zabbix Apache 2 Monitor</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-09-05--slack-notifications-in-devops/2020-09-05">Slack Notifications in DevOps</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-20--zabbix-behind-nginx/2020-07-20">Zabbix Multi-Tenant NGINX Docker Ingress</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-19--zabbix-company-logo/2020-07-19">Zabbix Company Logo</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-18--zabbix-email-notification/2020-07-18">Zabbix Email Notifications</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-17--zabbix-website-monitor/2020-07-17">Zabbix Monitoring a Website</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-16--zabbix-agent/2020-07-16">Zabbix Agent</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-15--zabbix-docker-installation/2020-07-15">Zabbix Docker Installation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-14--nagios-ubuntu-install/2020-07-14">Installing Nagios4 on Ubuntu Server 20.04</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/docs/DevOps/Zabbix/2020-07-12--nagios-docker-install/2020-07-12">Installing Nagios4 with Docker</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/server-provisioning">Server Provisioning</a><button aria-label="Expand sidebar category &#x27;Server Provisioning&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/gitops">GitOps</a><button aria-label="Expand sidebar category &#x27;GitOps&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/kubernetes">Kubernetes</a><button aria-label="Expand sidebar category &#x27;Kubernetes&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/nginx">NGINX</a><button aria-label="Expand sidebar category &#x27;NGINX&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/elasticsearch">Elasticsearch</a><button aria-label="Expand sidebar category &#x27;Elasticsearch&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/ansible">Ansible</a><button aria-label="Expand sidebar category &#x27;Ansible&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/server-security">Server Security</a><button aria-label="Expand sidebar category &#x27;Server Security&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/linux">Linux</a><button aria-label="Expand sidebar category &#x27;Linux&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/windows">Windows</a><button aria-label="Expand sidebar category &#x27;Windows&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/tomcat">Tomcat</a><button aria-label="Expand sidebar category &#x27;Tomcat&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" tabindex="0" href="/docs/category/salt">Salt</a><button aria-label="Expand sidebar category &#x27;Salt&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/machine-learning-ai-and-computer-vision">Machine Learning, AI and Computer Vision</a><button aria-label="Expand sidebar category &#x27;Machine Learning, AI and Computer Vision&#x27;" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" aria-expanded="false" href="/docs/category/automation-deep-vision-and-robotics">Automation, Deep Vision and Robotics</a><button aria-label="Expand sidebar category &#x27;Automation, Deep Vision and Robotics&#x27;" type="button" class="clean-btn menu__caret"></button></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/devops"><span itemprop="name">DevOps</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/docs/category/zabbix"><span itemprop="name">Zabbix</span></a><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Zabbix v6 SMART HDD and CPU Temperature Check</span><meta itemprop="position" content="3"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Zabbix v6 SMART HDD and CPU Temperature Check</h1></header><p><img alt="TST, Hong Kong" src="/assets/images/photo-kt443t6d_64hdh43hfh6dgjdfhg4_d-d8b333d1f9ddf34ac7392aef86b14c83.jpg" width="1500" height="622"></p>
+<ul>
+<li><a href="#install-smartmontools-and-lm-sensors">Install Smartmontools and LM Sensors</a>
+<ul>
+<li><a href="#harddrive-monitoring">Harddrive Monitoring</a></li>
+<li><a href="#using-smartctl">Using Smartctl</a></li>
+<li><a href="#cpu-temperature">CPU Temperature</a></li>
+</ul>
+</li>
+<li><a href="#zabbix">Zabbix</a>
+<ul>
+<li><a href="#preparing-zabbix-agent2">Preparing Zabbix-Agent2</a></li>
+<li><a href="#direct-cli-command-execution">Direct CLI Command Execution</a></li>
+<li><a href="#working-with-shell-scripts">Working with Shell Scripts</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="install-smartmontools-and-lm-sensors">Install Smartmontools and LM Sensors</h2>
+<pre><code class="language-bash">apt install lm-sensors smartmontools
+</code></pre>
+<h3 id="harddrive-monitoring">Harddrive Monitoring</h3>
+<p>S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology; often written as SMART) is a monitoring system included in computer hard disk drives (HDDs), solid-state drives (SSDs), and eMMC drives</p>
+<p>The smartmontools package comes with two utilities, smartctl which you can use to check your hard drives on the command line, and smartd, a daemon that checks your hard disks at a specified interval and logs warnings/errors to the syslog and can also send warnings and errors to a specified email address (usually the admin of the system).</p>
+<pre><code class="language-bash">smartctl -v
+
+smartctl 7.2 2020-12-30 r5155 [x86_64-linux-5.10.0-11-amd64] (local build)
+Copyright (C) 2002-20, Bruce Allen, Christian Franke, www.smartmontools.org
+</code></pre>
+<h3 id="using-smartctl">Using Smartctl</h3>
+<p>Find partition:</p>
+<pre><code class="language-bash">df -h
+
+Filesystem                            Size  Used Avail Use% Mounted on
+tmpfs                                  32G  2.9M   32G   1% /run
+/dev/mapper/ubuntu--vg--1-ubuntu--lv  438G   81G  338G  20% /
+tmpfs                                  63G  914M   62G   2% /dev/shm
+tmpfs                                 5.0M     0  5.0M   0% /run/lock
+/dev/nvme0n1p2                        2.0G  304M  1.5G  17% /boot
+/dev/nvme0n1p1                        1.1G  6.1M  1.1G   1% /boot/efi
+tmpfs                                  13G  4.0K   13G   1% /run/user/1000
+</code></pre>
+<p>In the case of my test server below we have a virtual machine - that, obviously, does not have access to the underlying HDD hardware <code>/dev/sda1</code>:</p>
+<pre><code class="language-bash">smartctl -a /dev/sda
+smartctl 7.2 2020-12-30 r5155 [x86_64-linux-5.15.0-97-generic] (local build)
+Copyright (C) 2002-20, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Model Family:     Western Digital Red
+Device Model:     WDC WD10EFRX-68FYTN0
+Serial Number:    WD-WCC4J4NHYJJ2
+LU WWN Device Id: 5 0014ee 269c5648a
+Firmware Version: 82.00A82
+User Capacity:    1,000,204,886,016 bytes [1.00 TB]
+Sector Sizes:     512 bytes logical, 4096 bytes physical
+Rotation Rate:    5400 rpm
+Device is:        In smartctl database [for details use: -P show]
+ATA Version is:   ACS-2 (minor revision not indicated)
+SATA Version is:  SATA 3.0, 6.0 Gb/s (current: 6.0 Gb/s)
+Local Time is:    Sat Mar  9 09:21:06 2024 UTC
+SMART support is: Available - device has SMART capability.
+SMART support is: Enabled
+
+=== START OF READ SMART DATA SECTION ===
+SMART overall-health self-assessment test result: PASSED
+
+General SMART Values:
+Offline data collection status:  (0x00) Offline data collection activity
+                                        was never started.
+                                        Auto Offline Data Collection: Disabled.
+Self-test execution status:      (   0) The previous self-test routine completed
+                                        without error or no self-test has ever 
+                                        been run.
+Total time to complete Offline 
+data collection:                (14100) seconds.
+Offline data collection
+capabilities:                    (0x7b) SMART execute Offline immediate.
+                                        Auto Offline data collection on/off support.
+                                        Suspend Offline collection upon new
+                                        command.
+                                        Offline surface scan supported.
+                                        Self-test supported.
+                                        Conveyance Self-test supported.
+                                        Selective Self-test supported.
+SMART capabilities:            (0x0003) Saves SMART data before entering
+                                        power-saving mode.
+                                        Supports SMART auto save timer.
+Error logging capability:        (0x01) Error logging supported.
+                                        General Purpose Logging supported.
+Short self-test routine 
+recommended polling time:        (   2) minutes.
+Extended self-test routine
+recommended polling time:        ( 160) minutes.
+Conveyance self-test routine
+recommended polling time:        (   5) minutes.
+SCT capabilities:              (0x303d) SCT Status supported.
+                                        SCT Error Recovery Control supported.
+                                        SCT Feature Control supported.
+                                        SCT Data Table supported.
+
+SMART Attributes Data Structure revision number: 16
+Vendor Specific SMART Attributes with Thresholds:
+ID# ATTRIBUTE_NAME          FLAG     VALUE WORST THRESH TYPE      UPDATED  WHEN_FAILED RAW_VALUE
+  1 Raw_Read_Error_Rate     0x002f   200   200   051    Pre-fail  Always       -       0
+  3 Spin_Up_Time            0x0027   169   133   021    Pre-fail  Always       -       2516
+  4 Start_Stop_Count        0x0032   100   100   000    Old_age   Always       -       63
+  5 Reallocated_Sector_Ct   0x0033   200   200   140    Pre-fail  Always       -       0
+  7 Seek_Error_Rate         0x002e   200   200   000    Old_age   Always       -       0
+  9 Power_On_Hours          0x0032   075   075   000    Old_age   Always       -       18640
+ 10 Spin_Retry_Count        0x0032   100   253   000    Old_age   Always       -       0
+ 11 Calibration_Retry_Count 0x0032   100   253   000    Old_age   Always       -       0
+ 12 Power_Cycle_Count       0x0032   100   100   000    Old_age   Always       -       62
+192 Power-Off_Retract_Count 0x0032   200   200   000    Old_age   Always       -       59
+193 Load_Cycle_Count        0x0032   199   199   000    Old_age   Always       -       5458
+194 Temperature_Celsius     0x0022   121   094   000    Old_age   Always       -       22
+196 Reallocated_Event_Count 0x0032   200   200   000    Old_age   Always       -       0
+197 Current_Pending_Sector  0x0032   200   200   000    Old_age   Always       -       0
+198 Offline_Uncorrectable   0x0030   100   253   000    Old_age   Offline      -       0
+199 UDMA_CRC_Error_Count    0x0032   200   200   000    Old_age   Always       -       0
+200 Multi_Zone_Error_Rate   0x0008   100   253   000    Old_age   Offline      -       0
+
+SMART Error Log Version: 1
+No Errors Logged
+
+SMART Self-test log structure revision number 1
+Num  Test_Description    Status                  Remaining  LifeTime(hours)  LBA_of_first_error
+# 1  Short offline       Completed without error       00%     18594         -
+
+SMART Selective self-test log data structure revision number 1
+ SPAN  MIN_LBA  MAX_LBA  CURRENT_TEST_STATUS
+    1        0        0  Not_testing
+    2        0        0  Not_testing
+    3        0        0  Not_testing
+    4        0        0  Not_testing
+    5        0        0  Not_testing
+Selective self-test flags (0x0):
+  After scanning selected spans, do NOT read-scan remainder of disk.
+If Selective self-test is pending on power-up, resume after 0 minute delay.
+</code></pre>
+<p>Additional NVME drive:</p>
+<pre><code class="language-bash">smartctl -a /dev/nvme0
+
+smartctl 7.2 2020-12-30 r5155 [x86_64-linux-5.15.0-91-generic] (local build)
+Copyright (C) 2002-20, Bruce Allen, Christian Franke, www.smartmontools.org
+
+=== START OF INFORMATION SECTION ===
+Model Number:                       SanDisk Extreme Pro 500GB
+Serial Number:                      212181449612
+Firmware Version:                   111130WD
+PCI Vendor/Subsystem ID:            0x15b7
+IEEE OUI Identifier:                0x001b44
+Total NVM Capacity:                 500,107,862,016 [500 GB]
+Unallocated NVM Capacity:           0
+Controller ID:                      8215
+NVMe Version:                       1.3
+Number of Namespaces:               1
+Namespace 1 Size/Capacity:          500,107,862,016 [500 GB]
+Namespace 1 Formatted LBA Size:     512
+Namespace 1 IEEE EUI-64:            001b44 4a4944db11
+Local Time is:                      Sat Mar  9 09:45:02 2024 CET
+Firmware Updates (0x14):            2 Slots, no Reset required
+Optional Admin Commands (0x0017):   Security Format Frmw_DL Self_Test
+Optional NVM Commands (0x005f):     Comp Wr_Unc DS_Mngmt Wr_Zero Sav/Sel_Feat Timestmp
+Log Page Attributes (0x0e):         Cmd_Eff_Lg Ext_Get_Lg Telmtry_Lg
+Maximum Data Transfer Size:         128 Pages
+Warning  Comp. Temp. Threshold:     84 Celsius
+Critical Comp. Temp. Threshold:     88 Celsius
+Namespace 1 Features (0x02):        NA_Fields
+
+Supported Power States
+St Op     Max   Active     Idle   RL RT WL WT  Ent_Lat  Ex_Lat
+ 0 +     5.50W       -        -    0  0  0  0        0       0
+ 1 +     3.50W       -        -    1  1  1  1        0       0
+ 2 +     3.00W       -        -    2  2  2  2        0       0
+ 3 -   0.0700W       -        -    3  3  3  3     4000   10000
+ 4 -   0.0035W       -        -    4  4  4  4     4000   40000
+
+Supported LBA Sizes (NSID 0x1)
+Id Fmt  Data  Metadt  Rel_Perf
+ 0 +     512       0         2
+ 1 -    4096       0         1
+
+=== START OF SMART DATA SECTION ===
+SMART overall-health self-assessment test result: PASSED
+
+SMART/Health Information (NVMe Log 0x02)
+Critical Warning:                   0x00
+Temperature:                        51 Celsius
+Available Spare:                    100%
+Available Spare Threshold:          10%
+Percentage Used:                    3%
+Data Units Read:                    7,580,500 [3.88 TB]
+Data Units Written:                 37,759,770 [19.3 TB]
+Host Read Commands:                 38,034,128
+Host Write Commands:                1,870,013,477
+Controller Busy Time:               279
+Power Cycles:                       25
+Power On Hours:                     13,542
+Unsafe Shutdowns:                   17
+Media and Data Integrity Errors:    0
+Error Information Log Entries:      1
+Warning  Comp. Temperature Time:    0
+Critical Comp. Temperature Time:    0
+
+Error Information (NVMe Log 0x01, 16 of 256 entries)
+No Errors Logged
+</code></pre>
+<p>When you see that the <code>SMART support is:</code> <strong>disabled</strong> run the following command to enable it:</p>
+<pre><code class="language-bash">smartctl -s on -a /dev/sda1
+</code></pre>
+<h3 id="cpu-temperature">CPU Temperature</h3>
+<pre><code class="language-bash">sensors
+
+coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +50.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 0:        +50.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 1:        +42.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 2:        +46.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 3:        +48.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 4:        +44.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 5:        +49.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 6:        +44.0°C  (high = +100.0°C, crit = +100.0°C)
+Core 7:        +47.0°C  (high = +100.0°C, crit = +100.0°C)
+
+nvme-pci-0900
+Adapter: PCI adapter
+Composite:    +48.9°C  (low  =  -5.2°C, high = +83.8°C)
+                       (crit = +87.8°C)
+
+acpitz-acpi-0
+Adapter: ACPI interface
+temp1:        +16.8°C  (crit = +20.8°C)
+temp2:        +27.8°C  (crit = +105.0°C)
+
+iwlwifi_1-virtual-0
+Adapter: Virtual device
+temp1:            N/A  
+
+enp7s0-pci-0700
+Adapter: PCI adapter
+PHY Temperature:  +47.9°C  
+MAC Temperature:  +48.5°C  
+
+nvme-pci-0300
+Adapter: PCI adapter
+Composite:    +50.9°C  (low  =  -5.2°C, high = +83.8°C)
+                       (crit = +87.8°C)
+</code></pre>
+<h2 id="zabbix">Zabbix</h2>
+<h3 id="preparing-zabbix-agent2">Preparing Zabbix-Agent2</h3>
+<p>Add the <code>zabbix</code> agent to <strong>Sudoers</strong>:</p>
+<pre><code class="language-bash">nano /etc/sudoers
+</code></pre>
+<pre><code class="language-bash"># Zabbix user SMART control
+zabbix ALL=(ALL) NOPASSWD:/usr/sbin/smartctl
+
+# Zabbix user LM Sensors
+zabbix ALL=NOPASSWD:/bin/sensors
+</code></pre>
+<p>Let&#x27;s start by allowing the Zabbix server to execute ANY script (parental supervision advised):</p>
+<pre><code class="language-bash">nano /etc/zabbix/zabbix_agent2.conf
+</code></pre>
+<pre><code class="language-bash">### Option: AllowKey
+#       Allow execution of item keys matching pattern.
+#       Multiple keys matching rules may be defined in combination with DenyKey.
+#       Key pattern is wildcard expression, which support &quot;*&quot; character to match any number of any characters in ce&gt;
+#       Parameters are processed one by one according their appearance order.
+#       If no AllowKey or DenyKey rules defined, all keys are allowed.
+#
+# Mandatory: no
+AllowKey=system.run[*]
+</code></pre>
+<h3 id="direct-cli-command-execution">Direct CLI Command Execution</h3>
+<p>Now prepare a few sensor/smarttools commands to extract single values of interest:</p>
+<pre><code class="language-bash">smartctl -a /dev/sda | grep Temperature_Celsius | awk {&#x27;print $10&#x27;}
+23
+
+smartctl -a /dev/nvme0 | grep Temperature | awk {&#x27;print $2&#x27;} | grep -o &#x27;[0-9]\+&#x27;
+51
+
+sudo sensors | grep &#x27;Core 0&#x27; | awk -F&#x27;[+|.]&#x27; {&#x27;print $2&#x27;}
+30
+</code></pre>
+<p>We can add these scripts to our Zabbix Server <strong>Scripts</strong> config:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_4-87d9b2bac94c1a18bdb6830fdcd8e24e.png" width="1047" height="728"></p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_5-63c1a3238b6167a3fdc289bfdfe47814.png" width="1047" height="506"></p>
+<p>As a manual script item we can now execute those scripts directly from our global dashboard:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_6-6fcb4c9631fbdc7144148f4e6a05dddc.png" width="1045" height="494"></p>
+<p>If you run into the following error message <strong>Cannot execute script. Unknown metric system.run</strong> you skipped the step above of adding the zabbix agent to your host <code>sudoers</code> - or forgot to restart the Zabbix Agent service:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_7-5e1df46ac70a45e1e24a59aa75101d7e.png" width="1042" height="231"></p>
+<p>If everything is set up right your server should now be able to retrieve the Temperature value from your host system:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_8-15a96bf838f727952cc26b3ea3c1d96e.png" width="1042" height="330"></p>
+<h3 id="working-with-shell-scripts">Working with Shell Scripts</h3>
+<p>To replace the nasty wildcard execution permission we can now replace the direct commands with a shell script. Just add all CLI commands you want to execute to separate shell files in a directory accessible to the Zabbix Agent:</p>
+<p><em>/opt/zabbix/temp_sda.sh</em></p>
+<pre><code class="language-sh">#!/bin/bash
+sudo smartctl -a /dev/sda | grep Temperature_Celsius | awk {&#x27;print $10&#x27;}
+</code></pre>
+<p><em>/opt/zabbix/temp_nvme0.sh</em></p>
+<pre><code class="language-sh">#!/bin/bash
+smartctl -a /dev/nvme0 | grep Temperature | awk {&#x27;print $2&#x27;} | grep -o &#x27;[0-9]\+&#x27;
+</code></pre>
+<p><em>/opt/zabbix/temp_core0.sh</em></p>
+<pre><code class="language-sh">#!/bin/bash
+sudo sensors | grep &#x27;Core 0&#x27; | awk -F&#x27;[+|.]&#x27; {&#x27;print $2&#x27;}
+</code></pre>
+<p>and so on...</p>
+<p>Now replace the wildcard with the explicit script file calls to exclude any script not specifically defined by you:</p>
+<pre><code class="language-bash">nano nano /etc/zabbix/zabbix_agent2.conf
+</code></pre>
+<pre><code class="language-bash">### Option: AllowKey
+#       Allow execution of item keys matching pattern.
+#       Multiple keys matching rules may be defined in combination with DenyKey.
+#       Key pattern is wildcard expression, which support &quot;*&quot; character to match any number of any characters in ce&gt;
+#       Parameters are processed one by one according their appearance order.
+#       If no AllowKey or DenyKey rules defined, all keys are allowed.
+#
+# Mandatory: no
+AllowKey=system.run[sh /opt/zabbix/temp_nvme0.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_nvme1.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_sda.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_sdb.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core0.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core1.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core2.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core3.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core4.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core5.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core6.sh]
+AllowKey=system.run[sh /opt/zabbix/temp_core7.sh]
+</code></pre>
+<p>Now change the scripts accordingly on the Zabbix server:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_9-edcc328b100bc79e459fc1e106124e99.png" width="1046" height="726"></p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_10-31667a3ce4074abf2bd4e5b5ad4255c1.png" width="1045" height="772"></p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_11-de872d43ce42b4957986a120774bedbe.png" width="1047" height="298"></p>
+<p>Verify that it is still working:</p>
+<p><img alt="Zabbix v6 SMART HDD and CPU Temperature Check" src="/assets/images/Zabbix_Temperature_Check_12-bc60a4fccbe7d0b0caa796edcd52dd42.png" width="1043" height="319"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-tags-row row margin-bottom--sm"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/linux">LINUX</a></li><li class="tag_QGVx"><a class="tag_zVej tagRegular_sFm0" href="/docs/tags/zabbix">Zabbix</a></li></ul></div></div><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/DevOps/Zabbix/2024-03-07--zabbix-v6-hdd-cpu-temp-check/index.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/category/zabbix"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Zabbix</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/DevOps/Zabbix/2022-07-15-zabbix-for-zimbra/2022-07-15"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Zabbix &lt;3 Zimbra</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#install-smartmontools-and-lm-sensors" class="table-of-contents__link toc-highlight">Install Smartmontools and LM Sensors</a><ul><li><a href="#harddrive-monitoring" class="table-of-contents__link toc-highlight">Harddrive Monitoring</a></li><li><a href="#using-smartctl" class="table-of-contents__link toc-highlight">Using Smartctl</a></li><li><a href="#cpu-temperature" class="table-of-contents__link toc-highlight">CPU Temperature</a></li></ul></li><li><a href="#zabbix" class="table-of-contents__link toc-highlight">Zabbix</a><ul><li><a href="#preparing-zabbix-agent2" class="table-of-contents__link toc-highlight">Preparing Zabbix-Agent2</a></li><li><a href="#direct-cli-command-execution" class="table-of-contents__link toc-highlight">Direct CLI Command Execution</a></li><li><a href="#working-with-shell-scripts" class="table-of-contents__link toc-highlight">Working with Shell Scripts</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Research</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Notebook</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tags">Tags</a></li><li class="footer__item"><a class="footer__link-item" href="/Curriculum-Vitae">CV</a></li></ul></div><div class="col footer__col"><div class="footer__title">Social</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.linkedin.com/in/mike-polinowski-6396ba121/" target="_blank" rel="noopener noreferrer" class="footer__link-item">LinkedIn<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://twitter.com/MikePolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a href="https://www.flickr.com/people/149680084@N06/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Flickr<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/mpolinowski" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Mike Polinowski, INSTAR Deutschland GmbH, Shenzhen - China.</div></div></div></footer></div>
+</body>
+</html>
