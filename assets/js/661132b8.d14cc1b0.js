@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmikes_dev_notebook=self.webpackChunkmikes_dev_notebook||[]).push([[47752],{57025:e=>{e.exports=JSON.parse('{"label":"Development","permalink":"/blog/tags/development","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
