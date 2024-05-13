@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmikes_dev_notebook=self.webpackChunkmikes_dev_notebook||[]).push([[89267],{828289:e=>{e.exports=JSON.parse('[{"label":"DevOps","permalink":"/blog/tags/dev-ops","count":3},{"label":"Development","permalink":"/blog/tags/development","count":1},{"label":"Markdown","permalink":"/blog/tags/markdown","count":1}]')}}]);
