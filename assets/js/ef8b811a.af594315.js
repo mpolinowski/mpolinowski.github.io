@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmikes_dev_notebook=globalThis.webpackChunkmikes_dev_notebook||[]).push([[38947],{256600(o){o.exports=JSON.parse('{"authors":[{"name":"Mike Polinowski","title":"CTO INSTAR Deutschland GmbH","url":"https://github.com/mpolinowski","imageURL":"https://github.com/mpolinowski.png","key":"mpolinowski","page":null,"count":5}]}')}}]);
