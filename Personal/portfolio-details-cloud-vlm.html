@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - INSTAR Cloud Vision Language Annotation</title>
+  <title>Portfolio Details - Edge Vision-Language Model (SmolVLM)</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
         <div class="row">
 
           <div class="col-lg-8">
-            <h2 class="portfolio-title">INSTAR Cloud - Vision Language Annotation</h2>
+            <h2 class="portfolio-title">Edge Vision-Language Model (SmolVLM)</h2>
 
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
@@ -81,13 +81,15 @@
             <h3>Project information</h3>
             <ul>
               <li><strong>Category</strong>: MLOps</li>
-              <li><strong>Client</strong>: Waletech (INSTAR Germany) Shenzhen, China</li>
-              <li><strong>Project date</strong>: 15 Jul, 2020</li>
+              <li><strong>Client</strong>: INSTAR Deutschland GmbH (Waletech) Shenzhen, China</li>
+              <li><strong>Project date</strong>: 15 Jul, 2026</li>
               <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
             </ul>
 
             <p>
-              <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-20-training-smolvlm-vision-language-model/2026-07-20" target="_blank">SmolVLM</a> exported to the OpenVino format - finally a VLM transformer model that can be deployed on a CPU server! The model was fine-tuned using custom annotation using <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-15-gemma4-vlm-annotations/2026-07-15" target="_blank">a YOLO object detector with a GEMMA4 VLM</a> - letting the custom trained object detector point out points of interest in the custom dataset to the Vison-Language-Model. Different SmolVLM models were trained with different input prompts and output formats to minimize the output generation time. Still WiP - adding the predicted output to Elasticsearch to make alarm events search-able.
+              A Vision-Language Model on a CPU server, without a GPU. I <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-20-training-smolvlm-vision-language-model/2026-07-20" target="_blank">fine-tuned SmolVLM</a> on a custom security-scene dataset, using a custom-trained YOLO detector (<a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-15-gemma4-vlm-annotations/2026-07-15" target="_blank">annotated with a GEMMA-4 VLM pass</a>) to
+              point out regions of interest. Trained multiple variants with different input prompts and output formats to minimise token-generation latency. Exported to OpenVINO format for CPU deployment.
+              Currently in progress: feeding predicted scene descriptions into Elasticsearch so alarm events become text-searchable by the customer.
             </p>
           </div>
 

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - INSTAR Cloud License Plate Recognition</title>
+  <title>Portfolio Details - ANPR – Fast-Plate-OCR</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
         <div class="row">
 
           <div class="col-lg-8">
-            <h2 class="portfolio-title">INSTAR Cloud - License Plate Recognition</h2>
+            <h2 class="portfolio-title">ANPR – Fast-Plate-OCR</h2>
 
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
@@ -77,13 +77,13 @@
             <h3>Project information</h3>
             <ul>
               <li><strong>Category</strong>: MLOps</li>
-              <li><strong>Client</strong>: Waletech (INSTAR Germany) Shenzhen, China</li>
+              <li><strong>Client</strong>: INSTAR Deutschland GmbH (Waletech) Shenzhen, China</li>
               <li><strong>Project date</strong>: 01 Nov, 2025</li>
               <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
             </ul>
 
             <p>
-                Replacing an old custom Tensorflow OCR model with a lightweight LiteRT version of <a href="https://github.com/ankandrew/fast-plate-ocr" target="_blank">Fast-Plate-OCR</a>. The model is integrated in the INSTAR Cloud AI pipeline and directly fed the cropped license plate detected by the main object detector - a custom LiteRT YOLO model. This setup reduced the detection time to single digit milliseconds on a CPU server and reduced the overall server footprint to barely noticeable.
+                Replaced a legacy custom TensorFlow OCR model with a lightweight LiteRT build of <a href="https://github.com/ankandrew/fast-plate-ocr" target="_blank">Fast-Plate-OCR</a>. The model sits downstream of the main object-detector (a custom LiteRT YOLO) and receives only the cropped plate region. End-to-end plate detection time dropped to single-digit milliseconds on a CPU server; the additional compute footprint is negligible at fleet scale.
             </p>
           </div>
 

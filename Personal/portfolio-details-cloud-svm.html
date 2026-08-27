@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - INSTAR Cloud Face Recognition</title>
+  <title>Portfolio Details - Face Recognition – PCA / HoG / SVM Pipeline</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,7 +46,7 @@
         <div class="row">
 
           <div class="col-lg-8">
-            <h2 class="portfolio-title">INSTAR Cloud - Face Recognition</h2>
+            <h2 class="portfolio-title">Face Recognition – PCA / HoG / SVM Pipeline</h2>
 
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
@@ -85,13 +85,13 @@
             <h3>Project information</h3>
             <ul>
               <li><strong>Category</strong>: MLOps</li>
-              <li><strong>Client</strong>: Waletech (INSTAR Germany) Shenzhen, China</li>
-              <li><strong>Project date</strong>: 01 Feb, 2020</li>
+              <li><strong>Client</strong>: INSTAR Deutschland GmbH (Waletech) Shenzhen, China</li>
+              <li><strong>Project date</strong>: 01 Feb, 2025</li>
               <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
             </ul>
 
             <p>
-                Replacing an old custom Tensorflow Embedding model that was used to prepare the numerical embeddings for an SVM classifier with a simple <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/ML/2023-04-09-principal-component-analysis/2023-04-09" target="_blank">Principal Component Analysis (PCA)</a> with a <a href="https://www.researchgate.net/publication/342886529_Face_Detection_Histogram_of_Oriented_Gradients_and_Bag_of_Feature_Method" target="_blank">Histogram of Oriented Gradients (HoG)</a> fallback. This task had more complexity as it required a custom training path to be triggered by customers through the Cloud UI. The used YOLO RTLite model provided the detected faces as crops that could be assigned to classes that then were used to train the pca-svm or hog-svm classifier pipeline.
+                Replaced a custom TensorFlow embedding model (preparing vectors for an SVM classifier) with a PCA projection and a Histogram-of-Oriented-Gradients fallback path. The complexity was not the model swap but the workflow: a custom training pipeline triggered by end customers through the Cloud UI, where YOLO-RTLite face crops are assigned to user-defined classes and fed into the <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/ML/2023-04-09-principal-component-analysis/2023-04-09" target="_blank">PCA-SVM</a> or <a href="https://www.researchgate.net/publication/342886529_Face_Detection_Histogram_of_Oriented_Gradients_and_Bag_of_Feature_Method" target="_blank">HoG-SVM</a> classifier pipelines. Shipped as a self-service "train your own face list" feature.
             </p>
           </div>
 
