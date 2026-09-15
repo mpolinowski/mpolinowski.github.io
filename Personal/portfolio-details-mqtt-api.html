@@ -115,8 +115,9 @@
             </ul>
 
             <p>
-                INSTAR cameras had no native smart-home interface. I designed and joined the embedded system team to implement two complementary protocols directly in the firmware:
+                <strong>The problem:</strong>INSTAR cameras had no native smart-home interface. I designed and joined the embedded system team to implement two complementary protocols directly in the firmware:
             </p>
+            <p><strong>What I did:</strong> Designed and implemented two complementary protocols directly in the firmware:</p>
             <ul>
                 <li>
                     <strong>HTTP/S webhooks</strong> – every major automation platform that exposes a webhook endpoint (Home Assistant, openHAB, ioBroker, custom Node-RED flows) can now receive camera events as GET/POST pulses. Extended with URL-query parameters so the payload carries structured data: detected object classes, confidence scores, and AI-module annotations.
@@ -126,8 +127,8 @@
                 </li>
             </ul>
             <p>
-                To my knowledge, INSTAR remains the only surveillance-camera manufacturer that exposes its **full control interface** over MQTT. This single decision is what made the product drop-in
-                compatible with the entire open-source smart-home ecosystem.
+                To my knowledge, INSTAR remains the only surveillance-camera manufacturer that exposes its <strong>full control interface</strong> over MQTT. This single decision is what made the product drop-in
+                compatible with the entire open-source smart-home ecosystem — and laid the groundwork for the MCP server that turned those same MQTT topics into AI-agent tools.
             </p>
           </div>
 

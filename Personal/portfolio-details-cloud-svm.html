@@ -89,9 +89,14 @@
               <li><strong>Project date</strong>: 01 Feb, 2025</li>
               <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
             </ul>
-
             <p>
-                Replaced a custom TensorFlow embedding model (preparing vectors for an SVM classifier) with a PCA projection and a Histogram-of-Oriented-Gradients fallback path. The complexity was not the model swap but the workflow: a custom training pipeline triggered by end customers through the Cloud UI, where YOLO-RTLite face crops are assigned to user-defined classes and fed into the <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/ML/2023-04-09-principal-component-analysis/2023-04-09" target="_blank">PCA-SVM</a> or <a href="https://www.researchgate.net/publication/342886529_Face_Detection_Histogram_of_Oriented_Gradients_and_Bag_of_Feature_Method" target="_blank">HoG-SVM</a> classifier pipelines. Shipped as a self-service "train your own face list" feature.
+                <strong>The problem:</strong> a heavy TensorFlow embedding model slowing the pipeline down, and a customer who wanted their custom face detections without filing a support ticket.
+
+                <strong>What I did:</strong> Replaced the embedding model with a <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/ML/2023-04-09-principal-component-analysis/2023-04-09" target="_blank">PCA projection</a> and a <a href="https://www.researchgate.net/publication/342886529_Face_Detection_Histogram_of_Oriented_Gradients_and_Bag_of_Feature_Method" target="_blank">Histogram-of-Oriented-Gradients</a> fallback, while keeping a CNN-SVM (FaceNet) path for higher accuracy. The model swap was the easy half — the real build was the multi-tenant workflow: a self-serve pipeline the customer triggers from the cloud UI, where YOLO face crops get assigned to user-defined classes, quality-scored, and balanced (including an "unknown-faces" class so a one-class SVM rejects strangers), then flow through either the PCA-SVM or HoG-SVM classifier (CNN-SVM fallback for safety).
+
+                Per-user models, label encoders, and face galleries are persisted on shared host volumes — a local model registry the inference container mounts — so any worker in the fleet can score a face against the same tenant's gallery without a database round-trip per request. I also kept parallel `dev` and `prod` model/gallery directories in the serving job, so a customer can A/B a retrained face list against the live one before it goes real. At inference time, face embeddings are clustered and grouped into a coherent list of persons, with threshold + margin scoring to avoid false matches. Shipped as a self-serve "train your own face list" feature.
+
+                <strong>The payoff:</strong> moved face-recognition training from an internal task into the customer's own hands while cutting prediction times by up to 50% to sub 300ms.
             </p>
           </div>
 

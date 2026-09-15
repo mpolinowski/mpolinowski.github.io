@@ -87,8 +87,16 @@
             </ul>
 
             <p>
-                The INSTAR Cloud AI pipeline initially ran distributed across multiple Nvidia GPU servers, each running custom TensorFlow and PyTorch models. I was tasked with cutting hardware cost while improving detection accuracy. I re-architected the entire chain: updated model weights, exported to CPU-friendly formats (LiteRT, OpenVINO), and rebuilt the serving layer as a multi-threaded Python pipeline using <a href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2026-07-17--zabbix-v7-redis-plugin/2026-07-17" target="_blank">Redis queues</a> and <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2023-01-26-python-ray-remote-actors/2023-01-26/" target="_blank">Python Ray Actors</a>. The result: a single CPU server handling the full payload that was later extended to two for redundancy — still at a fraction of the
-                previous GPU cost. Battle-proven in production at 10,000+ detection tasks per minute.
+                <strong>The problem:</strong> a chain of individually broken AI features — motion, face, plate, scene — each with its own model, its own crash modes, none stable under real load.
+            </p>
+            <p>
+                <strong>What I did:</strong> I built the one serving stack that ties them together — a distributed AI inference platform on a CPU-only server. Three resident model servers keep object detection (YOLOv10 / LiteRT-TFLite), plate OCR (Fast-Plate-OCR / LiteRT), and a fine-tuned SmolVLM (OpenVINO) scene observer loaded once in memory behind a <a href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2026-07-17--zabbix-v7-redis-plugin/2026-07-17" target="_blank">Redis job queue</a>: sorted-set task queues for batching, thread-safe claim-and-process worker loops, and UUID-keyed request/result slots so every prediction call resolves without blocking the others. A watchdog validates each incoming alarm job (JSON schema), then orchestrates a pool of <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2023-01-26-python-ray-remote-actors/2023-01-26/" target="_blank">Ray actors</a> (up to 18 concurrent, each 1 CPU capped) with round-robin dispatching, result collection, and fleet-wide structured logging. A connector layer then writes each detection into the customer-facing MySQL database — alarms, plate hits, face matches — triggers email notifications with per-tenant rules, and cross-server load balancing routes each job to the least-loaded node.
+            </p>
+            <p>
+                Six months of model optimization (OpenVINO / LiteRT conversion), memory budgeting (partitioning the Ray heap from the shared-memory store), and fault-tolerance work drove the failure modes out: no more memory leaks, random crashes, or multi-minute predictions at peak. It ships as a documented HashiCorp Nomad job — canary-first rollout with automatic rollback on a failing health check, a bounded retry policy, and strict per-task CPU/memory limits — so a broken model can't take down the fleet, just that one allocation. Deployed on Nomad behind a dedicated Zabbix dashboard for the cloud team.
+            </p>
+            <p>
+                <strong>The payoff:</strong> the system that makes every AI project above stop being a demo and become a service.
             </p>
           </div>
 

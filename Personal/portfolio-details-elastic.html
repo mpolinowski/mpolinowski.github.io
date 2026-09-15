@@ -85,9 +85,20 @@
               <li><strong>Project date</strong>: 01 March, 2018</li>
               <li><strong>Project URL</strong>: <a href="https://www.elastic.co/elasticsearch/" target="_blank">www.elastic.co</a></li>
             </ul>
-
             <p>
-              <a href="https://mpolinowski.github.io/docs/tags/elasticsearch" target="_blank">Elasticsearch</a> is the search and analytics backbone for three separate products: the customer knowledge base (full-text search across documentation and FAQ), the AI prediction layer (storing and querying detection events, plate reads, and face-match results), and the internal SysAdmin dashboard. I own the index schema, the ingestion pipelines that feed it from the AI chain and the ticketing system, and the performance tuning that keeps p95 search latency under 200 ms at fleet scale.
+                <strong>The problem:</strong> three products each quietly needed to search and correlate events at scale, and none had a trustworthy backend.
+            </p>
+            <p>
+                <strong>What I did:</strong> Made <a href="https://mpolinowski.github.io/docs/tags/elasticsearch" target="_blank">Elasticsearch</a> the backbone for all three — the customer knowledge base, the AI prediction layer (detection events, plate reads, face matches), and the internal sysadmin dashboard.
+            </p>
+            <p>
+                I own the index design: custom bilingual analyzers (separately stemmed English and German analysis, with char/tokenizer pipelines and per-language stop-word + stemmer chains), multi-field mappings that pair analyzed text fields with .raw keyword sub-fields for exact-match faceting (series, type, tags, chapter, version), and index:false on display-only fields (links, images, sha256) to keep the index lean. Documents are bulk-ingested via the _bulk API from the AI chain, from the camera API/CGI reference (a structured index carrying per-parameter permissions.get/set and value ranges), and from the ticketing system; aliased indexes let me reindex blue-green behind a zero-downtime alias swap. I own the relevance layer — field weights, bool must/filter queries, and fuzziness — and the tuning that keeps p95 search under 200 ms at fleet scale.
+            </p>
+            <p>
+                The infra is Nomad-managed: a X-Pack secured single node (snapshot repo, tuned memlock/nofile ulimits, bounded JVM heap) and Kibana as separate health-checked services behind a hardened TLS 1.3 ingress with Let's Encrypt auto-renewal, exposed over a public HTTPS REST endpoint. Filebeat ingests server logs and flags anomalies; Kibana gives real-time infra insight.
+            </p>
+            <p>
+                <strong>The payoff:</strong> one query layer behind three products, fast enough to be invisible.
             </p>
           </div>
 

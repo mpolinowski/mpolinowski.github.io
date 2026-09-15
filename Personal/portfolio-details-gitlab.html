@@ -81,9 +81,14 @@
               <li><strong>Project date</strong>: 01 March, 2018</li>
               <li><strong>Project URL</strong>: <a href="https://about.gitlab.com/" target="_blank">gitlab.com</a></li>
             </ul>
-
             <p>
-              All product code, infrastructure-as-code, and ML model artefacts live in self-hosted <a href="https://mpolinowski.github.io/docs/tags/gitlab" target="_blank">GitLab</a>. I built the CI/CD pipeline that takes open-source or internal source code, wraps it in a Docker container, runs tests, and pushes the artefact to the Nomad registry — triggered on merge, with blue-green rollout and automatic rollback. This replaced a patchwork of manual SSH deployments and is the single pipeline through which every web service, AI model, and infrastructure change reaches production.
+                <strong>The problem:</strong> production reached by manual SSH, patch by patch — inconsistent, untracked, and impossible to roll back cleanly.
+
+                <strong>What I did:</strong> Everything — product code, infrastructure-as-code (Nomad job files), and ML model artifacts — lives in a <a href="https://mpolinowski.github.io/docs/tags/gitlab" target="_blank">self-hosted GitLab EE server</a>, which I also deploy and operate as a Nomad job with the container registry, Let's Encrypt auto-renewal, and a hardened three-tier backup/restore procedure (DB+repos, then registry, then artifacts) so the whole platform is recoverable in minutes, not hours.
+
+                The pipeline wraps source in Docker, runs tests, and pushes the artifact to the internal registry; the Nomad driver pulls it on merge with canary rollout and automatic rollback on a failing health check. Protected environments plus a per-namespace ACL policy mean a merge can't ship to a namespace the author isn't allowed to touch. It is now the single path through which every web service, AI model, and infra change reaches production.
+
+                <strong>The payoff:</strong> the difference between "deploys" and "shipping at fleet scale."
             </p>
           </div>
 

@@ -81,9 +81,14 @@
               <li><strong>Project date</strong>: 01 Nov, 2025</li>
               <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
             </ul>
-
             <p>
-                Replaced a legacy custom TensorFlow OCR model with a lightweight LiteRT build of <a href="https://github.com/ankandrew/fast-plate-ocr" target="_blank">Fast-Plate-OCR</a>. The model sits downstream of the main object-detector (a custom LiteRT YOLO) and receives only the cropped plate region. End-to-end plate detection time dropped to single-digit milliseconds on a CPU server; the additional compute footprint is negligible at fleet scale.
+                <strong>The problem:</strong> a legacy custom TensorFlow OCR model — slow and heavier than it needed to be — sitting on the read-plate path.
+
+                <strong>What I did:</strong> Replaced it with a lightweight LiteRT (TFLite) build of <a href="https://github.com/ankandrew/fast-plate-ocr" target="_blank">Fast-Plate-OCR</a>, positioned downstream of the YOLO detector so it only ever sees a clean cropped plate region — detection and OCR decoupled into separate services communicating through a Redis job queue. Four model variants (CCT-S / CCT-XS, in ReLU and standard activations) are selectable per alarm, and the worker pool claims batches with thread-safe locking so concurrent alarm events don't drop plates.
+
+                In production the OCR path runs as a Nomad-managed service on a shared host volume mount that holds the variant weights and a `plates` / `plates-dev` buffer, so a new plate model ships as a canary-safe image rollout. End-to-end plate detection dropped to single-digit milliseconds on a CPU server, and the added compute footprint is negligible even at fleet scale — the load-balanced cloud data frontend routes each plate job to the least-loaded AI backend.
+
+                <strong>The payoff:</strong> plate reads fast enough to be invisible, cheap enough to run everywhere.
             </p>
           </div>
 

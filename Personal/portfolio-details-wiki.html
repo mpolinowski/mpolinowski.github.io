@@ -85,9 +85,20 @@
               <li><strong>Project date</strong>: 01 Apr, 2012</li>
               <li><strong>Project URL</strong>: <a href="https://wiki.instar.com/en/" target="_blank">wiki.instar.com</a></li>
             </ul>
-
             <p>
-              INSTAR previously had no structured online documentation — customers emailed, called, or relied on sales reps for answers. I designed and built the internal and customer-facing wiki from scratch: <a href="https://mpolinowski.github.io/docs/tags/gatsby" target="_blank">Gatsby.js</a> front end, headless CMS for content, Elasticsearch for full-text search. The platform was then integrated into the onboarding flow of every new product. Today it is the first place support, sales, and customers go before a ticket is ever opened. I own the content architecture, the build pipeline, and the search-relevance tuning.
+                <strong>The problem:</strong> INSTAR had no structured online documentation — customers emailed, called, or asked a sales rep for answers.
+            </p>
+            <p>
+                <strong>What I did:</strong> Designed and built the internal and customer-facing wiki from scratch as a <a href="https://mpolinowski.github.io/docs/tags/react" target="_blank">TypeScript React</a> + <a href="https://mpolinowski.github.io/docs/tags/gatsby" target="_blank">Gatsby static site</a> with an <a href="https://mpolinowski.github.io/docs/tags/mdx" target="_blank">MDX content pipeline (a remark plugin chain handling PrismJS code highlighting, image optimization to WebP/AVIF via gatsby-image/Sharp, auto-generated heading anchors, and linked-file copying)</a>. It ships as an installable, offline-first Progressive Web App — a Workbox service worker with a precached page set plus a full PWA manifest — with per-page SEO (sitemap, canonical URLs, structured meta/Open-Graph/Twitter cards) and GA4 + gtag analytics.
+            </p>
+            <p>
+                The build runs with a tuned Node heap and a custom Webpack config (SSR-safe shims for browser-only modules). It is a per-locale (DE/EN/FR) static build served by a custom multi-stage Docker image: a small Go/<a href="https://mpolinowski.github.io/docs/tags/go-fiber" target="_blank">GoFiber static server</a> (prefork, recover + structured logging) on Alpine, tagged and pushed to the <a href="https://mpolinowski.github.io/docs/tags/gitlab" target="_blank">self-hosted GitLab container registry</a>. Those per-locale images run as separate <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad</a> jobs behind a single hardened <a href="https://mpolinowski.github.io/docs/tags/nginx" target="_blank">nginx ingress</a> — TLS 1.3, HSTS, strict security headers, HTTP/2, HTTP to HTTPS redirect — with Let's Encrypt renewed by a scheduled Nomad batch job. Elasticsearch powers faceted full-text search (weighted multi-field, fuzzy, autosuggest, streaming results, shareable state in the URL).
+            </p>
+            <p>
+                Today it is the first place support, sales, and customers go before a ticket is even opened — the same Elasticsearch stack that later became the backbone of our AI prediction layer and the admin dashboard
+            </p>
+            <p>
+                <strong>The payoff:</strong> deflected the "where do I find X?" ticket category — for over a decade.
             </p>
           </div>
 

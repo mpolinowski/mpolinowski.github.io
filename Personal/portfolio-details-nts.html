@@ -69,9 +69,17 @@
               <li><strong>Project date</strong>: 01 Feb, 2020</li>
               <li><strong>Project URL</strong>: <a href="https://chrony.tuxfamily.org/index.html" target="_blank">chrony.tuxfamily.org</a></li>
             </ul>
-
             <p>
-              Every alarm, detection event, and log line across the camera fleet and the cloud backend must carry a trustworthy timestamp. I deployed <a href="https://mpolinowski.github.io/docs/tags/NTS" target="_blank">chrony</a> (NTP with NTS/TLS authentication) as a fleet-wide service: cameras, servers, and the AI inference pipeline all sync to a single time source. This is what makes cross-device alarm correlation, log forensics, and customer-facing event timelines actually reliable — and what keeps the Elasticsearch search results honest when a customer asks *"what happened on my camera at 14:32?"
+                <strong>The problem:</strong> every alarm, detection event, and log line across the fleet and the cloud backend needed a trustworthy timestamp — and "the two cameras disagree by 40 seconds" is an un-debuggable system.
+            </p>
+            <p>
+                <strong>What I did:</strong> Deployed <a href="https://mpolinowski.github.io/docs/tags/NTS" target="_blank">chrony (NTP over NTS/TLS encryption + authentication)</a> as a fleet-wide service behind a <a href="https://mpolinowski.github.io/docs/tags/nginx" target="_blank">hardened nginx ingress</a>: TLS 1.3 with OCSP stapling, HSTS, and a stream-mode L4 proxy that UDP-forwards NTP (123) and NTS (4460) to the chrony backend, with service-discovery from Consul templating the upstreams so the proxy follows the service if it moves. Let's Encrypt is provisioned and renewed by a separate <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad batch job</a>. Cameras, servers, and the AI inference pipeline all sync to a single time source.
+            </p>
+            <p>
+                That's what makes cross-device alarm correlation, log forensics, and the customer-facing event timeline actually reliable — and what keeps Elasticsearch honest when someone asks "what happened on my camera at 14:32?"
+            </p>
+            <p>
+                <strong>The payoff:</strong> it now runs all of INSTAR's cloud infra and is the default time-sync option in every IoT device we sell.
             </p>
           </div>
 

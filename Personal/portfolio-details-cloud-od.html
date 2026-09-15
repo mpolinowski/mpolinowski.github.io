@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Portfolio Details - INSTAR Cloud Computer Vision Engine for IP Security Cameras — Edge to Cloud</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/Personal/personal_assets/img/favicon.png" rel="icon">
+  <link href="/Personal/personal_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/Personal/personal_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/Personal/personal_assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/Personal/personal_assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/Personal/personal_assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/Personal/personal_assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/Personal/personal_assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/Personal/personal_assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Personal - v4.9.1
+  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details ======= -->
+    <div id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-8">
+            <h2 class="portfolio-title">Computer Vision Engine for IP Security Cameras — Edge to Cloud</h2>
+
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1a.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1c.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1d.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1e.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1f.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1g.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1h.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1i.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                    <img src="personal_assets/img/portfolio/portfolio-details-cloud-ai-1j.png" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-4 portfolio-info">
+            <h3>Project information</h3>
+            <ul>
+              <li><strong>Category</strong>: MLOps</li>
+              <li><strong>Client</strong>: INSTAR Deutschland GmbH (Waletech) Shenzhen, China</li>
+              <li><strong>Project date</strong>: 15 Jul, 2026</li>
+              <li><strong>Project URL</strong>: <a href="https://cloud.instar.de/" target="_blank">INSTAR Cloud</a></li>
+            </ul>
+            <p>
+                <strong>The problem:</strong> Our cameras ran a legacy Caffe detector — fast but low-confidence, able to tell only three generic classes apart. Customers kept filing the same two complaints: it flags things that aren't there, and it misses things that are
+            </p>
+            <p>
+                <strong>What I did:</strong> I turned "a better model" from a guess into a process I owned end to end. I benchmarked five architectures against real surveillance footage and chose YOLO for speed, precision and ease of use. Then I went to the customers and pulled their complaint videos — that feedback drove the dataset, not the other way around.
+            </p>
+            <p>
+                I built a surveillance-specific dataset for what these cameras actually see: grainy frames, motion blur, low light, and monochrome infrared-LED night video. And extended the model from three classes to nineteen, because that's how many things customers said they needed to see.
+            </p>
+            <p>
+                From YOLOv3 to YOLOv10 I picked YOLOv7 for embedded edge deployment — the best balance of precision, size and speed for the target hardware. And YOLO10 for the cloud deployment for it's higher accuracy and ease of export to CPU-friendly formats (float16 / RTLite). I consolidated the embedded Linux and cloud teams' needs so one model type served both, simplifying the training steps, then exported the PyTorch model to ONNX, quantized it, and converted it to the proprietary Novatek firmware format.
+            </p>
+            <p>
+                Once deployed I fed follow-on complaint videos from live customers into an MLflow-monitored training pipeline. Accuracy climbed and false detection dropped on both sides — fewer false positives and fewer false negatives. After that model held in the field I built a second one around static objects: parking, missing protective gear, fire and smoke, unattended luggage
+            </p>
+            <p>
+                <strong>The payoff:</strong> The same training pipeline for all models, evaluated on real footage, served as a canary-deployed <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad job</a> for the cloud with <a href="https://mpolinowski.github.io/docs/DevOps/Zabbix/2026-07-17--zabbix-v7-redis-plugin/2026-07-17" target="_blank">Zabbix dashboard</a> and added to a Gitlab CI/CD pipeline for the camera firmware build.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div><!-- End Portfolio Details -->
+
+  </main><!-- End #main -->
+
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
+    <a href="https://bootstrapmade.com/" target="_blank">Designed with BootstrapMade</a>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="personal_assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="personal_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="personal_assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="personal_assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="personal_assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="personal_assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="personal_assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="personal_assets/js/main.js"></script>
+
+</body>
+
+</html>

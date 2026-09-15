@@ -81,9 +81,17 @@
               <li><strong>Project date</strong>: 01 Feb, 2016</li>
               <li><strong>Project URL</strong>: <a href="https://osticket.com/" target="_blank">osticket.com</a></li>
             </ul>
-
             <p>
-              Customer support previously ran on email inboxes with no routing, no SLA tracking, and no history. I deployed <a href="https://mpolinowski.github.io/docs/tags/os-ticket" target="_blank">osTicket</a> as the central ticketing platform: email, web-form, and API intake all funnel into one queue with priority routing, SLA timers, and per-technician dashboards. The result was a support team that could finally say *"we responded within 4 hours"* with data to back it up.
+                <strong>The problem:</strong> support ran on raw email inboxes — no routing, no SLA tracking, no history.
+            </p>
+            <p>
+                <strong>What I did:</strong> Deployed <a href="https://mpolinowski.github.io/docs/tags/os-ticket" target="_blank">osTicket</a> as the central queue: email, web-form, and API intake all funnel into one place with priority routing, SLA timers, and per-technician dashboards. Reply templating and search over past solutions close it out.
+            </p>
+            <p>
+                It runs as a Nomad-managed service — <a href="https://mpolinowski.github.io/docs/tags/nginx" target="_blank">hardened nginx ingress</a> with TLS 1.3 and Let's Encrypt, a MariaDB backend, canary-safe rollout — and I built a scheduled BorgBackup job (encryption-at-rest, LZ4 compression, tiered retention) into the same platform so ticket history and attachments are always recoverable. A parallel `osticket-testing` clone of the identical job gives support a throwaway staging instance without touching production.
+            </p>
+            <p>
+                <strong>The payoff:</strong> a support team that could finally say "we responded within 4 hours" with data to back it up. And it's now embedded in the web shop and the UI of every network device we sell — the primary way customers reach sales, RMA, or support.
             </p>
           </div>
 

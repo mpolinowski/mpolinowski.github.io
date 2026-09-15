@@ -87,9 +87,23 @@
             </ul>
 
             <p>
-              A Vision-Language Model on a CPU server, without a GPU. I <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-20-training-smolvlm-vision-language-model/2026-07-20" target="_blank">fine-tuned SmolVLM</a> on a custom security-scene dataset, using a custom-trained YOLO detector (<a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-15-gemma4-vlm-annotations/2026-07-15" target="_blank">annotated with a GEMMA-4 VLM pass</a>) to
-              point out regions of interest. Trained multiple variants with different input prompts and output formats to minimise token-generation latency. Exported to OpenVINO format for CPU deployment.
-              Currently in progress: feeding predicted scene descriptions into Elasticsearch so alarm events become text-searchable by the customer.
+                <strong>The problem:</strong> a VLM is a GPU-shaped tool, and we had a CPU server and a hard latency budget.
+            </p>
+            <p>
+
+                <strong>What I did:</strong> I <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-20-training-smolvlm-vision-language-model/2026-07-20" target="_blank">fine-tuned SmolVLM</a> on a custom security-scene dataset. To teach it what matters, I first ran my <a href="https://mpolinowski.github.io/docs/IoT-and-Machine-Learning/AIOps/2026-07-15-gemma4-vlm-annotations/2026-07-15" target="_blank">YOLO detector over the footage and fed those bounding-box regions into a Gemma-4 pass</a> — using the detector's output to point the model at the regions of interest and prime it to be an expert on spotting potential security risks, before it ever sees the whole scene. I trained multiple variants (256M / 500M, 8-bit, different prompts, different output shapes) specifically to cut token-generation latency before it reached the serving layer: deterministic decoding, a strict 512-token budget, and enforced-JSON outputs. I exported the models to OpenVINO (OVModelForVisualCausalLM) for CPU deployment, and the serving layer keeps each variant loaded once behind a thread-safe lock so a worker thread returns a prediction without blocking the pipeline.
+            </p>
+            <p>
+
+                In production it runs inside the Nomad-managed inference job: model weights live on a shared host volume — a local model registry the container mounts — so shipping a new variant is a canary-safe container rollout, not a retrain-and-redeploy cycle.
+            </p>
+            <p>
+
+                <strong>In progress:</strong> feeding the scene descriptions into Elasticsearch so an alarm event becomes customer-searchable text.
+            </p>
+            <p>
+
+                <strong>The payoff:</strong> multimodal understanding on hardware that shouldn't be able to do it, within a performance target.
             </p>
           </div>
 

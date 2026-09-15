@@ -81,9 +81,12 @@
               <li><strong>Project date</strong>: 01 March, 2018</li>
               <li><strong>Project URL</strong>: <a href="https://www.zabbix.com/" target="_blank">www.zabbix.com</a></li>
             </ul>
-
             <p>
-                Step two after orchestrating deployments with <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Hashicorp Nomad</a>: knowing when something is going wrong before the customer notices. I integrated <a href="https://mpolinowski.github.io/docs/tags/zabbix" target="_blank">Zabbix Server Monitor</a> across the full server fleet — CPU, memory, disk, and network saturation, plus custom health-check API probes for every customer-facing service. System-critical variables are extracted into per-service dashboards, with email and Slack alerts on threshold breach. The result: the Cloud team now gets paged on degradation, not on a customer support ticket.
+                <strong>The problem:</strong> on a growing fleet, we were learning about outages from customers, not from our dashboards.
+
+                <strong>What I did:</strong> Integrated Zabbix across the full fleet — CPU, memory, disk, network saturation, plus custom health-check API probes for every customer-facing service. The <a href="https://mpolinowski.github.io/docs/tags/zabbix" target="_blank">Zabbix server</a> itself is containerized on <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad</a> against a PostgreSQL backend — server, frontend, and database in one job with canary-safe rollout and a health-gated deploy, so the monitoring stack is as fault-tolerant as the things it watches. I sized the Zabbix proxy/server caches (history, trend, value caches) for our event volume and tuned ulimits for the connection counts. System-critical variables feed per-service dashboards, with email and Slack alerts on threshold breach.
+
+                <strong>The payoff:</strong> the cloud team gets paged on degradation, not on a support ticket — and the Zabbix dashboards are the same ones the AI pipeline project above relies on.
             </p>
           </div>
 

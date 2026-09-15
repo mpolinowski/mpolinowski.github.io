@@ -85,7 +85,15 @@
               <li><strong>Project date</strong>: 01 March, 2018</li>
               <li><strong>Project URL</strong>: <a href="https://www.discourse.org/" target="_blank">www.discourse.org</a></li>
             </ul>
-
+            <p>
+                <strong>The problem:</strong> every "how do I connect my camera?" question landed on my desk as a Tier-1 ticket.
+            </p>
+            <p>
+                <strong>What I did:</strong> Deployed and configured <a href="https://mpolinowski.github.io/docs/tags/discourse" target="_blank">Discourse</a> as the customer forum on the same hardened infrastructure stack as the rest of INSTAR: a <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad</a>-managed container with a canary-safe rollout, a dedicated namespace + node pool, its own ACL policy, and a <a href="https://mpolinowski.github.io/docs/tags/nginx" target="_blank">hardened nginx ingress (TLS 1.3, HSTS, Let's Encrypt via a scheduled certbot job)</a> in front. Seeded with integration guides and FAQ threads and wired into the product docs, the forum became the community's front door.
+            </p>
+            <p>
+                <strong>The payoff:</strong> a measurable drop in repetitive Tier-1 volume, because customers and integrators now answer each other. I remain the escalation point for forum-reported bugs that point at firmware or the API — and I use the forum to push new-feature guides.
+            </p>
             <p>
               Before this, every "how do I connect my camera to Home Assistant?" question landed on my desk as a Tier-2 ticket. I deployed and configured <a href="https://mpolinowski.github.io/docs/tags/discourse" target="_blank">Discourse</a> as the customer community forum, seeded it with integration guides and FAQ threads, and wired it into the product documentation. The direct impact: a measurable reduction in repetitive Tier-1 support volume, because customers and integrators now answer each other. I remain the escalation point for forum-reported bugs that trace back to firmware or API-level issues.
             </p>

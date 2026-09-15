@@ -101,9 +101,17 @@
               <li><strong>Project date</strong>: 01 Feb, 2020</li>
               <li><strong>Project URL</strong>: <a href="https://www.nomadproject.io/" target="_blank">www.nomadproject.io</a></li>
             </ul>
-
             <p>
-                Before this, deployments across a growing fleet of virtual and bare-metal servers were manual, inconsistent, and untracked. I evaluated Kubernetes and <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Hashicorp Nomad</a>, chose Nomad for its lean footprint (install only what the workload needs), and built a unified orchestration layer for all engineering teams. Every deployment is now a documented job file: containers spin up, self-heal, auto-scale, and roll back on failure. Consul provides service discovery and health-checking so services find each other across data centres without hard-coded IPs. Onboarding a new team to the platform went from a multi-day manual process to a single job-file PR.
+                <strong></strong>The problem: deployments across a growing bare-metal + VPS fleet were manual, inconsistent, and untracked.
+            </p>
+            <p>
+                What I did: First the honest evaluation — <a href="https://mpolinowski.github.io/docs/tags/ansible" target="_blank">Ansible/Tower</a>, <a href="https://mpolinowski.github.io/docs/tags/salt" target="_blank">Salt</a>, <a href="https://mpolinowski.github.io/docs/tags/kubernetes" target="_blank">Kubernetes</a>, and <a href="https://mpolinowski.github.io/docs/tags/nomad" target="_blank">Nomad</a> on the table. We chose Nomad for its lean footprint (install only what a workload needs), and it made the rest easy: an existing Dockerfile re-parses into a job file and you inherit the orchestration. Today the platform spans **6+ namespaces, 6+ node pools, and 10+ datacenters**, each isolated with its own policy — and every deployment is a documented, versioned job file, not a runbook.
+            </p>
+            <p>
+                Security is baked in, not bolted on. A cfssl-generated CA enforces mTLS between the server and every client with encrypted Serf gossip, and a per-namespace Sentinel policy grants least-privilege: the cloud team's token can `submit-job` and `scale-job` in `cloud` but is denied in `wiki-search` or `tickets`. Containers spin up, self-heal, and roll back — canary-first deploys gated on a health check, `auto_revert` on failure, replace the old manual SSH rollouts. Consul provides service discovery and health-checking, so services find each other across data centres without hard-coded IPs: an nginx upstream reads the Consul catalog and re-renders automatically as backends come and go. Consul-template drives the remaining templating, including cross-data centre certificate renewal. Onboarding a new team to the platform went from a multi-day manual process to a single job-file PR.
+            </p>
+            <p>
+                The payoff: one orchestration layer every engineering team actually uses.
             </p>
           </div>
 
