@@ -111,6 +111,7 @@ h6 {
 #header .social-links a {
   font-size: 16px;
   display: flex;
+  background: #000000!important;
   justify-content: center;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
@@ -123,7 +124,7 @@ h6 {
 }
 
 #header .social-links a:hover {
-  background: #18d26e;
+  background: #18d26e!important;
 }
 
 @media (max-width: 992px) {
@@ -163,6 +164,10 @@ h6 {
   display: none;
 }
 
+#header.header-top .intro-banner {
+  display: none !important;
+}
+
 #header.header-top h1 {
   margin-right: auto;
   font-size: 36px;
@@ -191,7 +196,7 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /**
-* Desktop Navigation 
+* Desktop Navigation
 */
 
 .navbar {
@@ -264,7 +269,7 @@ h6 {
 }
 
 /**
-* Mobile Navigation 
+* Mobile Navigation
 */
 .mobile-nav-toggle {
   color: #fff;
