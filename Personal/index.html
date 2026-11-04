@@ -150,10 +150,23 @@
                 </tr>
                 <tr>
                     <td><strong>CTO, INSTAR Deutschland GmbH</strong></td>
-                    <td>Owned DevOps, DevSecOps and platform strategy for 70+ bare-metal cloud servers and VPS instances serving both internal tooling and customer-facing web services.</td>
+                    <td>Owned DevOps, DevSecOps, MLOps and platform strategy for 70+ bare-metal cloud servers and VPS instances serving both internal tooling and customer-facing web services.</td>
                 </tr>
                 <tr>
-                    <td><strong>AI / MLOps (last 5 yrs)</strong></td>
+                    <td><strong>AI / LLMOps</strong></td>
+                    <td>Built "INSTAR Wiki Agent" — an engineer copilot that runs fully local as a LangGraph ReAct agent over three tool families: two- stage retrieval on the curated bilingual product wiki (scored Elasticsearch search first, full-
+                    page web-scrape only when the agent judges the abstract insufficient); live camera debugging and source-code RAG over the annotated production pipeline.</td>
+                </tr>
+                <tr>
+                    <td><strong>AI / LLMOps</strong></td>
+                    <td>A FastMCP server over the camera's MQTT control API that turns 700+ raw topics into six clean, capability-based tools any LLM agent can call — with state-confidence tracking and credential-safe design, so agents drive the hardware without hallucinated commands. Shipped once; available to every MCP-compatible harness a customer already uses.</td>
+                </tr>
+                <tr>
+                    <td><strong>AI / LLMOps</strong></td>
+                    <td>Own the end-to-end MLOps & LLMOps pipeline — data ingestion  -> data curation and annotation / training / fine-tuning -> version-controlled model registry (MLflow) -> production serving — shipped through self-hosted GitLab CI/CD as the single reviewed path to production.</td>
+                </tr>
+                <tr>
+                    <td><strong>CVE / MLOps</strong></td>
                     <td>Designed and deployed CVE (Computer Vision for Embedded) models on IoT edge hardware *and* customer-facing cloud APIs. Built ML pipelines from data ingestion through model serving with full observability.</td>
                 </tr>
                 <tr>
@@ -557,10 +570,12 @@
                 <ul>
                     <li><strong>AI Agents & LLM Integration (2026)</strong></li>
                     <ul>
+                        <li>Built "INSTAR Wiki Agent" — an engineer copilot that runs fully local (Ollama chat + embedding models, no cloud LLM) as a LangGraph ReAct agent over three tool families: two-stage retrieval on the curated bilingual product wiki (scored Elasticsearch search first, full-page web-scrape only when the agent judges the abstract insufficient), live camera debugging and source-code RAG over the annotated production pipeline.</li>
                         <li>Built a Model Context Protocol (FastMCP) server over the camera control API, exposing six domain-level tools that let any MCP-compatible LLM agent drive the hardware — without touching raw protocol, and with state-confidence tracking so the agent reports only what it confirmed.</li>
                     </ul>
                     <li><strong>AI / MLOps & Inference Optimization (2020 – Present)</strong></li>
                     <ul>
+                        <li>A FastMCP server over the camera's MQTT control API that turns 700+ raw topics into six clean, capability-based tools any LLM agent can call — with state-confidence tracking and credential-safe design, so agents drive the hardware without hallucinated commands. Shipped once; available to every MCP-compatible harness a customer already uses.</li>
                         <li>Built an end-to-end machine-learning pipeline for a CPU-only AI inference platform — from data ingestion and training / fine-tuning through a version-controlled model registry to production model serving — monitored for performance and reliability.</li>
                         <li>Designed a distributed inference pipeline (Ray actor pool, Redis job queues, cross-server load balancing) that serves real-time object detection (YOLO), ANPR / OCR, and a fine-tuned Vision-Language Model; battle-tested at 10,000+ detection tasks per minute.</li>
                         <li>Drove a significant cost-and-reliability result: migrated a multi-GPU TensorFlow/PyTorch stack to a two-CPU-server architecture, maintaining or improving accuracy while cutting compute cost by ~10× and eliminating crashes, memory leaks, and peak-load stalls.</li>
@@ -636,6 +651,22 @@
 
       <div class="row">
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="icon-box">
+            <div class="icon"><i class="bi bi-cpu"></i></div>
+            <h4>ReAct Agent Tools</h4>
+            <p>Engineer copilot as a LangGraph ReAct agent over three tool families: two-stage retrieval on the curated bilingual product wiki (scored Elasticsearch search first, full-page web-scrape only when the agent judges the abstract insufficient), live camera debugging and source-code RAG over the annotated production pipeline.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+            <div class="icon"><i class="bi bi-cpu"></i></div>
+            <h4>MCP Automation</h4>
+            <p>FastMCP server over the camera's MQTT control API that turns 700+ raw topics into six clean, capability-based tools any LLM agent can call — with state-confidence tracking and credential-safe design, so agents drive the hardware without hallucinated commands. Shipped once; available to every MCP-compatible harness a customer already uses.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
           <div class="icon-box">
             <div class="icon"><i class="bi bi-cpu"></i></div>
             <h4>AI & Computer Vision</h4>
